@@ -993,17 +993,15 @@ POST http://localhost:8080/api/usersong/all
 
 则整合成功
 
-
-
-
 ## 整合Kafka
+
+> 参考文档[SpringBoot集成Spring For Kafka操作Kafka详解 - 大浪不惊涛 - 博客园 (cnblogs.com)](https://www.cnblogs.com/cnndevelop/p/14079494.html)
 
 ### 环境配置
 
 在linux有Kafka集群环境，但是版本不对并且虚拟机太耗资源。
 
 为了方便，直接在windows上安装单机版并配置环境变量。其服务监听端口还是9092。
-
 
 然后在项目中引入依赖：
 
@@ -1016,7 +1014,6 @@ POST http://localhost:8080/api/usersong/all
 ```
 
 Kafka版本3.6.x，而Springboot版本3.3.1
-
 
 最后在yaml文件中配置路径：
 
@@ -1038,9 +1035,7 @@ spring:
 
 则环境配置完毕。
 
-
 ### 具体实现
-
 
 **监听topic，此处作为消费者**
 
@@ -1056,7 +1051,6 @@ public class KafkaConsumer {
 ```
 
 这里使用了提供的注解来方便监听指定的topic.该注解的参数较多，可以支持单个，多个，正则等方式指定topic,并且可以指定group
-
 
 **生产者**
 
@@ -1079,8 +1073,6 @@ public class KafkaController {
 ```
 
 这里使用@Resource注解/Autowire注解注入bean对象，然后使用post方法传送消息，可以使用KafkaTemplete中的多种方法来实现消息的发送。可以异步发送/同步发送、
-
-
 
 ### 测试
 
