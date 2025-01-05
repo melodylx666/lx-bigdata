@@ -749,7 +749,6 @@ weaving的实现的可以在不同的情况下实现：编译期，类加载器�
 
 需要导入的依赖只有两个，一个starter以及一个jdbc依赖
 
-
 ```apache
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
@@ -794,7 +793,6 @@ mybatis:
 ```
 
 则可以写代码了。
-
 
 ### 具体操作
 
@@ -858,7 +856,6 @@ public class R<T> {
 }
 ```
 
-
 #### 持久层
 
 实现一个对应实体操作的Dao接口，和DB交互，用于ORM
@@ -880,7 +877,6 @@ public interface UserSongDao {
 }
 ```
 
-
 #### 服务层
 
 用于实现业务逻辑的处理，可以调用多个Dao方法
@@ -900,7 +896,6 @@ public interface UserSongService {
     R queryAll();
 }
 ```
-
 
 然后Impl一个具体的类，其中会注入具体的dao类
 
@@ -965,11 +960,9 @@ public class UserSongController {
 }
 ```
 
-
 #### 测试
 
 具体逻辑是先pos一个record，然后查询数据
-
 
 **post部分**
 
@@ -986,7 +979,6 @@ Content-Type: application/json
 }
 ```
 
-
 **query**
 
 ```apache
@@ -995,10 +987,107 @@ POST http://localhost:8080/api/usersong/all
 
 可以得到输出的JSON格式的相应结果
 
-
 **查询数据表验证**
 
 ![image.png](assets/mybatis-db.png)
 
-
 则整合成功
+
+
+
+
+## 整合Kafka
+
+### 环境配置
+
+在linux有Kafka集群环境，但是版本不对并且虚拟机太耗资源。
+
+为了方便，直接在windows上安装单机版并配置环境变量。其服务监听端口还是9092。
+
+
+然后在项目中引入依赖：
+
+```apache
+        <!-- kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+```
+
+Kafka版本3.6.x，而Springboot版本3.3.1
+
+
+最后在yaml文件中配置路径：
+
+```apache
+spring:
+  application:
+    name:boot
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456789
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: group-1
+```
+
+则环境配置完毕。
+
+
+### 具体实现
+
+
+**监听topic，此处作为消费者**
+
+```apache
+@Component
+public class KafkaConsumer {
+    @KafkaListener(topics = "boot")
+    public void processMessage(String message){
+        System.out.println("Received message: " + message);
+    }
+}
+
+```
+
+这里使用了提供的注解来方便监听指定的topic.该注解的参数较多，可以支持单个，多个，正则等方式指定topic,并且可以指定group
+
+
+**生产者**
+
+```apache
+@RestController
+public class KafkaController {
+    @Resource
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    @PostMapping("/sendMessage")
+    public void sendMessage(@RequestParam(value = "message") String message) {
+        var future = kafkaTemplate.send("boot", message);
+        //回调,异步发送消息
+        future.thenApply(result -> {
+            System.out.println("消息发送成功");
+            return result;
+        });
+    }
+}
+```
+
+这里使用@Resource注解/Autowire注解注入bean对象，然后使用post方法传送消息，可以使用KafkaTemplete中的多种方法来实现消息的发送。可以异步发送/同步发送、
+
+
+
+### 测试
+
+使用自带的http-client发送：
+
+```
+POST http://localhost:8080/sendMessage?message=hello
+```
+
+则可以看到消息已经成功进入了消息队列kafka，控制台也有输出。
