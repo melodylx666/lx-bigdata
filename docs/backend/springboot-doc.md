@@ -399,9 +399,6 @@ public class restfulController {
 }
 ```
 
-
-
-
 ## IOC和AOP
 
 Spring的核心思想是IOC以及AOP，而SpringBoot在此基础上进行了自动配置。
@@ -413,7 +410,6 @@ Inversion of Control，控制翻转，是一种编程思想，不需要任何新
 依赖查找：依赖查找会主动获取，在需要的时候通过调用框架提供的方法来获取对象，并且在获取时需要提供相关的配置文件路径、key等信息来确定获取对象的状态。
 
 依赖注入：Springboot中使用的是基于注解的依赖输入。
-
 
 为什么要有控制反转这种编程模式？
 
@@ -519,7 +515,6 @@ public class IOCTest {
 }
 ```
 
-
 **IOC的意义**
 
 好处之一当然是不用再手动创建对象，直接使用@Autowired注解就可以。
@@ -527,7 +522,6 @@ public class IOCTest {
 但是最核心的好处是：让代码脱离了对具体实现的依赖。原始的Person同时依赖于Driveable接口以及其具体实现。但是现在不依赖于具体实现了，只依赖于抽象的接口。
 
 ![image.png](assets/IOC原理.png)
-
 
 ### AOP
 
@@ -560,7 +554,6 @@ PointCut:  切入点，用于筛选JoinPoint的条件，对Joinpoint做一次fil
 
 Aspect: 切面，一个包含PointCut以及Advice的集合，完整的定义了在什么条件下做什么事情。图中的每个横线就是一个Apsect。比如当下单接口被调用的时候进行权限检查。
 
-
 **应用场景**
 
 从Advice的时机来看，有
@@ -575,7 +568,6 @@ Aspect: 切面，一个包含PointCut以及Advice的集合，完整的定义了�
 
 * 参数检查，日志记录，异常处理，性能统计
 * 事务控制，权限控制，缓存处理
-
 
 **例子**
 
@@ -669,13 +661,11 @@ public class WebAspect {
 }
 ```
 
-
 **执行顺序**
 
 同一个切面的执行顺序：before -> after[Returning,Throwing], after
 
 不同切面的执行顺序：和Adapter一样，使用inbound/outbound的安装执行逻辑
-
 
 **原理解析**
 
@@ -688,7 +678,6 @@ Spring的AOP是用代理的方式实现的。每个切面都是Spring容器中�
 weaving的实现的可以在不同的情况下实现：编译期，类加载器，运行期
 
 ![image.png](assets/AOP代理.png)
-
 
 ### 程序入口
 
@@ -753,3 +742,263 @@ weaving的实现的可以在不同的情况下实现：编译期，类加载器�
 11. 调用runners
 12. 启动应用发生异常的处理
 13. 发布上下文就绪事件
+
+## 整合MyBatis
+
+### 环境配置
+
+需要导入的依赖只有两个，一个starter以及一个jdbc依赖
+
+
+```apache
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+```
+
+然后配置app.yaml
+
+```apache
+# springboot
+spring:
+  application:
+    name:boot
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456789
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# springdoc
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    doc-expansion: none
+    url: "/v3/api-docs"
+    path: /swagger-ui.html
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+```
+
+则可以写代码了。
+
+
+### 具体操作
+
+#### DB
+
+建表如下：
+
+```apache
+create database boot;
+use boot;
+
+CREATE TABLE t_user_song(
+    `id` INT AUTO_INCREMENT COMMENT '序号，自增' ,
+    `name` VARCHAR(11)   COMMENT '用户姓名' ,
+    `sname` VARCHAR(20)   COMMENT '歌曲名称' ,
+    `stype` VARCHAR(10)   COMMENT '歌曲类型' ,
+    `score` INT   COMMENT '歌曲评分' ,
+    `songer` VARCHAR(20)   COMMENT '歌手姓名' ,
+    `create_time` DATETIME   COMMENT '创建时间' ,
+    PRIMARY KEY (id)
+)  COMMENT = '用户歌曲表';
+
+select * from t_user_song;
+```
+
+#### 实体类
+
+创建一个实体类，对应数据库表
+
+```apache
+@Data
+public class UserSong {
+    private Integer id;
+    private String name;
+    private String sname;
+    private String stype;
+    private Integer score;
+    private String songer;
+    private Date createTime;
+}
+```
+
+并封装一个统一相应的消息实体类
+
+```apache
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class R<T> {
+    private Integer code;
+    private String msg;
+    private T data;
+
+    public static <T> R<T> ok(T data) {
+        return new R<>(0, "success", data);
+    }
+
+    public static <T> R<T> error(T data) {
+        return new R<>(1, "fail", data);
+    }
+}
+```
+
+
+#### 持久层
+
+实现一个对应实体操作的Dao接口，和DB交互，用于ORM
+
+```apache
+public interface UserSongDao {
+    //增
+    @Insert("insert into t_user_song(name,sname,stype,songer,score,create_time) values(#{name},#{sname},#{stype},#{songer},#{score},now())")
+    Integer add(UserSong song);
+    //删
+    @Delete("delete from t_user_song where id=#{id}")
+    Integer deleteById(Integer id);
+    //改
+    @Update("update t_user_song set sname=#{sname},stype=#{stype},songer=#{songer},score=#{score} where id=#{id}")
+    Integer update(UserSong song);
+    //查
+    @Select("select * from t_user_song order by create_time desc")
+    List<UserSong> all();
+}
+```
+
+
+#### 服务层
+
+用于实现业务逻辑的处理，可以调用多个Dao方法
+
+```apache
+public interface UserSongService {
+    //增
+    R add(UserSong song);
+
+    //改
+    R update(UserSong song);
+
+    //删
+    R delete(Integer id);
+
+    //查
+    R queryAll();
+}
+```
+
+
+然后Impl一个具体的类，其中会注入具体的dao类
+
+```apache
+@Service
+public class UserSongServiceImpl implements UserSongService {
+    @Resource
+    private UserSongDao dao;
+
+    @Override
+    public R add(UserSong song) {
+        return dao.add(song) > 0 ? R.ok(song) : R.error(song);
+    }
+
+    @Override
+    public R update(UserSong song) {
+        return dao.update(song) > 0 ? R.ok(song) : R.error(song);
+    }
+
+    @Override
+    public R delete(Integer id) {
+        return dao.deleteById(id) > 0 ? R.ok(null) : R.error(null);
+    }
+
+    @Override
+    public R queryAll() {
+        return R.ok(dao.all());
+    }
+}
+```
+
+#### 控制层
+
+也就是controller的位置，调用service接口的方法，然后等待具体实现类的注入。
+
+```apache
+@RestController
+@RequestMapping("/api/usersong/")
+public class UserSongController {
+    @Resource
+    private UserSongService service;
+  
+    @PostMapping("save")
+    public R save(@RequestBody UserSong song) {
+        return service.add(song);
+    }
+
+    @PostMapping("update")
+    public R update(@RequestBody UserSong song) {
+        return service.update(song);
+    }
+
+    @PostMapping("delete")
+    public R delete(Integer id) {
+        return service.delete(id);
+    }
+
+    @PostMapping("all")
+    public R all() {
+        return service.queryAll();
+    }
+}
+```
+
+
+#### 测试
+
+具体逻辑是先pos一个record，然后查询数据
+
+
+**post部分**
+
+```apache
+POST http://localhost:8080/api/usersong/save
+Content-Type: application/json
+
+{
+  "name": "lee",
+  "sname" :"spuerman",
+  "songer": "hello",
+  "stype": "rock",
+  "score": 10
+}
+```
+
+
+**query**
+
+```apache
+POST http://localhost:8080/api/usersong/all
+```
+
+可以得到输出的JSON格式的相应结果
+
+
+**查询数据表验证**
+
+![image.png](assets/mybatis-db.png)
+
+
+则整合成功
