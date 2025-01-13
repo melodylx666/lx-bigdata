@@ -1,14 +1,16 @@
-# 0. 文档来源
+# Vue
+
+## 0. 文档来源
 
 尚硅谷b站课程精简而来，用于个人学习使用。
 
-# 1. 介绍Vue
+## 1. 介绍Vue
 
 `vue`是一个前端框架，最新的`vue3`基于`typescript`
 
-# 2. 创建Vue3工程
+## 2. 创建Vue3工程
 
-## 2.1. 【基于 vite 创建】(推荐)
+### 2.1. 【基于 vite 创建】(推荐)
 
 `vite` 是新一代前端构建工具，官网地址：[https://vitejs.cn](https://vitejs.cn/)，`vite`的优势如下：
 
@@ -74,26 +76,26 @@ npm create vue@latest
 - 加载`index.html`后，`Vite` 解析 `<script type="module" src="xxx">` 指向的`JavaScript`。
 - `Vue3`**中是通过 **`createApp` 函数创建一个应用实例。
 
-# 3. Vue3核心语法
+## 3. Vue3核心语法
 
-## 3.1.  【OptionsAPI 与 CompositionAPI】
+### 3.1.  【OptionsAPI 与 CompositionAPI】
 
 - `Vue2`的`API`设计是`Options`（配置）风格的。
 - `Vue3`的`API`设计是`Composition`（组合）风格的。
 
-### Options API 的弊端
+#### Options API 的弊端
 
 `Options`类型的 `API`，数据、方法、计算属性等，是分散在：`data`、`methods`、`computed`中的，若想新增或者修改一个需求，就需要分别修改：`data`、`methods`、`computed`，不便于维护和复用。
 
-### Composition API 的优势
+#### Composition API 的优势
 
 可以用函数的方式，更加优雅的组织代码，让相关功能的代码更加有序的组织在一起。
 
 > 具体理解就是可以把主要的功能实现全部拆分到其他文件中去，最后在`setup`中组合即可。这正是组合式API最大的优势。
 
-## 3.2. 【拉开序幕的 setup】
+### 3.2. 【拉开序幕的 setup】
 
-### setup 概述
+#### setup 概述
 
 `setup`是`Vue3`中一个新的配置项，值是一个函数，它是 `Composition API` **“表演的舞台**_**”**_，组件中所用到的：数据、方法、计算属性、监视......等等，均配置在`setup`中。
 
@@ -143,7 +145,7 @@ npm create vue@latest
 </script>
 ```
 
-### setup 的返回值
+#### setup 的返回值
 
 - 若返回一个**对象**：则对象中的：属性、方法等，在模板中均可以直接使用**（重点关注）。**
 - 若返回一个**函数**：则可以自定义渲染内容，代码如下：
@@ -154,13 +156,13 @@ setup(){
 }
 ```
 
-### setup 与 Options API 的关系
+#### setup 与 Options API 的关系
 
 - `Vue2` 的配置（`data`、`methos`......）中**可以访问到** `setup`中的属性、方法。
 - 但在`setup`中**不能访问到**`Vue2`的配置（`data`、`methos`......）。
 - 如果与`Vue2`冲突，则`setup`优先。
 
-### setup 语法糖
+#### setup 语法糖
 
 `setup`函数有一个语法糖，这个语法糖，可以让我们把`setup`独立出去，代码如下：
 
@@ -220,7 +222,7 @@ export default defineConfig({
 
 3. 第三步：`<script setup lang="ts" name="Person">`
 
-## 3.3. 【ref 创建：基本类型的响应式数据】
+### 3.3. 【ref 创建：基本类型的响应式数据】
 
 - **作用：**定义响应式变量，在vue2中，只要是data中包括的都是响应式数据，在vue3中，响应式数据有特定语法。
 - 什么是响应式数据：
@@ -273,7 +275,7 @@ export default defineConfig({
 </script>
 ```
 
-## 3.4. 【reactive 创建：对象类型的响应式数据】
+### 3.4. 【reactive 创建：对象类型的响应式数据】
 
 - **作用：**定义一个**响应式对象**（基本类型不要用它，要用`ref`，否则报错）
 - **语法：**`let 响应式对象= reactive(源对象)`。
@@ -327,7 +329,7 @@ function test(){
 </script>
 ```
 
-## 3.5. 【ref 创建：对象类型的响应式数据】
+### 3.5. 【ref 创建：对象类型的响应式数据】
 
 - 其实`ref`接收的数据可以是：**基本类型**、**对象类型**。
 - 若`ref`接收的是对象类型，内部其实也是调用了`reactive`函数。
@@ -381,7 +383,7 @@ function test(){
 </script>
 ```
 
-## 3.6. 【ref 对比 reactive】
+### 3.6. 【ref 对比 reactive】
 
 宏观角度看：
 
@@ -401,7 +403,7 @@ function test(){
 > 2. 若需要一个响应式对象，层级不深，`ref`、`reactive`都可以。
 > 3. 若需要一个响应式对象，且层级较深，推荐使用`reactive`。
 
-## 3.7. 【toRefs 与 toRef】
+### 3.7. 【toRefs 与 toRef】
 
 - 作用：将一个响应式对象中的每一个属性，转换为`ref`对象。
 - 备注：`toRefs`与`toRef`功能一致，但`toRefs`可以批量转换。
@@ -444,7 +446,7 @@ function test(){
 </script>
 ```
 
-## 3.8. 【computed】
+### 3.8. 【computed】
 
 作用：根据已有数据计算出新数据（和`Vue2`中的`computed`作用一致）。
 
@@ -490,7 +492,7 @@ function test(){
 </script>
 ```
 
-## 3.9.【watch】
+### 3.9.【watch】
 
 - 作用：监视数据的变化（和`Vue2`中的`watch`作用一致，但是写法不一样）
 - 特点：`Vue3`中的`watch`只能监视以下**四种数据**：
@@ -502,7 +504,7 @@ function test(){
 
 我们在`Vue3`中使用`watch`的时候，通常会遇到以下几种情况：
 
-### * 情况一
+#### * 情况一
 
 监视`ref`定义的【基本类型】数据：直接写数据名即可，监视的是其`value`值的改变。
 
@@ -535,7 +537,7 @@ function test(){
 </script>
 ```
 
-### * 情况二
+#### * 情况二
 
 监视`ref`定义的【对象类型】数据：直接写数据名，监视的是对象的【地址值】，若想监视对象内部的数据，要手动开启深度监视。
 
@@ -586,7 +588,7 @@ function test(){
 </script>
 ```
 
-### *  情况三
+#### *  情况三
 
 监视`reactive`定义的【对象类型】数据，且默认开启了深度监视。
 
@@ -643,7 +645,7 @@ function test(){
 </script>
 ```
 
-### * 情况四
+#### * 情况四
 
 监视`ref`或`reactive`定义的【对象类型】数据中的**某个属性**，注意点如下：
 
@@ -708,7 +710,7 @@ function test(){
 </script>
 ```
 
-### * 情况五
+#### * 情况五
 
 监视上述的多个数据
 
@@ -764,7 +766,7 @@ function test(){
 </script>
 ```
 
-## 3.10. 【watchEffect】
+### 3.10. 【watchEffect】
 
 * 官网：立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行该函数。
 * `watch`对比`watchEffect`
@@ -826,7 +828,7 @@ function test(){
   </script>
   ```
 
-## 3.11. 【标签的 ref 属性】
+### 3.11. 【标签的 ref 属性】
 
 作用：用于注册模板引用。
 
@@ -906,7 +908,7 @@ function test(){
 </script>
 ```
 
-## 3.12. 【props】
+### 3.12. 【props】
 
 > ```js
 > // 定义一个接口，限制每个Person对象的格式
@@ -972,7 +974,7 @@ function test(){
 >   </script>
 > ```
 
-## 3.13. 【生命周期】
+### 3.13. 【生命周期】
 
 * 概念：`Vue`组件实例在创建时要经历一系列的初始化步骤，在此过程中`Vue`会在合适的时机，调用特定的函数，从而让开发者有机会在特定阶段运行自己的代码，这些特定的函数统称为：生命周期钩子
 * 规律：
@@ -1051,7 +1053,7 @@ function test(){
   </script>
   ```
 
-## 3.14. 【自定义hook】
+### 3.14. 【自定义hook】
 
 - 什么是`hook`？—— 本质是一个函数，把`setup`函数中使用的`Composition API`进行了封装，类似于`vue2.x`中的`mixin`。
 - 自定义`hook`的优势：复用代码, 让`setup`中的逻辑更清楚易懂。就是用于模块化，通常是一个xxx.js或者xxx.ts.一般命名规范是usexxx。
@@ -1145,9 +1147,9 @@ function test(){
 
 ---
 
-# 4. 路由
+## 4. 路由
 
-## 4.1. 【对路由的理解】
+### 4.1. 【对路由的理解】
 
 此处的路由就是一组key-value的对应关系。由一个key可以路由到一个value
 
@@ -1160,7 +1162,7 @@ function test(){
 3. 指定具体的路由规则
 4. 形成一个一个的xxx.vue（比如Subject.vue）
 
-## 4.2. 【基本切换效果】
+### 4.2. 【基本切换效果】
 
 - `Vue3`中要使用`vue-router`的最新版本，目前是`4`版本。
 - 路由配置文件代码如下：
@@ -1220,14 +1222,14 @@ function test(){
   </script>
   ```
 
-## 4.3. 【两个注意点】
+### 4.3. 【两个注意点】
 
 > 1. 路由组件通常存放在`pages` 或 `views`文件夹，一般组件通常存放在`components`文件夹。
 >    1. 一般组件，引入的时候是<Person />引入的
 >    2. 路由组件，通过路由路径配置
 > 2. 通过点击导航，视觉效果上“消失” 了的路由组件，默认是被**卸载**掉的，需要的时候再去**挂载**。
 
-## 4.4.【路由器工作模式】
+### 4.4.【路由器工作模式】
 
 1. `history`模式
 
@@ -1256,7 +1258,7 @@ function test(){
    > ```
    >
 
-## 4.5. 【to的两种写法】
+### 4.5. 【to的两种写法】
 
 ```vue
 <!-- 第一种：to的字符串写法 -->
@@ -1266,7 +1268,7 @@ function test(){
 <router-link active-class="active" :to="{path:'/home'}">Home</router-link>
 ```
 
-## 4.6. 【命名路由】
+### 4.6. 【命名路由】
 
 作用：可以简化路由跳转及传参（后面就讲）。
 
@@ -1302,7 +1304,7 @@ routes:[
 <router-link :to="{name:'guanyu'}">跳转</router-link>
 ```
 
-## 4.7. 【嵌套路由】
+### 4.7. 【嵌套路由】
 
 1. 编写`News`的子路由：`Detail.vue`
 2. 配置路由规则，使用`children`配置项：
@@ -1361,9 +1363,9 @@ routes:[
    </template>
    ```
 
-## 4.8. 【路由传参】
+### 4.8. 【路由传参】
 
-### query参数
+#### query参数
 
 1. 传递参数
 
@@ -1397,7 +1399,7 @@ routes:[
    console.log(route.query)
    ```
 
-### params参数
+#### params参数
 
 1. 传递参数
 
@@ -1432,7 +1434,7 @@ routes:[
 >
 > 备注2：传递`params`参数时，需要提前在规则中占位。
 
-## 4.9. 【路由规则的props配置】
+### 4.9. 【路由规则的props配置】
 
 作用：让路由组件更方便的收到参数（可以将路由参数作为`props`传给组件）
 
@@ -1455,7 +1457,7 @@ routes:[
 }
 ```
 
-## 4.10. 【 replace属性】
+### 4.10. 【 replace属性】
 
 1. 作用：控制路由跳转时操作浏览器历史记录的模式。
 2. 浏览器的历史记录有两种写入方式：分别为```push```和```replace```：
@@ -1468,7 +1470,7 @@ routes:[
    <RouterLink replace .......>News</RouterLink>
    ```
 
-## 4.11. 【编程式导航】使用频率很高
+### 4.11. 【编程式导航】使用频率很高
 
 routeLink最终在浏览器上都会转换为a标签。
 
@@ -1492,7 +1494,7 @@ console.log(router.push)
 console.log(router.replace)
 ```
 
-## 4.12. 【重定向】
+### 4.12. 【重定向】
 
 1. 作用：将特定的路径，重新定向到已有路由。
 2. 具体编码：
@@ -1504,13 +1506,13 @@ console.log(router.replace)
    }
    ```
 
-# 5. pinia
+## 5. pinia
 
 功能:集中式状态(数据)管理，比如redux,vuex,pinia。与其对应的是分布式存储。
 
 主要用于多个组件之间要共享数据。而组件自身的数据不应该交给集中式状态管理。
 
-## 5.1【搭建 pinia 环境】
+### 5.1【搭建 pinia 环境】
 
 第一步：`npm install pinia`
 
@@ -1534,7 +1536,7 @@ app.mount('#app')
 
 此时开发者工具中已经有了`pinia`选项
 
-## 5.2【存储+读取数据】
+### 5.2【存储+读取数据】
 
 1. `Store`是一个保存：**状态**、**业务逻辑** 的实体，每个组件都可以**读取**、**写入**它。
 2. 它有三个概念：`state`、`getter`、`action`，相当于组件中的： `data`、 `computed` 和 `methods`。
@@ -1615,7 +1617,7 @@ app.mount('#app')
    </script>
    ```
 
-## 5.4.【修改数据】(三种方式)
+### 5.4.【修改数据】(三种方式)
 
 1. 第一种修改方式，直接修改
 
@@ -1665,7 +1667,7 @@ app.mount('#app')
    countStore.incrementOdd(n.value)
    ```
 
-## 5.5.【storeToRefs】
+### 5.5.【storeToRefs】
 
 - 借助`storeToRefs`将`store`中的数据转为`ref`对象，方便在模板中使用。
 - 注意：`pinia`提供的`storeToRefs`只会将数据做转换，而`Vue`的`toRefs`会转换`store`中数据。
@@ -1690,7 +1692,7 @@ app.mount('#app')
 
 ```
 
-## 5.6.【getters】
+### 5.6.【getters】
 
 1. 概念：当`state`中的数据，需要经过处理后再使用时，可以使用`getters`配置。
 2. 追加```getters```配置。
@@ -1728,7 +1730,7 @@ app.mount('#app')
    let {sum,school,bigSum,upperSchool} = storeToRefs(countStore)
    ```
 
-## 5.7.【$subscribe】
+### 5.7.【$subscribe】
 
 通过 store 的 `$subscribe()` 方法侦听 `state` 及其变化
 
@@ -1739,7 +1741,7 @@ talkStore.$subscribe((mutate,state)=>{
 })
 ```
 
-## 5.8. 【store组合式写法】
+### 5.8. 【store组合式写法】
 
 ```ts
 import {defineStore} from 'pinia'
@@ -1766,7 +1768,7 @@ export const useTalkStore = defineStore('talk',()=>{
 })
 ```
 
-# 6. 组件通信
+## 6. 组件通信
 
 **`Vue3`组件通信和`Vue2`的区别：**
 
@@ -1779,7 +1781,7 @@ export const useTalkStore = defineStore('talk',()=>{
 
 **常见搭配形式：**
 
-## 6.1. 【props】
+### 6.1. 【props】
 
 概述：`props`是使用频率最高的一种通信方式，常用与 ：**父 ↔ 子**。
 
@@ -1831,7 +1833,7 @@ export const useTalkStore = defineStore('talk',()=>{
 </script>
 ```
 
-## 6.2.【v-model】
+### 6.2.【v-model】
 
 1. 概述：实现 **父↔子** 之间相互通信。
 2. 前序知识 —— `v-model`的本质
@@ -1849,4 +1851,4 @@ export const useTalkStore = defineStore('talk',()=>{
    ```
 3. 组件标签上的`v-model`的本质：`:moldeValue` ＋ `update:modelValue`事件。
 
-## 6.3 pinia
+### 6.3 pinia
