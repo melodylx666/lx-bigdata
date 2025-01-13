@@ -20,9 +20,13 @@ nav:
       - LANG/index.md
       - LANG/JUC-SUC.md
       - LANG/DS-leetcode.md
-  - 数据开发:
+  - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
+  - 前端开发:
+      - frontend/index.md
+      - frontend/Vue3快速上手.md
+      - frontend/typescript.md
 # [UI]
 # [top]
 theme:
