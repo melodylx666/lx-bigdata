@@ -5,21 +5,14 @@ site_description: li-xiao的个人网站
 # [Navigtion]
 nav:
   - Home: index.md
-  - 考试:
-      - TEST/index.md
-      - TEST/javaweb.md
-      - TEST/数字图像处理.md
-      - TEST/blockchain.md
-      - TEST/软件工程.md
-  - 风控项目:
+  - 项目文档:
       - Project/index.md
       - Project/dynamic-Cep.md
       - Project/econ-rule-engine.md
       - Project/AbstractStreamOperatorDesign.md
-  - 语言基础:
-      - LANG/index.md
-      - LANG/JUC-SUC.md
-      - LANG/DS-leetcode.md
+  - 框架分析:
+      - frameworkAnalysis/index.md
+      - frameworkAnalysis/asyncToolLearn.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
@@ -27,6 +20,16 @@ nav:
       - frontend/index.md
       - frontend/Vue3快速上手.md
       - frontend/typescript.md
+  - 考试复习:
+        - TEST/index.md
+        - TEST/javaweb.md
+        - TEST/数字图像处理.md
+        - TEST/blockchain.md
+        - TEST/软件工程.md
+  - 其他:
+        - LANG/index.md
+        - LANG/JUC-SUC.md
+        - LANG/DS-leetcode.md
 # [UI]
 # [top]
 theme:
