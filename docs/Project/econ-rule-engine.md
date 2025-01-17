@@ -1,6 +1,6 @@
 # 金融风控引擎
 
-> 项目地址：[stream\_rule\_flink: a rule-engine try,created by lx in 2024-12-06 (gitee.com)](https://gitee.com/lxmelody/stream_rule_flink)。目前是私有仓库
+> 项目地址：[melodylx666/CEP-X: 规则引擎尝试 (github.com)](https://github.com/melodylx666/CEP-X)。目前是私有仓库
 
 ## 项目背景
 
@@ -25,7 +25,6 @@
 * 数据挖掘部分：没有开始做，考虑Scala SparkML或者直接Python
 
 用户画像部分需要结合离线数仓去做，这部分暂时没有做。
-
 
 ## 项目难点
 
