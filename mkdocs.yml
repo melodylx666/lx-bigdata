@@ -10,9 +10,12 @@ nav:
       - Project/dynamic-Cep.md
       - Project/econ-rule-engine.md
       - Project/AbstractStreamOperatorDesign.md
+      - Project/ruleCoreSummary.md
   - 框架分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
+  - 数仓开发:
+      - dataWarehouse/index.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
