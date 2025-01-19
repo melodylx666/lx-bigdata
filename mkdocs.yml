@@ -14,8 +14,9 @@ nav:
   - 框架分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
-  - 数仓开发:
+  - 数据存储与计算:
       - dataWarehouse/index.md
+      - dataWarehouse/kafka.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
