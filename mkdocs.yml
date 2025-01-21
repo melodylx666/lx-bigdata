@@ -14,6 +14,7 @@ nav:
   - 框架分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
+      - JVM/JVM并发总结.md
   - 数据存储与计算:
       - dataWarehouse/index.md
       - dataWarehouse/kafka.md
@@ -32,7 +33,6 @@ nav:
         - TEST/软件工程.md
   - 其他:
         - LANG/index.md
-        - LANG/JUC-SUC.md
         - LANG/DS-leetcode.md
 # [UI]
 # [top]
