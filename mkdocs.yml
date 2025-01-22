@@ -18,6 +18,7 @@ nav:
   - 数据存储与计算:
       - dataWarehouse/index.md
       - dataWarehouse/kafka.md
+      - dataWarehouse/hadoop.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md

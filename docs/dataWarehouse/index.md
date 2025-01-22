@@ -3,3 +3,4 @@
 目前内容如下：
 
 * kafka
+* HDFS & YARN
