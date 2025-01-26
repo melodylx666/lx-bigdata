@@ -19,6 +19,7 @@ nav:
       - dataWarehouse/index.md
       - dataWarehouse/kafka.md
       - dataWarehouse/hadoop.md
+      - dataWarehouse/大数据SQL.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
