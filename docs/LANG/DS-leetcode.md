@@ -1,127 +1,8 @@
 # 数据结构与算法
 
-> 部分目录缺失
+> 部分目录缺失、
 
-![image.png](assets/ds-collection.png)
-
-### 工具类：
-
-全部都是静态方法
-
-#### Arrays：
-
-1. 数组元素拼接：
-
-   1. static String toString(Object[] a) ：对数组中每个元素调用toString打印，并用","拼接
-2. 排序：
-3. static void sort(int[] a, int fromIndex, int toIndex) ：对数据进行部分升序排序
-4. static void sort(T[] a, Comparator<? super T> c)：对数据元素进行定制排序
-5. static void sort(Object[] a) ：对数组元素进行自然排序
-6. 数组复制：
-7. static T[] copyOf(T[] original,int newLength)：从原数组复制长度为newLength的数组并返回新数组
-8. static T[] copyOfRange(T[] original,int from,int to)：复制原数组的[from,to）的数组元素并返回新数组
-9. 比较：
-10. static boolean equals(Object[] a,Object[] a2)：判断两个数组元素以及长度是否完全相同。
-11. 填充数组：
-12. static void fill(Object[] a,Object val)：将所有位置设置为val
-13. static void fill(Object[] a, int fromIndex, int toIndex, Object val) ：[from,to)位置设置为val
-
-#### Collections：
-
-1. 排序操作：
-
-   1. sort(List)：对列表元素进行自然升序排序
-   2. sort(List，Comparator):定制排序
-   3. reverse(List)：翻转列表元素位置
-   4. swap(List，int， int)：将List的i位置和j位置元素交换
-2. 查找：
-3. Object max(Collection)：自然排序下的最大值。也可以传入Compatator进行定制排序
-4. int frequency(Collection c，Object o)：返回列表中元素出现的次数
-5. 添加：
-6. boolean addAll(Collection c,T... elements):将所有指定元素添加到集合中
-
-### 集合框架：
-
-![image.png](assets/ds-map.png)
-
-#### Collection接口：
-
-#### 接口的方法
-
-1. 添加：add(E obj)：添加元素对象到当前集合中。addAll(Collection other)：this = this ∪ other
-2. 判断：
-   1. int size()：长度
-   2. boolean isEmpty()：是否为空
-   3. boolean contains(Object obj)：通过equals进行判断
-   4. boolean containsAll(Collection coll)：判断元素是否都包含
-3. 删除：
-4. clear()：清空
-5. remove(),removeAll()：删除第一个匹配的元素。删除全部匹配的元素。
-
-#### List
-
-主要使用ArrayList，以及LinkedList
-
-1. 插入:
-
-   1. *void add(int index, Object ele)*:在 index 位置插入 ele 元素
-2. 获取：
-3. *Object get(int index)*:获取指定 index 位置的元素
-4. List subList(int fromIndex, int toIndex):返回从 fromIndex 到 toIndex 位置的子集合
-5. 位置：
-6. int indexOf(Object obj):返回 obj 在集合中首次出现的位置
-7. int lastIndexOf(Object obj):返回 obj 在当前集合中末次出现的位置
-8. 删除替换：
-9. *Object remove(int index)*:移除指定 index 位置的元素
-10. *Object set(int index, Object ele)*:设置指定 index 位置的元素为ele
-
-#### Set
-
-主要使用HashSet
-
-### Map接口：
-
-![image.png](assets/map01.png)
-
-#### 接口的方法
-
-1. 添加
-
-   1. Object put(Object key,Object value)：将指定 key-value 添加到(或修改)当前的Map对象中。
-   2. void putAll(Map m):将 m 中的所有 key-value 对存放到当前 map 中
-2. 删除
-3. Object remove(Object key)：移除指定 key 的 key-value 对，并返回 value
-4. void clear()：清空当前 map 中的所有数据
-5. 查询
-
-#### 2.HashMap最常用
-
-1. 线程不安全
-2. 允许key和value是null值
-3. key相等：通过hashcode判断。value相等：通过equals方法判断。
-
-## 数据结构：
-
-### 栈
-
-1. 类：Stack
-2. 方法：
-   1. peek()：查看栈顶元素
-   2. pop()：弹出并返回栈顶元素
-   3. push()：将元素压栈
-
-### 队列与双端队列与优先队列
-
-1. 类：接口：
-   1. 队列：Queue，实现类LinkedList
-   2. 双端队列：Deque<T> deque = new ArrayDeque<>();
-   3. 优先队列：PriorityQueue<T> heap = new PriorityQueue<>((a,b)->a[1]-b[1])
-2. 方法：
-3. 添加：add,offer
-4. 查看队列头部：peek
-5. 获取并出队头部:poll
-
-# 数据量与对应算法
+## 数据量与对应算法
 
 1. 平台运行要求：
    1. c/c++运行时间1s，java/python/go等语言运行时间1-2s
@@ -134,6 +15,8 @@
 ![image.png](assets/O.png)
 
 ![image.png](assets/o1.png)
+
+## 排序
 
 ### 选择排序：
 
@@ -194,7 +77,6 @@ i\~n-1范围上，找到最小值并放在i位置，然后i+1\~n-1范围上继�
         }
     }
 ```
-
 
 ### 快速排序
 
@@ -354,7 +236,7 @@ class Solution {
 }
 ```
 
-## 对数器：
+## 对数器
 
 场景：对于测试用例不够的场景，用来自我验证
 
@@ -366,7 +248,7 @@ class Solution {
 
 到时候会丰富很多对数器的实战用法，这里只是一个简单易懂的示例
 
-## 二分搜索：
+## 二分搜索
 
 **👋**
 
@@ -487,7 +369,7 @@ public class Code04_FindPeakElement {
 }
 ```
 
-## 二分答案法：
+## 二分答案法
 
 ### 步骤
 
@@ -848,7 +730,7 @@ public static ListNode partition(ListNode head, int x) {
 
 插入删除都是O(1)的时间复杂度
 
-### 队列的实现：
+### 队列的实现
 
 ```
 public static class Queue1 {
@@ -1082,7 +964,7 @@ class MyCircularQueue {
 
 ### 栈和队列相互实现
 
-#### 使用栈实现队列：
+#### 使用栈实现队列
 
 方法：使用in, out两个栈
 
@@ -1137,7 +1019,7 @@ class MyQueue {
     }
 ```
 
-#### 队列实现栈：
+#### 队列实现栈
 
 队列：尾进头出
 
@@ -1232,7 +1114,7 @@ class MinStack2 {
     }
 ```
 
-### 双端队列：
+### 双端队列
 
 可以直接使用内部的LinkedList实现Deque接口，也可以使用数组实现。
 
@@ -1959,7 +1841,7 @@ class Solution {
 
 ## 递归和master公式
 
-### 递归：
+### 递归
 
 具体内容：递归 = 递归逻辑+ base case。多画递归调用图。
 
@@ -2053,13 +1935,13 @@ public class Solution {
 
 ## 笔试中的输入输出
 
-### 核心代码模式：
+### 核心代码模式
 
 组成：代码，data文件，answer文件
 
 规则：只用填逻辑就可以，不能改类名，方法名，参数类型
 
-### acm模式：
+### acm模式
 
 组成:data文件，answer文件。
 
@@ -2098,9 +1980,9 @@ public class Solution {
 2. 空间：
 3. 不论是数据空间还是辅助空间，都推荐使用静态开辟，注意数据量与复用(例如使用Arrays.fill(arr,0,m,0)等方法进行清空)即可。
 
-## 归并：
+## 归并
 
-### 归并排序：
+### 归并排序
 
 1. 时间复杂度O(n\*logn)：T(n) = 2\*T(n/2) + O(n),则log(2,2)=1，则为O(n^1 \* logn) = O(nlogn)
 2. 核心：递归
@@ -2171,12 +2053,6 @@ public class Solution {
 2. 只需要在对应的差分数组上让[L]-v, [R+1]+v
 3. 然后对差分数组进行前缀和就可以得到结果
 4. 模板题：
-
-这里有 `<span class="color_font"><span>n</span></span>` 个航班，它们分别从 `<span class="color_font"><span>1</span></span>` 到 `<span class="color_font"><span>n</span></span>` 进行编号。
-
-有一份航班预订表 `<span class="color_font"><span>bookings</span></span>` ，表中第 `<span class="color_font"><span>i</span></span>` 条预订记录 `<span class="color_font"><span>bookings[i] = [first</span></span>``<sub><span class="color_font"><span>i</span></span></sub>``<span class="color_font"><span>, last</span></span>``<sub><span class="color_font"><span>i</span></span></sub>``<span class="color_font"><span>, seats</span></span>``<sub><span class="color_font"><span>i</span></span></sub>``<span class="color_font"><span>]</span></span>` 意味着在从 `<span class="color_font"><span>first</span></span>``<sub><span class="color_font"><span>i</span></span></sub>` 到 `<span class="color_font"><span>last</span></span>``<sub><span class="color_font"><span>i</span></span></sub>` （**包含** `<span class="color_font"><span>first</span></span>``<sub><span class="color_font"><span>i</span></span></sub>` 和 `<span class="color_font"><span>last</span></span>``<sub><span class="color_font"><span>i</span></span></sub>` ）的 **每个航班** 上预订了 `<span class="color_font"><span>seats</span></span>``<sub><span class="color_font"><span>i</span></span></sub>` 个座位。
-
-请你返回一个长度为 `<span class="color_font"><span>n</span></span>` 的数组 `<span class="color_font"><span>answer</span></span>`，里面的元素是每个航班预定的座位总数
 
 ```
 class Solution {
@@ -3344,7 +3220,7 @@ class Solution {
             }
             len--;
             sum -= gas[l] - cost[l];
-      
+    
         }
         return -1;
     }
@@ -4462,11 +4338,11 @@ class Solution {
                                 queue[r][0] = nx;
                                 queue[r][1] = ny;
                                 r++;
-                          
+                        
                             }
                         }
                     }
-              
+            
                 }
             }
         }
@@ -5454,6 +5330,7 @@ int a = nums[i]\*max[i-1];
 int b = nums[i]\*min[i-1];
 
 int c = nums[i];
+
 1. 求a,b,c的最大值和最小值来求出当前的max[i]和min[i]
 
 ```
@@ -5478,6 +5355,7 @@ class Solution {
     }
 }
 ```
+
 1. 三个无重叠子数组的最大和
    1. 要求每个子数组长度固定是k
    2. 要求互不重叠
@@ -5504,6 +5382,7 @@ for(int r=n-k-1; r>=0; r--){
     suffix[r] = sums[cur] >= sums[suffix[r+1]] ? cur : suffix[r+1];  
 }
 ```
+
 1. 假设来到了[i,j]，长度为k。i的范围可以是[k-1,n-k]
    1. 从prefix[i]获得[0\~i-1]范围的MSA的开头p
    2. 从suffix[i]获得[j\~n-1]范围的MSA的开头s
@@ -5564,6 +5443,7 @@ class Solution {
     }
 }
 ```
+
 ### 子序列问题
 
 1. 子序列判断问题：给定字符串 **s** 和 **t** ，判断 **s** 是否为 **t** 的子序列。字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。
@@ -5612,6 +5492,7 @@ object Solution {
     }
 }
 ```
+
 1. 最长递增子序列(LIS)：
    1. 普通dp做法：
       1. dp[i]代表以i位置结尾的LIS是什么。
@@ -5637,6 +5518,7 @@ class Solution {
     }
 }
 ```
+
 1. 优化做法:贪心+二分
    1. 引入ends数组：作为结果数组
    2. 思路：
@@ -5677,6 +5559,7 @@ class Solution {
     }
 }
 ```
+
 1. 求非负数组的和为t的子序列的数量
    1. 思路：背包问题
    2. dp[i][j]：前i个数字的子序列，和为j的种类 。注意dp[0][0]初始化为1，代表空数组也可以满足和为0.
@@ -5701,6 +5584,7 @@ public int subSum(int[] nums, int t){
         return dp[n][t];
     }
 ```
+
 ### 01背包
 
 **📌**
@@ -5747,6 +5631,7 @@ public static int compute() {
     return dp[t];
 }
 ```
+
 1. 变形：
    1. 某公司游戏平台的夏季特惠开始了，你决定入手一些游戏。现在你一共有X元的预算，该平台上所有的 n 个游戏均有折扣，标号为 i 的游戏的原价 *ai* 元，现价只要 *bi*元（也就是说该游戏可以优惠 *ai*−*bi* 元）并且你购买该游戏能获得快乐值为 *wi*。由于优惠的存在，你可能做出一些冲动消费导致最终买游戏的总费用超过预算，但只要满足获得的总优惠金额不低于超过预算的总金额，那在心理上就不会觉得吃亏。现在你希望在心理上不觉得吃亏的前提下，获得尽可能多的快乐值。
    2. 分析：只要总优惠>超过的总预算，也就是![](),其中ci=ai-bi，X为总预算。经过变形，可以分析得出![]()就可以继续获得快乐值。所以只要ci-bi>0就一定可以买。对于ci-bi<0的物品，每个可以看做是cost[i] = -(ci-bi)的商品，总共的可花费的钱是![]()。可以转换为0-1背包问题。或者可以看做每次获得一个Well>0的东西,就是增加了可用的余额。
@@ -5800,6 +5685,7 @@ class Main{
     }
 }
 ```
+
 1. 例题leetcode494目标和
    1. 给你一个非负整数数组 `<span class="color_font"><span>nums</span></span>` 和一个整数 `<span class="color_font"><span>target</span></span>` 。
 
@@ -5844,6 +5730,7 @@ class Solution {
     }
 }
 ```
+
 1. 普通动态规划：
 
    1. 思路：由于i,j中j有负数，所以考虑将j位置下标进行平移，补成正数
@@ -5886,6 +5773,7 @@ class Solution {
     }
 }
 ```
+
 ### 分组背包
 
 1. 和01背包区别：商品进行分组，每组最多只能取一件商品(01)
@@ -5973,6 +5861,7 @@ public class Code01_PartitionedKnapsack {
     }
 }
 ```
+
 1. 时间复杂度：假设物品总个数是n,背包容量是m,则时间复杂度是O(m\*k1 + m\*k2 +... m\*kn),其中ki是第i组的个数。k1+k2+..+kn = n;所以是M(m\*n);
 
 ### 完全背包
@@ -6038,6 +5927,7 @@ public class Code03_UnboundedKnapsack {
         return dp[m][t];
     }
 ```
+
 ### 数位DP
 
 数位DP的实现统一采用记忆化搜索。
@@ -6066,6 +5956,7 @@ class Solution {
     }
 }
 ```
+
 1. leetcode 902[**最大为 N 的数字组合**](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/)
    1. 思路：
       1. 对于数字的选择，有一些限制。
@@ -6163,6 +6054,7 @@ class Solution {
     }
 }
 ```
+
 1. leetcode 233数字一的个数
    1. 给定一个整数 `<span>n</span>`，计算所有小于等于 `<span>n</span>` 的非负整数中数字 `<span>1</span>` 出现的个数。
 
@@ -6195,6 +6087,7 @@ class Solution {
     }
 }
 ```
+
 ### 树形DP
 
 树是一个头节点没有父节点，其余节点都有一个父节点的有向无环图
@@ -6232,7 +6125,7 @@ class Solution {
             max = a;
             min = b;
             isBst = c;
-            //以x节点为根节点的树中包含的最大BST子树      
+            //以x节点为根节点的树中包含的最大BST子树    
             maxBstSize = d;
         }
     }
@@ -6258,6 +6151,7 @@ class Solution {
         return new Info(max, min, isBst, maxBSTSize);
     }
 ```
+
 1. [**二叉搜索子树的最大键值和**](https://leetcode.cn/problems/maximum-sum-bst-in-binary-tree/)
    1. 这次是寻找树中具有最大累加和的二叉搜索子树
       1. 思路：以x为根的树
@@ -6281,6 +6175,7 @@ class Solution {
     info(max,min,sum,maxSum,isBST)
   }
 ```
+
 1. [二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
    1. ！走的边不能重复
    2. 思路：以x为根的树
@@ -6304,6 +6199,7 @@ object Solution {
   }
 }
 ```
+
 1. leetcode 979在二叉树上分配硬币
    1. 思路：以x为根结点的整棵树的调整次数
       1. 第一部分：左树的调整次数 + 右树调整次数
@@ -6329,6 +6225,7 @@ object Solution {
   }
 }
 ```
+
 ## 贪心
 
 1. 基本思想：每一步都是局部最优，而最后得到的可能是全局最优
@@ -6357,6 +6254,7 @@ class Solution {
     }
 }
 ```
+
 ## 数据结构设计
 
 ### setAll功能的哈希表
@@ -6387,7 +6285,7 @@ class Main {
         build();
         while (in.nextToken() != StreamTokenizer.TT_EOF) {
             N = (int)in.nval;
-            for(int i=0, op=0; i<N;i++){          
+            for(int i=0, op=0; i<N;i++){        
                 in.nextToken();op = (int)in.nval;
                 if(op == 1){
                     in.nextToken();int x = (int)in.nval;
@@ -6440,6 +6338,7 @@ class Main {
     }
 }
 ```
+
 ### 实现LRU缓存
 
 LRU是Least Recently Used的缩写，即最近最少使用，是一种常用的[页面置换算法](https://baike.baidu.com/item/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/7626091?fromModule=lemma_inlink)，选择最近最久未使用的页面予以淘汰。该算法赋予每个[页面](https://baike.baidu.com/item/%E9%A1%B5%E9%9D%A2/5544813?fromModule=lemma_inlink)一个访问字段，用来记录一个页面自上次被访问以来所经历的时间 t，当须淘汰一个页面时，选择现有页面中其 t 值最大的，即最近最少使用的页面予以淘汰。
