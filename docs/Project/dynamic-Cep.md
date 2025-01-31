@@ -1,23 +1,25 @@
-# 动态CEP实现
+# 动态CEP解析
 
 ## 参考资源
 
-[架构文章](https://juejin.cn/post/7218824938093920312)，但是规则发现部分并不是采用了广播流的方式，而是采用了异步线程定时扫描，并通过协调器分发到自定义算子上去。同时本项目参考了多个github开源项目的实现
+[架构文章](https://juejin.cn/post/7218824938093920312)。
+[shirukai/flink-dynamic-cep: FlinkCEP动态多规则实现及自定义规则处理引擎 (github.com)](https://github.com/shirukai/flink-dynamic-cep)
 
-## 本文功能
 
-主要是对于引入开源的项目的探究和总结，并对多个不同开源实现的的差异进行对比
+## 案例与实现
 
-## 实现的需求
+主要是对于引入开源的项目的探究和总结，并对多个不同开源实现的的差异进行对比。
+
+### 实现的需求
 
 开源版本的CEP的pattern到NFA这一步是在编译时候就完成的，运行时不能修改。
 那么对于单规则修改，或者是多规则的执行，就无法实现，或者是代价很大。所以很多公司都根据自己的需求选择对开源版本代码进行修改，从而实现动态规则修改。
 
-## 实现思路
+### 实现思路
 
-### 背景
+#### 背景
 
-以经典的机房温度检测场景为例子，假设现在进入的一个$record$的格式是 $|rackID|温度|功率|其他|$,而我们的需求是需要针对不同机房温度的变化趋势进行检测，从而可以进行Warning或者是Alert。
+以经典的机房温度检测场景为例子，假设现在进入的一个$record$的格式是`|rackID|温度|功率|其他|,`而我们的需求是需要针对不同机房温度的变化趋势进行检测，从而可以进行Warning或者是Alert。
 
 ### 方法
 
@@ -93,7 +95,7 @@ Flip200中开始提到了我们需要添加的三类接口/类，分别是
 
 这段话意味着，我们如果要在coordinator上实现I/O,则有必要单独开线程，防止阻塞Job manager。具体来说，我们自己实现的协调器Context实例，内部包含了两个线程池。如果调用 context.sendToOperator，则会将事件委托给协调器线程执行。**用于确保事件是在协调器线程执行，而不是其他线程**
 
-```apache
+```java
 /**
      * 协调器线程中发送事件给指定的subTask
      * @param subtaskId subtask的ID,比如1
@@ -158,6 +160,7 @@ RuleDistributorCoordinatorProvider
 
 然后考虑
 
+```java
 public RuleDistributorCoordinator(String operatorName,
 String ruleUpdatedQueueId,
 RuleDiscovererFactory discovererFactory,
@@ -169,6 +172,7 @@ this.context = coordinatorContext;
 this.ruleUpdatedQueueId = ruleUpdatedQueueId;
 updatedEventQueue = getRuleUpdatedEventQueue();
 }
+```
 
 这个类是个核心类，它实现了
 
@@ -217,11 +221,7 @@ OperatorCoordinator, RuleManager
 
 #### 两种Coordiantor职责与交互
 
-首先是
-
-```
-RuleDistributorCoordinator
-```
+首先是`RuleDistributorCoordinator`
 
 它通过discover，查看DB规则是否改变。如果改变，则对于每个规则(新规则，也可以是规则最新版)，将规则相关参数封装到event
 此处使用的event一共有两种
@@ -234,7 +234,7 @@ RuleDistributorCoordinator
    1. 定义：规则更新事件
    2. 内容：包含一个RuleUpdated列表
    3. RuleUpdated: 规则更新实体。包含规则定义时json字符串除了binding部分的所有字段。
-3. 通过一个共享map进行消息通信
+3. 通过一个共享map进行消息通信，这是`Coordinator`的常用手段。
 
 ### 算子开发部分
 
@@ -277,3 +277,5 @@ RuleDistributorCoordinator
    是对于key绑定规则的map的封装，并且支持正则功能
 
 #### cep-Process-Oper
+
+简单来说，是基于开源实现的`Flink`基础之上，提供了关于规则动态加载的功能。关于规则加载与序列化和反序列，阿里并没有公开完全。但是本文章所给连接中的开源项目完整的进行了实现。并且提供了基于`CustomArgsCondition`与`AviatorCondition`的两种规则，并且可以外加`jar`包，被自定义的`ClassLoader`进行加载并应用。同时一些需要写到算子`open`函数中的全局配置也可以动态加载进来。
