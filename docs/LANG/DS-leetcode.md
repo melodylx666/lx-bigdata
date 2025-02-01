@@ -2490,20 +2490,43 @@ public class Code01_MergeKSortedLists {
 }
 ```
 
-**💡**
+**对顶堆**
 
-传入比较器的写法：可以使用lambda表达式，也可以常规传入Comparator
+用于维护数据流的中位数，通过一个大根堆 + 小根堆来实现。
 
-PriorityQueue<ListNode> heap = new PriorityQueue<>(new Comparator<ListNode>() {
+具体思路如下：若数据递增，则中位数左侧小，右侧大，将数据一分为二,并规定奇数情况下左侧比右侧大一个.
 
-@Override
+则考虑将左侧维护为一个大根堆，右侧维护为一个小根堆，变化只发生在临界值，也就是左侧的最大值和右侧的最小值。
 
-public int compare(ListNode o1, ListNode o2) {
+* 如果l.size == r.size，则将数据加入r，并将r中最小值给l，因为需要满足l.size == r.size +1
+* 如果l.size == r.size +1，则将数据加入l,并将l中最大值给r,因为需要满足l.size == r.size +1
 
-return o1.val - o2.val;
-}
+即可实时获得数据流中位数
 
-});
+```java
+    def findMedianPrice(prices: Array[Int]): Array[Double] = {
+        // write code here
+        import scala.collection.mutable.{PriorityQueue}
+        val l = PriorityQueue[Int]()
+        val r = PriorityQueue[Int]()(Ordering.Int.reverse)
+
+        val ans = prices.map(p => {
+            if(l.size == r.size){
+                r.enqueue(p)
+                l.enqueue(r.dequeue())
+            }else{
+                l.enqueue(p)
+                r.enqueue(l.dequeue())
+            }
+            val tmp = (if(l.size == r.size) (l.head.toDouble + r.head)/2 
+                   else l.head.toDouble)
+            tmp
+        })
+        return ans
+    } 
+```
+
+
 
 ## 哈希表
 
@@ -3220,7 +3243,7 @@ class Solution {
             }
             len--;
             sum -= gas[l] - cost[l];
-    
+  
         }
         return -1;
     }
@@ -3310,7 +3333,45 @@ class Solution {
          2. 对于L: 则a的L不存在，b的L是a,c的L=b，
          3. 对于R: 并且abc此时都没有满足R。
          4. 如果出现了下一个数字d，并且d<c，则c的(L,R)找到，并且栈中剩余的元素的R必然不是c，并且d的(L,R)必然没有c，则c可以弹出。
-      7. 重复值情况处理：如果有重复值，需要进行修正。关键就是重复值情况的处理。对于本题，就是利用后来的重复元素作暂时的R，最后复用后来的重复元素的R
+      7. 重复值情况处理：如果有重复值，需要进行修正。关键就是重复值情况的处理。对于本题，就是利用后来的重复元素作暂时的R，最后复用后来的重复元素的
+
+如果为非重复值，如下即可(求矩形最大面积):
+
+```java
+    def maxArea(areas: Array[Int]): Int = {
+        // write code here
+        import scala.collection.mutable.{Stack}
+        val stk = Stack[Int]()
+        //左右两侧最小的
+        val ans = Array.fill[(Int,Int)](areas.length)((-1,-1))
+
+        for(i <- areas.indices){
+            val cur = areas(i)
+            while(stk.nonEmpty && areas(stk.top) > cur){
+                val tmp = stk.pop()
+                val l = (if(stk.isEmpty) -1 else stk.top)
+                val r = i
+                ans.update(tmp,(l,r))
+            }
+            stk.push(i)
+        }
+        while(stk.nonEmpty){
+            val tmp = stk.pop()
+            val l = (if(stk.isEmpty) -1 else stk.top)
+            val r = -1
+            ans.update(tmp,(l,r))
+        }
+        return ans.zipWithIndex.map{
+            case ((l,r),m) => {
+                val finalL = (if(l == -1) -1 else l)
+                val finalR = (if(r == -1)  areas.length else r)
+                areas(m) * (finalR-1 - (finalL+1) + 1)
+            }
+        }.max
+    }
+```
+
+有重复值，则需要修正：
 
 ```
 public static void compute() {
@@ -3345,9 +3406,13 @@ public static void compute() {
 ```
 
 1. [每日温度](https://leetcode.cn/problems/daily-temperatures/)
-   1. 给定一个整数数组 `<span>temperatures</span>` ，表示每天的温度，返回一个数组 `<span>answer</span>` ，其中 `<span>answer[i]</span>` 是指对于第 `<span>i</span>` 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 `<span>0</span>` 来代替。
+   1. ```html
+      给定一个整数数组 `<span>temperatures</span>` ，表示每天的温度，返回一个数组 `<span>answer</span>` ，其中 `<span>answer[i]</span>` 是指对于第 `<span>i</span>` 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 `<span>0</span>` 来代替。
+      ```
 
-```
+      这里最后的清算阶段没有算，因为题目中默认要求就是0，其实按规定还是需要一个`while循环的`。
+
+```java
 public static int[] dailyTemperatures(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
@@ -4338,11 +4403,11 @@ class Solution {
                                 queue[r][0] = nx;
                                 queue[r][1] = ny;
                                 r++;
-                        
+                      
                             }
                         }
                     }
-            
+          
                 }
             }
         }
@@ -6125,7 +6190,7 @@ class Solution {
             max = a;
             min = b;
             isBst = c;
-            //以x节点为根节点的树中包含的最大BST子树    
+            //以x节点为根节点的树中包含的最大BST子树  
             maxBstSize = d;
         }
     }
@@ -6285,7 +6350,7 @@ class Main {
         build();
         while (in.nextToken() != StreamTokenizer.TT_EOF) {
             N = (int)in.nval;
-            for(int i=0, op=0; i<N;i++){        
+            for(int i=0, op=0; i<N;i++){      
                 in.nextToken();op = (int)in.nval;
                 if(op == 1){
                     in.nextToken();int x = (int)in.nval;
