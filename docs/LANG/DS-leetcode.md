@@ -2526,8 +2526,6 @@ public class Code01_MergeKSortedLists {
     } 
 ```
 
-
-
 ## 哈希表
 
 ### HashSet and HashMap
@@ -3406,11 +3404,6 @@ public static void compute() {
 ```
 
 1. [每日温度](https://leetcode.cn/problems/daily-temperatures/)
-   1. ```html
-      给定一个整数数组 `<span>temperatures</span>` ，表示每天的温度，返回一个数组 `<span>answer</span>` ，其中 `<span>answer[i]</span>` 是指对于第 `<span>i</span>` 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 `<span>0</span>` 来代替。
-      ```
-
-      这里最后的清算阶段没有算，因为题目中默认要求就是0，其实按规定还是需要一个`while循环的`。
 
 ```java
 public static int[] dailyTemperatures(int[] nums) {
@@ -4403,11 +4396,11 @@ class Solution {
                                 queue[r][0] = nx;
                                 queue[r][1] = ny;
                                 r++;
-                      
+                    
                             }
                         }
                     }
-          
+        
                 }
             }
         }
@@ -6350,7 +6343,7 @@ class Main {
         build();
         while (in.nextToken() != StreamTokenizer.TT_EOF) {
             N = (int)in.nval;
-            for(int i=0, op=0; i<N;i++){      
+            for(int i=0, op=0; i<N;i++){    
                 in.nextToken();op = (int)in.nval;
                 if(op == 1){
                     in.nextToken();int x = (int)in.nval;
