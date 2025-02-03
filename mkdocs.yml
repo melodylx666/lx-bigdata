@@ -21,6 +21,10 @@ nav:
       - dataWarehouse/kafka.md
       - dataWarehouse/hadoop.md
       - dataWarehouse/大数据SQL.md
+  - 计算机基础:
+      - LANG/index.md
+      - BaseSkill/store.md
+      - LANG/DS-leetcode.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
@@ -34,9 +38,6 @@ nav:
         - TEST/数字图像处理.md
         - TEST/blockchain.md
         - TEST/软件工程.md
-  - 其他:
-        - LANG/index.md
-        - LANG/DS-leetcode.md
 # [UI]
 # [top]
 theme:
