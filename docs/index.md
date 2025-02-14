@@ -5,18 +5,17 @@
 > 这里是lx的个人博客
 
 1. 个人方向：数据开发
-2. 主力语言：Scala Java
-3. 技术方向：离线数仓，实时引擎
+2. 主力语言：Scala
+3. 技术栈：   离线数仓，实时引擎
 4. 开源活动：给[apache/doris-website: Apache Doris Website (github.com)](https://github.com/apache/doris-website)贡献过两个文档部分的pr，一个typo，一个功能性。
 
-## 博客内容
+## 博客动态
 
-目前内容列表
+最新输出：
 
-* 数仓开发
-* 后端开发
-* 前端开发
-* 其他
+[操作系统 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/BaseSkill/store/)
+
+[大数据SQL剖析 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/)
 
 **todo-list**
 
