@@ -21,6 +21,7 @@ nav:
       - dataWarehouse/kafka.md
       - dataWarehouse/hadoop.md
       - dataWarehouse/大数据SQL.md
+      - dataWarehouse/flink_learn.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
