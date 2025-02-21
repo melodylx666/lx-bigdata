@@ -23,6 +23,7 @@ nav:
       - dataWarehouse/大数据SQL.md
       - dataWarehouse/flink_learn.md
       - dataWarehouse/数仓.md
+      - dataWarehouse/存储引擎.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
