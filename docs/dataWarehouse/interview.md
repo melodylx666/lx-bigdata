@@ -1,6 +1,6 @@
-# 差缺补漏
+# 查缺补漏
 
-> 记录每一次面试中有疑惑，或者觉得有意思的场景题
+> 记录每一次面试中有疑惑，或者觉得有意思的问题
 
 ## 大数据组件
 
@@ -24,6 +24,21 @@ RDD的中的弹性，到底是什么呢？我对这个犯了迷糊。收到弹�
 
 其实这里的话就是解释了它的适应性的真正含义，也就是RDD的某些`partition`数据丢了，可以重新触发这部分的计算(可以通过把shuffle_0_0_0.data/index删除了来模拟。然后下游`task`发现根据`mapstatus`找不到`block`，也就拿不到迭代器之后，会触发缺失文件的重新生成）。
 
+### Tez
+
+> [Apache Tez – Welcome to Apache TEZ®](https://tez.apache.org/)
+>
+> [HIVE执行引擎TEZ学习以及实际使用 - 伯安知心 - 博客园 (cnblogs.com)](https://www.cnblogs.com/boanxin/p/13336930.html)
+
+#### 使用原理与场景
+
+这个组件之前只在书上看到过一次，居然被问到了。其实在Hive命令行登录的时候每次都会看到这个组件的提示(Hive2.x之后推荐Tez和Spark，而不是Hive on MR)
+
+它通过DAG进行调度任务，其API其实更像Flink，有Source，Sink，ProcessorOperator等概念。具体就不展开了。
+
+**特点**
+
+和`YARN`与`Hive`强制绑定，就是为其特化的增强执行引擎。当然同时和`Spark`对比，也可以视作缺点。因为有`Spark on k8s`，并且`SparkSQL`和`Hive`交互也是比较流畅。
 
 ## 数仓理论
 
