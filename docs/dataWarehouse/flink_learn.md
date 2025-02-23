@@ -791,7 +791,6 @@ public class IntervalJoinDemo {
 
 Flink采用了快照机制，定时将状态快照，统一存储到远端，比如HDFS上。这样节点宕机之后的状态恢复压力减小很多。
 
-
 **精确一次的一致性快照**
 
 Flink实现了一个名为`checkpoint`的分布式轻量级异步快照，保证了精确一次的数据处理，以及一致性状态。其实主要存储的就是`state`。
@@ -805,11 +804,9 @@ Flink将状态进行了分类:
 * 算子状态:可以平均分割
 * 键值状态：自动根据键值和最大并行度进行分配
 
-
 当任务中增加、减少了算子，该怎么办？
 
 Flink提出`savepoint`机制，也就是用户手动触发的`checkpoint`。
-
 
 #### 两种状态
 
@@ -850,7 +847,6 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
 * ReducingState
 * AggregatingState
 
-
 **广播状态**
 
 广播状态作用粒度同样是一个`subtask`.
@@ -860,7 +856,6 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
 然后就可以将当前规则广播到所有处理(process)算子当中。
 
 > 需要开自定义算子
-
 
 #### 精确一次性与快照
 
@@ -897,7 +892,6 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
 
 如此，可以完美实现单机的精确一次性。
 
-
 **分布式系统**
 
 分布式系统如何实现内部的精确一次性处理呢？
@@ -930,13 +924,11 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
 
 最后是Sink。Sink算子上游是算子，等同于Transform算子。
 
-
 **优化**
 
 上面是将状态和后续到达数据全部持久化，可不可以直接接着计算呢？
 
 当然可以，只要将计算延长至`barrier`数据到达之前即可。
-
 
 **最终的Flink checkpoint机制**
 
@@ -947,14 +939,12 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
   * 下游算子正常处理数据，直到`barrier`，停止处理并继续向下游发送`barrier`，同时进行持久化。
   * 最终协调器收到所有subtask发送的`event`，则认为checkpoint结束。
 
-
 **端到端精确一次性**
 
 现在系统内部可以实现精确一次性，如何端到端精确一次性呢？
 
 * 数据源:2PC，比如Flink内置的kafkaConnector
 * 数据汇：幂等写入,比如Kafka，Redis
-
 
 #### 状态后端
 
@@ -975,7 +965,6 @@ Flink内置的KafkaConsumer就使用了算子状态，通常情况下，其对�
 ```
 
 配置如上。默认是`hashmap`。
-
 
 #### 有状态流与事件驱动
 
@@ -1035,7 +1024,6 @@ public class FraudDetector extends KeyedProcessFunction<Long,Transaction,Alert>{
 }
 ```
 
-
 具体有5种有状态流处理函数:
 
 * KeyedProcessFunction,专门作用于键控流
@@ -1064,3 +1052,83 @@ public class FraudDetector extends KeyedProcessFunction<Long,Transaction,Alert>{
             e.printStackTrace();
         }
 ```
+
+
+#### 广播状态
+
+> [Broadcast State 模式 | Apache Flink](https://nightlies.apache.org/flink/flink-docs-release-1.20/zh/docs/dev/datastream/fault-tolerance/broadcast_state/)
+
+广播状态，通常用于一个简单的规则流发布的场景，可以做简单的匹配，或单纯的过滤。
+
+```java
+public class BroadCastDemo {
+    public static void main(String[] args) {
+        Configuration conf = new Configuration();
+        conf.setString("rest.port", "9091");
+        conf.setBoolean("web.ui.enable", true);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        DataStreamSource<Transaction> datastream = env.addSource(new TransactionSource());
+        DataStreamSource<Rule> rulestream = env.addSource(new RuleStreamSource());
+        KeyedStream<Transaction, Long> userPartitionedStream = datastream.keyBy(Transaction::getAccountId);
+        MapStateDescriptor<String, Rule> descriptor = new MapStateDescriptor<>("ruleBroadcastState", String.class, Rule.class);
+        BroadcastStream<Rule> ruleBroadcastStream = rulestream.broadcast(descriptor);
+
+        SingleOutputStreamOperator<String> processed = userPartitionedStream
+                .connect(ruleBroadcastStream)
+                .process(new KeyedBroadcastProcessFunction<Long, Transaction, Rule, String>() {
+                    private MapStateDescriptor<String, Rule> descriptor = new MapStateDescriptor<>("ruleBroadcastState", String.class, Rule.class);
+                    //处理主数据流元素
+                    @Override
+                    public void processElement(Transaction value, ReadOnlyContext ctx, Collector<String> out) throws Exception {
+                        Rule rule = ctx.getBroadcastState(descriptor).get("rule");
+                        if (rule != null) {
+                            if (rule.isValid(value)) {
+                                out.collect(value.toString());
+                            }
+                        }
+                    }
+                    //处理广播规则流元素
+                    @Override
+                    public void processBroadcastElement(Rule value, Context ctx, Collector<String> out) throws Exception {
+                        ctx.getBroadcastState(descriptor).put("rule", value);
+                    }
+                });
+        processed.print();
+        try {
+            env.execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static class RuleStreamSource implements SourceFunction<Rule> {
+        private boolean running = true;
+        @Override
+        public void run(SourceContext<Rule> ctx) throws Exception {
+            while(running){
+                Thread.sleep(500);
+                ctx.collect(new Rule(RandomUtils.nextDouble()));
+            }
+        }
+        @Override
+        public void cancel() {
+            running = false;
+        }
+    }
+    public static class Rule{
+        private Double amountLimit;
+        public Rule(Double amountLimit){
+            this.amountLimit = amountLimit;
+        }
+        public boolean isValid(Transaction transaction) {
+            return transaction.getAmount() < amountLimit;
+        }
+    }
+}
+```
+
+这个实例对`Flink`官网例子进行修改，通过内置数据源去做广播流。使用方法:
+
+* 为广播流分配一个状态fd
+* 然后和主数据流(通常为键控流)进行connect
+* 对流进行process，此时一个`subtask`可以同时拿到最新的rule，以及最新的数据。但是两者在两个函数内，怎么交互呢？
+  就是通过一个`subtask`内的全部变量-state来交互。这里的状态fd和第一步定义的需要完全一致。然后就可以在主数据流处理逻辑中使用了。

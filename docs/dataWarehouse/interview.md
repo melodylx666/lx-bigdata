@@ -40,6 +40,99 @@ RDD的中的弹性，到底是什么呢？我对这个犯了迷糊。收到弹�
 
 和`YARN`与`Hive`强制绑定，就是为其特化的增强执行引擎。当然同时和`Spark`对比，也可以视作缺点。因为有`Spark on k8s`，并且`SparkSQL`和`Hive`交互也是比较流畅。
 
+
+### Flink
+
+#### 广播流和CEP
+
+针对广播流的使用，我更新了`Flink总结`中的内容，详细实现了一个`Demo`，如下:
+
+```java
+public class BroadCastDemo {
+    public static void main(String[] args) {
+        Configuration conf = new Configuration();
+        conf.setString("rest.port", "9091");
+        conf.setBoolean("web.ui.enable", true);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf);
+        DataStreamSource<Transaction> datastream = env.addSource(new TransactionSource());
+        DataStreamSource<Rule> rulestream = env.addSource(new RuleStreamSource());
+        KeyedStream<Transaction, Long> userPartitionedStream = datastream.keyBy(Transaction::getAccountId);
+        MapStateDescriptor<String, Rule> descriptor = new MapStateDescriptor<>("ruleBroadcastState", String.class, Rule.class);
+        BroadcastStream<Rule> ruleBroadcastStream = rulestream.broadcast(descriptor);
+
+        SingleOutputStreamOperator<String> processed = userPartitionedStream
+                .connect(ruleBroadcastStream) //connect两个流
+                .process(new KeyedBroadcastProcessFunction<Long, Transaction, Rule, String>() {
+                    private MapStateDescriptor<String, Rule> descriptor = new MapStateDescriptor<>("ruleBroadcastState", String.class, Rule.class);
+                    //处理主数据流元素
+                    @Override
+                    public void processElement(Transaction value, ReadOnlyContext ctx, Collector<String> out) throws Exception {
+                        Rule rule = ctx.getBroadcastState(descriptor).get("rule");
+                        if (rule != null) {
+                            if (rule.isValid(value)) {
+                                out.collect(value.toString());
+                            }
+                        }
+                    }
+                    //处理广播规则流元素
+                    @Override
+                    public void processBroadcastElement(Rule value, Context ctx, Collector<String> out) throws Exception {
+                        ctx.getBroadcastState(descriptor).put("rule", value);
+                    }
+                });
+        processed.print();
+        try {
+            env.execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static class RuleStreamSource implements SourceFunction<Rule> {
+        private boolean running = true;
+        @Override
+        public void run(SourceContext<Rule> ctx) throws Exception {
+            while(running){
+                Thread.sleep(500);
+                ctx.collect(new Rule(RandomUtils.nextDouble()));
+            }
+        }
+        @Override
+        public void cancel() {
+            running = false;
+        }
+    }
+    public static class Rule{
+        private Double amountLimit;
+        public Rule(Double amountLimit){
+            this.amountLimit = amountLimit;
+        }
+        public boolean isValid(Transaction transaction) {
+            return transaction.getAmount() < amountLimit;
+        }
+    }
+```
+
+可以看到，广播流的控制其实也是可以很强的，甚至可以做状态机匹配(官网例子更加复杂，可是没有完整代码)。
+
+在`Flink`项目中，就被问到了两者的区别，以及实现逻辑，总结如下:
+
+* Flink 广播流，是可以满足动态修改简单规则的场景的。同样是将Kafka或者关系数据库的规则表作为Source就可以。
+* Flink CEP，专门用于匹配复杂的事件规则，尤其是非确定有限状态机(其实CEP就来源于这个概念)。如果需要动态修改`Pattern`，则需要二次开发
+* 两者的核心区别实际就是`Operator`对`State`的抽象控制的程度。
+
+那么为什么需要动态CEP呢，其实，我认为这是一个编码复杂度的问题。
+
+如果是简单的流过滤，或者状态机状态很少。则直接使用`Flink`广播流就可以。
+
+但是如果状态机状态数量很多，规则复杂，那需要使用`Flink-CEP`。如果还需要不停机更新，则需要进行二次开发，实现动态CEP。
+
+而具体动态CEP的实现，又有两种:
+
+* Flink广播流广播规则
+* Flink协调器分发规则
+
+这其实是两种思路，其实在`task`端基本一致，只是在`master`端，一个需要新建广播流`source`，一个需要开发协调器扫数据库。`FILP200`推荐的是后者，原因很简单，就是保持`FLink`架构清晰，并且协调器本来就是做`subtask`协调的。
+
 ## 数仓理论
 
 ### 分层
