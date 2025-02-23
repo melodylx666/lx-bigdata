@@ -133,6 +133,7 @@ public class BroadCastDemo {
 
 这其实是两种思路，其实在`task`端基本一致，只是在`master`端，一个需要新建广播流`source`，一个需要开发协调器扫数据库。`FILP200`推荐的是后者，原因很简单，就是保持`FLink`架构清晰，并且协调器本来就是做`subtask`协调的。
 
+
 ## 数仓理论
 
 ### 分层
