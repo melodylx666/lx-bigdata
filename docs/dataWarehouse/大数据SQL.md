@@ -233,6 +233,10 @@ ANALYZE TABLES [ { FROM | IN } schema_name ] COMPUTE STATISTICS [ NOSCAN ]
 
 **PartialMerge**
 
+这种操作主要用在`distinct`操作中，用于对中间的结果缓冲区合并，但仍不是最终结果。
+
+这个模式挺复杂的。
+
 对一张`person`表，执行
 
 ```sql
@@ -264,6 +268,8 @@ group by `person`.id;
 
 可以看到，对于`sum`以及`count distinct`，分别从局部到全局进行处理。首先，注重`sum`逻辑，然后将分组也就是`hash`的键做改变，再注重`count distinct`逻辑，最后全局做一次汇总。
 
+![image.png](assets/partialMerge.png)
+
 #### 聚合算子
 
 有两种模式的聚合算子，分别是`SortAggregateExec`以及`HashAggregateExec`.
@@ -278,14 +284,52 @@ group by `person`.id;
 
 ### window
 
-窗口函数的具体细节太多了，具体可以看书。
+之前跳过了，现在补上。
+
+![image.png](assets/windowExec.png)
 
 其与普通`group by`的如下：
 
 * 行数变化：`group by`聚合行数减小，但是开窗函数不变，为每行输出结果
-* 功能增加：`group by`针对一个分区只能输出一种结果，但是开窗函数可以在分组窗口内做累积等逻辑，输出不同结果。并且支持的聚合韩束更多。
+* 功能增加：`group by`针对一个分区只能输出一种结果，但是开窗函数可以在分组窗口内做累积等逻辑，输出不同结果。并且支持的聚合函数更多。
 * 聚合模式不同：`group by`可以`partial + final`，而`window`只能`complete`模型运行，聚合逻辑全局在`reducer`端。
 * 聚合算子不同：`group by`可以`hash or sort`,但是`window`只能`sort`，因为窗口默认都有排序要求。
+
+具体来说，步骤如下:
+
+1. 对要开窗的表的数据，进行shuffle之后，每个分区内排序(partition by xxx)。
+2. 对每个排序的分区，不断进行开窗操作。也就是说，不断在这一个缓冲数组(`RowBuffer`)上做文章。
+3. 最终将所有分区的结果拼到一起。
+
+而对每个排序的分区操作，就是窗口函数语义的事情。具体来说，有两个核心点:
+
+* 窗口范围
+* 窗口内作用函数
+
+首先是窗口范围(针对的是单个分区)，一共有5种：
+
+* 全局窗口-unbound preceding and unbound following
+* 扩张窗口-unbound preceding and xxx，也就是说，窗口随着行的遍历，开始端一直都是第一行，size是单调递增的。
+* 收缩窗口-shrink Frame：xxx and unbound following ，也就是说，窗口随着行的遍历，逐渐逼近最后一行，size单调递减。
+* 移动窗口- xx preceding and yy following，每次有进有出
+* 偏移窗口- 也就是特定偏移量的行，一对一。
+
+
+如果窗口函数和Group By一起会怎么样？
+
+可以看到，也就是先进行group by ，局部聚合和全局聚合之后，在它的基础上，因为已经分好区了(分区粒度不同的话应该还是会再shuffle)，直接做window操作就可以。
+
+```sql
+
+== Physical Plan ==
+Window [count(1) windowspecdefinition(lesson#315, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS count#2662L], [lesson#315]
++- *(2) Sort [lesson#315 ASC NULLS FIRST], false, 0
+   +- *(2) HashAggregate(keys=[lesson#315], functions=[])
+      +- Exchange hashpartitioning(lesson#315, 200)
+         +- *(1) HashAggregate(keys=[lesson#315], functions=[])
+            +- *(1) FileScan json [lesson#315] Batched: false, Format: JSON, Location: InMemoryFileIndex[file:/tmp/score.json], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<lesson:string>
+
+```
 
 ### olap
 
@@ -341,7 +385,7 @@ group by
 
 **null值**
 
-执行中的`null`值，与实际生产中的`null`值，通过`geouping`函数处理。其返回的结果如果是1，则代表是grouping的null值。如果是0，则是本身的null值。
+执行中的`null`值，与实际生产中的`null`值，通过`grouping`函数处理。其返回的结果如果是1，则代表是grouping的null值。如果是0，则是本身的null值。
 
 #### 底层原理
 
@@ -747,7 +791,6 @@ set spark.sql.adaptive.enabled = true
 ### SPJ
 
 [性能调优 - Spark 4.0.0-preview2 Documentation (apache.org)](https://spark.apache.org/docs/4.0.0-preview2/sql-performance-tuning.html#storage-partition-join)
-
 
 ## 火山模型与向量化
 
