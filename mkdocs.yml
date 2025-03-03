@@ -29,6 +29,7 @@ nav:
       - LANG/index.md
       - BaseSkill/store.md
       - LANG/DS-leetcode.md
+      - BaseSkill/gitSummary.md
   - 后端开发:
       - backend/index.md
       - backend/springboot-doc.md
