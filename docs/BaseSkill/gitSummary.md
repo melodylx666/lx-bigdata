@@ -390,3 +390,9 @@ git checkout feature
 > * git add .   所有修改或者新增，删除
 > * git add -u 所有修改
 > * git add -p 互动式选择
+
+关于:`local`,`origin`,`upstream`：
+
+[git 本地仓添加多个远端仓库\_git remote add upstream-CSDN博客](https://blog.csdn.net/TomorrowAndTuture/article/details/121961700?spm=1001.2014.3001.5506)
+
+[Git实现本地库关联多个远程库 - aJream - 博客园 (cnblogs.com)](https://www.cnblogs.com/ajream/p/15383533.html)
