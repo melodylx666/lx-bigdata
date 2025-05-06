@@ -6,9 +6,11 @@
 
 个人方向：数据开发(数据存储或者数据计算均可)
 
-实习经历：Momenta---Cloud Data Infra---Data Storage Service---Intern
+实习经历(数据存储)：Momenta---Cloud Data Infra---Data Storage Service---Intern
 
 开源经历：为apache-Doris贡献过文档pr并被合并到主分支
+
+项目经历(数据计算)：[melodylx666/Sparklet: mini impl for SparkCore (github.com)](https://github.com/melodylx666/Sparklet)
 
 ## 博客动态
 
