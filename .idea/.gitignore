@@ -1,6 +1,0 @@
-# 默认忽略的文件
-/shelf/
-/workspace.xml
-
-# 忽略项目目录下的.idea
-.idea/
