@@ -16,6 +16,8 @@
 
 最新输出：
 
+[第一段实习总结]([melodylx666.github.io/lx-bigdata/Project/first-intern-summary/](https://melodylx666.github.io/lx-bigdata/Project/first-intern-summary/))
+
 [查缺补漏-lx-bigdata](https://melodylx666.github.io/lx-bigdata/dataWarehouse/interview/)
 
 [Flink总结 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/dataWarehouse/flink_learn/)
