@@ -12,7 +12,7 @@ nav:
       - Project/AbstractStreamOperatorDesign.md
       - Project/ruleCoreSummary.md
       - Project/first-intern-summary.md
-      - Project/scala-reflection.md
+      - BaseSkill/scala-reflection.md
   - 框架分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
