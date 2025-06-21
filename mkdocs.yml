@@ -18,6 +18,7 @@ nav:
       - frameworkAnalysis/asyncToolLearn.md
       - JVM/JVM并发总结.md
       - frameworkAnalysis/io.md
+      - BaseSkill/design-pattern.md
   - 数据存储与计算:
       - dataWarehouse/index.md
       - dataWarehouse/kafka.md
@@ -33,7 +34,7 @@ nav:
       - LANG/DS-leetcode.md
       - BaseSkill/gitSummary.md
       - BaseSkill/devops.md
-  - 前后端开发:
+  - 软件开发:
       - backend/index.md
       - backend/springboot-doc.md
       - frontend/index.md
