@@ -5,7 +5,7 @@ site_description: li-xiao的个人网站
 # [Navigtion]
 nav:
   - Home: index.md
-  - 项目文档:
+  - 随手总结:
       - Project/index.md
       - Project/dynamic-Cep.md
       - Project/econ-rule-engine.md
@@ -13,7 +13,7 @@ nav:
       - Project/ruleCoreSummary.md
       - Project/first-intern-summary.md
       - BaseSkill/scala-reflection.md
-  - 框架分析:
+  - 总结分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
       - JVM/JVM并发总结.md
@@ -33,10 +33,9 @@ nav:
       - LANG/DS-leetcode.md
       - BaseSkill/gitSummary.md
       - BaseSkill/devops.md
-  - 后端开发:
+  - 前后端开发:
       - backend/index.md
       - backend/springboot-doc.md
-  - 前端开发:
       - frontend/index.md
       - frontend/Vue3快速上手.md
       - frontend/typescript.md

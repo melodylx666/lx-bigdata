@@ -2,5 +2,7 @@
 /shelf/
 /workspace.xml
 
-# 忽略项目目录下的.idea
+# 忽略项目目录下ide绑定文件
 .idea/
+.gradle/
+.vscode/
