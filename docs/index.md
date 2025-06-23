@@ -1,32 +1,36 @@
 # 你好
 
-## 个人简介
+## self-intro
 
-> 这里是lx的个人博客
+> 这里是xiao的个人主页
 
-个人方向：数据开发
+### Timeline
 
-实习经历(数据存储)：Momenta---Cloud Data Infra---Data Storage Service---Intern
+* 2023-07 - 2023-12 超算基地，学习和研究并行计算
+* 2023-12 - 2024-01 ASC世界大学生超级计算机大赛全国二等奖
+* 2025-03 - 2025-05 Momenta-CDI-DSS，负责开发数据挖掘和自动标注平台
 
-开源经历：为apache-Doris，Scala-doc项目贡献过文档pr并被合并到主分支(2个typo,1个功能性)
+### other
 
-项目经历(数据计算)：[melodylx666/Sparklet: mini impl for SparkCore (github.com)](https://github.com/melodylx666/Sparklet)
+* 开源经历：为apache-Doris，Scala-doc项目贡献过文档pr并被合并到主分支(2个typo,1个功能性)
 
-## 博客动态
+* 项目经历(数据计算)：[melodylx666/Sparklet: mini impl for SparkCore (github.com)](https://github.com/melodylx666/Sparklet)
 
-最新输出：
 
-[第一段实习总结 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/Project/first-intern-summary/)
+### school record
 
-[查缺补漏-lx-bigdata](https://melodylx666.github.io/lx-bigdata/dataWarehouse/interview/)
+* `GPA rank` 前20%
+* `CET4 ` 579分
+* `CET6 ` 458分
 
-[Flink总结 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/dataWarehouse/flink_learn/)
+## output
 
-[操作系统 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/BaseSkill/store/)
+[查缺补漏](./dataWarehouse/interview.md)
 
-[大数据SQL剖析 - lx-bigdata (melodylx666.github.io)](https://melodylx666.github.io/lx-bigdata/dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/)
+[Flink总结](./dataWarehouse/flink_learn.md)
 
-**todo-list**
+[操作系统](./BaseSkill/store.md)
 
-1. 为有价值的项目做一些思路分析与解读
-2. 将读书笔记迁移过来(主要来自微信读书)
+[大数据SQL剖析](./dataWarehouse/大数据SQL.md)
+
+[第一段实习总结](./Project/first-intern-summary.md)
