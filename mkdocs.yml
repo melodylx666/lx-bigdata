@@ -30,6 +30,7 @@ nav:
       - dataWarehouse/存储引擎.md
       - dataWarehouse/interview.md
       - dataWarehouse/graphDB.md
+      - dataWarehouse/learn_db_from_paper.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
