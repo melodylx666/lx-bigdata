@@ -21,11 +21,11 @@
 ### other
 
 * 开源经历：为apache-Doris，Scala-doc项目贡献过文档pr并被合并到主分支(2个typo,1个功能性)
-
 * 项目经历(数据计算)：[melodylx666/Sparklet: mini impl for SparkCore (github.com)](https://github.com/melodylx666/Sparklet)
 
-
 ## output
+
+[从论文看隔离级别](./dataWarehouse/learn_db_from_paper.md)
 
 [GraphDB](./dataWarehouse/graphDB.md)
 
