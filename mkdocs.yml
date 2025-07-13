@@ -14,6 +14,7 @@ nav:
       - Project/first-intern-summary.md
       - BaseSkill/scala-reflection.md
       - BaseSkill/scala-scopt.md
+      - BaseSkill/prepare.md
   - 总结分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md

@@ -25,6 +25,8 @@
 
 ## output
 
+[秋招复习](./BaseSkill/prepare.md)
+
 [从论文看隔离级别](./dataWarehouse/learn_db_from_paper.md)
 
 [GraphDB](./dataWarehouse/graphDB.md)
