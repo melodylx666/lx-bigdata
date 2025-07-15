@@ -9,7 +9,7 @@
 * 2023-07 - 2023-12 太原理工超算基地，学习和研究并行计算
 * 2023-12 - 2024-01 ASC世界大学生超级计算机大赛全国二等奖
 * 2025-03 - 2025-05 Momenta-CDI，负责开发数据挖掘和自动标注平台
-* 2025-07 - 2025-09 开源之夏(ospp) 开发中
+* 2025-07 - 2025-09 开源之夏(ospp) 开发,做国产图数据库生态增强
 
 ### education
 
@@ -40,3 +40,5 @@
 [大数据SQL剖析](./dataWarehouse/大数据SQL.md)
 
 [第一段实习总结](./Project/first-intern-summary.md)
+
+[LevelDB源码学习](./frameworkAnalysis/leveldb_learn.md)
