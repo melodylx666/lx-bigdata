@@ -413,4 +413,34 @@ public byte[] get(byte[] key, ReadOptions options)
 }
 ```
 
-上面只有读写操作的分析，实际上LevelDB还有VersionEdit & Manifest & VersionSet & SSTable的部分，直接看专栏 & 代码会快速理解。
+上面只有读写操作的分析，下面我们来看其他部分。
+
+#### SnapShotImpl
+
+SnapsShotImpl是快照实现类，用于返回指定快照。本质上它是Version & SequenceNumber的封装。
+
+#### Version & VersionSet
+管理并维护所有活跃的Version实例，同时负责apply VersionEdit以产生新的Version实例。
+
+一个Version代表一个具体的SSTable文件集合的状态(包括Level0以及其他层级)。当引用计数=0的时候，会被从VersionSet中删除掉。
+
+#### VersionEdit & Manifest file
+
+是一种中间数据结构，用于表示1次对Version的更改(也就是对SSTable文件的修改)。而Manifest file则是一个log文件，每一个log record就是一个VersionEdit序列化为Slice之后的结果。
+
+那么非常显然，Version是VersionSet叠加之后的数据库状态，包含当前的SSTable文件状态。也就是说，其实通过Manifest file,就可以知道则合格那个LevelDB的状态。
+
+#### Compaction
+这个不是一个类，而是一个核心过程。在写操作开始的时候会通过makeRoomForWrite()，有可能触发Compaction。而读操作也会在读取完毕之后手动触发Compaction。
+
+Compaction会带来严重的写放大问题，也就是写入一个record的时机IO写入(所有因此产生的写操作)流量会是理论的数倍。这是由于WriteInternal的时候，首先会写WAL(包含完整的record以及op)，然后从immutable memTable到Level-0落盘，再到level-0与level-1的合并，再到level-n与level-n+1的合并(写入量上升一个数量级)。总共会产生大一个数量级以上的IO写入流量。
+
+详细来看，假设一次写入n个record：
+
+- WAL，会是1.x n
+- immutable memTable落盘为level-0，会是n
+- level0和level1的compact，这里是读取level-0的所有record，和level-1的对应范围的Record进行归并排序。假设原始写入一个memTable是2MB,但是现在需要将level-0(4 * 2)和level-1的文件(1 * 10)合并再写入，则为18MB,经过压缩过滤，实际为2.x倍。
+- level-n到level-n+1的compact，这里数据倍数关系是10x倍，则写入倍数差也是10倍。
+
+一般写放大可达10-100倍。
+ 
