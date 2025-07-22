@@ -211,7 +211,7 @@ ANALYZE TABLES [ { FROM | IN } schema_name ] COMPUTE STATISTICS [ NOSCAN ]
 
 ## 聚合
 
-### agregate
+### aggregate
 
 这里执行的是不包含窗口的聚合。
 
@@ -227,15 +227,67 @@ ANALYZE TABLES [ { FROM | IN } schema_name ] COMPUTE STATISTICS [ NOSCAN ]
 
 通常一些优化思路中，开启预先聚合，就是使用的这种模式。
 
+比如SQL语句如下:
+
+```sql
+select A, sum(B) from T group by A;
+```
+
+则在上游stage的每个task中，会先将数据进行预先聚合，也就是`partial`聚合模式。经过shuffle之后，在下游stage，每个task会进行`final`聚合模式。核心就是减少shuffle IO带来的影响。
+
 **Complete**
 
 就是直接将数据拉到`reducer`阶段进行聚合，通常用在不支持局部聚合的聚合函数中。
+
+```sql
+select A, sum(B) from T group by A;
+```
+
+同样的SQL，则数据行不会在上游Stage的task中进行预聚合，而是Shuffle完毕，在下游Stage的task中进行聚合。
+
+
 
 **PartialMerge**
 
 这种操作主要用在`distinct`操作中，用于对中间的结果缓冲区合并，但仍不是最终结果。
 
-这个模式挺复杂的。
+> 这里注意，Spark在默认情况下，就对distinct进行了优化，底层实现其实就是多阶段聚合。
+> 像Hive on MR，它执行count(distinct)就只会将所有数据拉取到一个Reduce Task中进行去重聚合，非常低效。通常需要手动进行多阶段聚合。
+
+`distinct`一般又会被分为`单distinct`和`多distinct`两种。这里只看`单distinct`。
+
+比如语句
+
+```sql
+select A, count(disctinct C) from T group by A;
+select A, sum(B), count(disctinct C) from T group by A;
+
+```
+
+执行链路一般如下：
+Partial -> PartialMerge -> Partial -> Final
+
+首先，对于只有单个count(distinct a), 没有其他聚合函数来说，步骤如下：
+
+1. Partial，也就是按照(A,C)为key，进行局部聚合(其实这里就是去重了，因为没有聚合字段。可以看做通过HashMap进行聚合，但是只保留keys)。
+2. Shuffle，按照(A,C)为key
+3. PartialMerge。将Shuffle Read过来的数据再次进行聚合(就是去重)。此时，(A,C)已经被全局去重，等同于A粒度下为C的record唯一。
+5. Partial，此时A下C的每种，对应一行record，可以将其map为(A,1)。则此时按照A粒度进行聚合，则输出为(A,3)。后者为(A,C)粒度下，C的种类。
+6. Shuffle，按照A为key
+7. Final，则按照a为key,聚合之后，则可以知道A粒度下C的种类全局为多少。最终输出结果就可以。
+
+而如果还有其他聚合函数，则语义变为如下：
+
+Partial -> PartialMerge -> Partial -> Final
+
+1. (A,C) 聚合，得到局部B值
+2. shuffle,按照(A,C)为key hash
+3. (A,C) 聚合 ，则此时得到(A,C)为key的B的全局值。
+4. merge，按照A为key,将C进行去重计数，而B进行局部聚合。
+5. shuffle，按照A粒度为hash key
+6. 此时进行聚合，则得到的是全局每种A下的C的种类，以及按照A为粒度B的总和，也就是SQL结果。
+
+
 
 对一张`person`表，执行
 
