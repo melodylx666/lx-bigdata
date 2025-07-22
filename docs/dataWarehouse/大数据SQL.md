@@ -836,3 +836,52 @@ set spark.sql.codegen.wholeStage = true / false;
 [kwai/blaze：超快的查询执行引擎使用 Apache Spark 语言，并以 Arrow-DataFusion 为核心。 (github.com)](https://github.com/kwai/blaze)
 
 [apache/incubator-gluten: Gluten is a middle layer responsible for offloading JVM-based SQL engines' execution to native engines. (github.com)](https://github.com/apache/incubator-gluten)
+
+## 常见问题
+
+### Spark
+
+#### Spark and MR
+
+Spark已经是事实上的批处理标准引擎了，它比MR来说有如下几点突破：
+
+* 从语义上来说，多个MR任务等价于一个Spark任务。而多个MR任务中的每个任务，结果都要落盘。但是Spark任务的中间缓存机制更加完善，某些task可以缓存中间数据，避免大量的磁盘IO。
+* Shuffle，这个是核心。
+  * 排序可选：对于MR来说，Shuffle write阶段必须按照parition + key排序。但是有些操作符，比如groupByKey，不需要排序。Spark就可以按照partition进行组织(之所以还要按照paritition排序是为了实现SortedBasedShuffle)，或者按照partition + key进行排序，实现更加灵活。
+  * 在线聚合。MR的聚合，都是数据先统一放入内存/磁盘，再单独启动聚合阶段。而Spark构建特殊结构AppendOnlyMap，利用hashMap的特性，实时更新数据。
+  * 临时文件数量小。对于MR来说，上游有M个任务，下游有N个任务，那么MR的临时文件数量为M*N，这是因为MR一直使用的都是HashBasedShuffle。而Spark从1.x开始就引入并默认为SortBasedShuffle。
+  
+    * HashBasedShuffle的数据，全部按照partitionId直接Hash到对应bucket就可以，MR还要求比如按照kety排序。临时文件数量M*N，排序不可选。
+    * SortedBasedShuffle，可以先尝试为BypassmergeSortShuffleWriter，类似于hashBasedShuffle。最后也可以退化为SortBasedShuffleWriter，它可以按照partitionId/(partitionId + key)进行排序，最终一个task只用输出一个磁盘文件(xxx.data)。并通过.index标识每个ShuffleRead如何从该文件读取数据。则临时文件数量M个，并且排序粒度可选。
+* Tungsten & codegen优化:Spark可以做code generation优化，将算子链拍扁生成一个for循环。同时DS和DF都引入堆外内存进行管理，加速执行。
+
+
+#### Spark进程类别
+
+Spark进程分为如下几种：
+
+1. Master节点常驻Master进程
+2. Worker节点常驻Worker进程
+3. Executor进程，每个Worker节点可以启动多个ExecutorBackend进程
+4. Driver进程。官方解释是the process running the main() function of the application and create the SparkContext object。位置不定。一般来说，可以是spark-submit启动的进程，也可以是spark-shell启动的进程，此时是client模式。同时也可以是运行在Yarn的ApplicationMaster中，或者是运行在Kubernetes的一个专属Pod中的进程，此时是cluster模式。甚至也可以是Idea中一个JVM运行main()函数 & 执行task，则此时Driver和Executor都运行在Idea一个JVM进程中。
+
+#### Spark内存模型
+
+Spark采用统一内存管理模型(针对所有Executor进程，也就是spark.executor.memory以及spark.memory.offHeapSize进行的管理)。
+
+Executor JVM进程管理如下：
+
+1. 框架内存空间(堆外 + 堆内，共计占60%)：框架执行空间，用于存储Shuffle过程的中间结果。而数据缓存空间，用于存储RDD的缓存数据/广播数据，task中间结果等。这两种默认一半一半。框架执行空间可以直接获取数据缓存空间而不同释放(其实是难以实现释放)，而数据缓存空间占用框架执行空间，必须释放(因为释放比较简单)。
+2. 用户代码空间(堆外 + 堆内,共计占)：用于存储用户代码生成的对象。
+3. 系统保留空间(堆内)：用于存储Spark运行时产生的临时对象。
+
+#### 聚合、开窗、连接的实现
+
+一般来说有如下类别：
+
+1. 聚合
+2. 开窗
+3. 连接
+
+这个上面都详细解释了。
+
