@@ -1279,7 +1279,7 @@ event-time window不输出结果。
 * allowLateness()函数，允许延迟(但是不要太长，防止状态累积过大)
 * 将乱序数据放入侧写流。这个函数调用放到窗口函数之前就可以实现。
 
-## 流式SQL & 流表理论
+## 流式SQL
 
 ### 理论基础
 
@@ -1364,7 +1364,37 @@ event-time window不输出结果。
 
 所以说，流和表其实是一体两面。
 
+
+### Beam模型
+
+《流式系统》中 介绍的Beam模型，就是一种流偏好的模型：对流进行转换， 得到新的流
+
+对于Beam模型，其转换操作都是通过流的形式来进行的，而表总是被特殊对待：要么是Source/Sink端的抽象，要么是在处理过程中被隐藏，也就是说Beam在任何涉及到表的地方，都将其隐藏在两个转换之间。
+
+### SQL模型
+
+SQL模型一直都是表偏好的模型，对表进行转换，得到新的表。
+
+对于SQL模型，其转换操作都是通过表的方式进行的，而流(比如select 过程中的一个个record)总是被隐藏。
+
+### 流表混合
+
+如果输入有表，又有流，那么输出应该是表还是流呢？
+
+结论如下：
+
+1. 如果所有输入都是表，输出才会使表
+2. 如果有一个输入是流，输出就会是流
+
+
+
 ### 操作基础
+
+标准的Flink SQL操作逻辑如下：
+
+1. 输入流转换为SQL 动态输入表
+2. 执行连续查询，产生动态输出表，连续查询过程中通常是有状态的
+3. 将动态输出表映射为输出流，然后将输出流存储到下游Sink中
 
 **Source表**
 
@@ -1390,6 +1420,8 @@ SELECT * from employee_information WHERE dept_id = 1;
 
 则当source表每进来一行数据，则会立即读取并输出结果。
 
+技术实现上，Flink采用动态表的技术，实现输入输出和表的映射。
+
 **连续查询**
 
 ```sql
@@ -1402,6 +1434,7 @@ GROUP BY dept_id;
 
 它会对源表每个新来的数据进行读取，并更新聚合结果。
 
+技术实现上，Flink通过类似物化视图的方式来实现转换操作。记录对源表(动态表)的操作(INSERT, UPDATE, DELETE)序列,也就是一个更新日志流，则不断对物化视图应用更新日志流，得到不断更新的物化视图。
 
 **sink表**
 
@@ -1417,3 +1450,72 @@ GROUP BY dept_id;
 ```
 
 sink表会将聚合结果源源不断写入到指定的表中(对应聚合结果直接替换，比如从20 -> 30)。
+
+sink表会有3种底层实现：
+
+1. append-only 日志流，也就是每个日志操作的record范围不会重叠。
+2. retract-only 日志流，也就是包含新增日志操作和undo日志操作，保证日志输出一直最新的结果。则insert是一次新增，而delete一次undo，而update一次undo和一次新增。
+3. upsert-only 日志流，语义同其他数据库的upsert语义。
+
+再比如使用SQL统计每种商品的历史累积销售额：
+
+```sql
+//source表
+CREATE TABLE source_table (
+    pId BIGINT,
+    income BIGINT
+) WITH (
+    ...
+);
+//sink表
+CREATE TABLE sink_table(
+    pId BIGINT,
+    all BIGINT
+) WITH (
+    ...
+)
+//连续查询
+INSERT INTO sink_table
+SELECT 
+    pId,
+    SUM(income) as all
+FROM source_table
+GROUP BY PId;
+```
+
+则当动态输入表数据一行一行插入的时候，连续查询结果会一直更新，同时动态输出表的结果也是一直更新的。
+
+再比如每种商品每1min的销售额，则流程如下：
+可以看到，只要时间窗口等配置清楚，sql依旧是直接从语义转换就可以，相当直观。
+
+```sql
+//source表
+CREATE TABLE source_table(
+    pId BIGINT,
+    income BIGINT,
+    time BIGINT, //ms
+    row_time AS TO_TIMESTAMP(time,3), //从time字段构建事件时间戳
+    WATERMARK FOR row_time AS row_time - INTERVAL '5' SECOND
+) WITH (
+    ...
+);
+
+//sink表
+//这里的输出其实是appnend only的，因为时间窗口并不能回溯
+CREATE TABLE sink_table(
+    pId BIGINT,
+    sum_income BIGINT
+    minutes STRING
+) WITH (
+    ...
+);
+
+//执行查询，当本地事件时间的watermark >= 窗口的end，才会触发窗口输出，而不是来一条输出一个结果
+INSERT INTO sink_table
+SELECT 
+    pId,
+    SUM(income) AS sum_income,
+    TUMBLE(row_time, INTERVAL '1' MINUTES) AS minutes
+FROM source_table
+GROUP BY pId,TUMBLE(row_time, INTERVAL '1' MINUTES)
+```
