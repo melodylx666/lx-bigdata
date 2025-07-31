@@ -15,6 +15,7 @@ nav:
       - BaseSkill/scala-reflection.md
       - BaseSkill/scala-scopt.md
       - BaseSkill/prepare.md
+      - BaseSkill/mac_learn.md
   - 总结分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md

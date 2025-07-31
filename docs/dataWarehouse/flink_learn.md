@@ -1437,7 +1437,6 @@ GROUP BY dept_id;
 技术实现上，Flink通过类似物化视图的方式来实现转换操作。记录对源表(动态表)的操作(INSERT, UPDATE, DELETE)序列,也就是一个更新日志流，则不断对物化视图应用更新日志流，得到不断更新的物化视图。
 
 **sink表**
-
 比如如下sql:
 
 ```sql
@@ -1519,3 +1518,4 @@ SELECT
 FROM source_table
 GROUP BY pId,TUMBLE(row_time, INTERVAL '1' MINUTES)
 ```
+
