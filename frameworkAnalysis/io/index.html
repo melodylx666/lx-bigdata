@@ -1,0 +1,3199 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="li-xiao的个人网站">
+      
+      
+        <meta name="author" content="li-xiao">
+      
+      
+        <link rel="canonical" href="https://melodylx666.github.io/lx-bigdata/frameworkAnalysis/io/">
+      
+      
+        <link rel="prev" href="../../JVM/JVM%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/">
+      
+      
+        <link rel="next" href="../../BaseSkill/design-pattern/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Java/Scala I/O - lx-bigdata</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#javascala-io" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="lx-bigdata" class="md-header__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            lx-bigdata
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Java/Scala I/O
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Project/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  随手总结
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dataWarehouse/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据存储与计算
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../LANG/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  计算机基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  杂项
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="lx-bigdata" class="md-nav__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    lx-bigdata
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Project/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随手总结
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    随手总结
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/dynamic-Cep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态CEP解析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/econ-rule-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    金融风控引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/AbstractStreamOperatorDesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义StreamOperator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/ruleCoreSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    规则动态加载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/first-intern-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一段实习总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scala Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-scopt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scopt库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    秋招复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/mac_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自用Mac入手文章指南合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总结分析合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asyncToolLearn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    asyncTool框架梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JVM/JVM%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM并发总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java/Scala I/O
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java/Scala I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        传输方式分类
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="传输方式分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字节流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字符流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相互转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计思路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装饰者模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bufferedreader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BufferedReader
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files工具类
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files工具类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O 模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O 模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-like-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unix-like IO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unix-like IO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        前置知识
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阻塞式IO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非阻塞式IO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O复用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        信号驱动I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        异步I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reactor模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心组件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/design-pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计模式总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../leveldb_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LevelDB源码学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../dataWarehouse/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据存储与计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据存储与计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/hadoop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDFS 与 YARN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据SQL剖析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/flink_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E6%95%B0%E4%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数仓理论总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/interview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    查缺补漏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/graphDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图数据库总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/learn_db_from_paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从论文学隔离级别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../LANG/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LANG/DS-leetcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构与算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/gitSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git 规范总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ci/cd流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../backend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    杂项
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    杂项
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/springboot-doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前端开发
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TS学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试的复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/javaweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    javaweb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字图像处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/blockchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    blockchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        传输方式分类
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="传输方式分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字节流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        字符流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相互转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设计思路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装饰者模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bufferedreader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BufferedReader
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files工具类
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files工具类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O 模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O 模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-like-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unix-like IO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unix-like IO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        前置知识
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阻塞式IO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非阻塞式IO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O复用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        信号驱动I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        异步I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reactor模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NIO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心组件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/melodylx666/lx-bigdata/edit/main/docs/frameworkAnalysis/io.md" title="编辑此页" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="javascala-io">Java/Scala I/O<a class="headerlink" href="#javascala-io" title="Permanent link">&para;</a></h1>
+<h2 id="_1">基础<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">传输方式分类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>从传输方式来看，分为字节流和字符流。</p>
+<h4 id="_3">字节流<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>命名格式：<code>xxxStream</code></p>
+<p><strong>InputStream</strong></p>
+<blockquote>
+<p>This abstract class is the superclass of all classes representing an input stream of bytes.
+Applications that need to define a subclass of InputStream must always provide a method that returns the next byte of input.</p>
+</blockquote>
+<p><img alt="image.png" src="../assets/InputStream.png" /></p>
+<p><strong>OutputStream</strong></p>
+<blockquote>
+<p>This abstract class is the superclass of all classes representing an output stream of bytes. An output stream accepts output bytes and sends them to some sink.
+Applications that need to define a subclass of OutputStream must always provide at least a method that writes one byte of output.</p>
+</blockquote>
+<p><img alt="image.png" src="../assets/OutputStream.png" /></p>
+<h4 id="_4">字符流<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p><strong>Reader</strong></p>
+<blockquote>
+<p>Abstract class for reading character streams. The only methods that a subclass must implement are read(char[], int, int) and close(). Most subclasses, however, will override some of the methods defined here in order to provide higher efficiency, additional functionality, or both.</p>
+</blockquote>
+<p><img alt="image.png" src="../assets/Reader.png" /></p>
+<p><strong>Writer</strong></p>
+<blockquote>
+<p>Abstract class for writing to character streams. The only methods that a subclass must implement are write(char[], int, int), flush(), and close(). Most subclasses, however, will override some of the methods defined here in order to provide higher efficiency, additional functionality, or both.</p>
+</blockquote>
+<p><img alt="image.png" src="../assets/Writer.png?t=1738205258635" /></p>
+<h4 id="_5">相互转换<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>这里的流都是字符流，但是都以字节流作为构造参数进行包装。</p>
+<p>也就是一个从文件读数据，可以在读取的时候进行<code>decode</code>，在输出的时候进行<code>encode</code></p>
+<p><strong>InputStreamReader</strong></p>
+<blockquote>
+<p>An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset. The charset that it uses may be specified by name or may be given explicitly, or the platform's default charset may be accepted.
+Each invocation of one of an InputStreamReader's read() methods may cause one or more bytes to be read from the underlying byte-input stream. To enable the efficient conversion of bytes to characters, more bytes may be read ahead from the underlying stream than are necessary to satisfy the current read operation.
+For top efficiency, consider wrapping an InputStreamReader within a BufferedReader. For example:
+BufferedReader in
+= new BufferedReader(new InputStreamReader(System. in));</p>
+</blockquote>
+<p><img alt="image.png" src="../assets/InputStreamReaderP.png" /></p>
+<p><code>InputStreamReader</code>用来对字节流进行包装，所以需要其作为构造参数传入。</p>
+<p>可以看到JDK给用户额外封装好了一个<code>FileReader</code>，用于方便文件读取，其使用<code>FileInputStream</code>作为构造参数。</p>
+<blockquote>
+<p>Reads text from character files using a default buffer size. Decoding from bytes to characters uses either a specified charset or the platform's default charset.
+The FileReader is meant for reading streams of characters. For reading streams of raw bytes, consider using a FileInputStream.</p>
+</blockquote>
+<p><strong>OutputStreamWriter</strong></p>
+<blockquote>
+<p>An OutputStreamWriter is a bridge from character streams to byte streams: Characters written to it are encoded into bytes using a specified charset. The charset that it uses may be specified by name or may be given explicitly, or the platform's default charset may be accepted.
+Each invocation of a write() method causes the encoding converter to be invoked on the given character(s). The resulting bytes are accumulated in a buffer before being written to the underlying output stream. Note that the characters passed to the write() methods are not buffered.
+For top efficiency, consider wrapping an OutputStreamWriter within a BufferedWriter so as to avoid frequent converter invocations. For example:
+Writer out
+= new BufferedWriter(new OutputStreamWriter(System. out));</p>
+</blockquote>
+<p>同样封装了一个<code>FileWriter</code></p>
+<h3 id="_6">设计思路<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h4 id="_7">装饰者模式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://www.runoob.com/design-pattern/decorator-pattern.html">装饰器模式 | 菜鸟教程 (runoob.com)</a></p>
+<p><a href="https://blog.csdn.net/qq_27093465/article/details/53323187">详细讲解装饰者模式和继承之间的关系和优劣(讲道理这事儿，不怕过 就怕不够)_装饰者模式和继承区别-CSDN博客</a></p>
+</blockquote>
+<p><code>JDK IO</code>整体采用装饰者模型进行设计。</p>
+<p>简单来讲，如果要设计一个<code>MyReader</code>，只用继承，可能会设计成如下：</p>
+<ul>
+<li>MyReader</li>
+<li>MyFileReader</li>
+<li>MyMusicReader</li>
+<li>MyxxxReader</li>
+</ul>
+<p>当想要把所有流增加<code>Buffer</code>功能的时候，就需要更深一级的继承。</p>
+<p>要解决层级太深的问题，可以在用户线程与具体类的使用之间，加一层进行解耦。</p>
+<p>具体而言，将修饰功能的类单独抽离出来，并继承/实现<code>MyReader</code>。</p>
+<p>然后在该类中拿到被修饰者作为字段，这里使用多态可以将类型声明为父接口即可。</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><span class="kd">class</span> <span class="nc">MyBufferedReader</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MyReader</span><span class="p">{</span>
+</span><span id="__span-0-2"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyReader</span><span class="w"> </span><span class="n">toenhance</span><span class="p">;</span>
+</span><span id="__span-0-3"><span class="w">    </span><span class="n">MyBufferedReafer</span><span class="p">(</span><span class="n">MyReader</span><span class="w"> </span><span class="n">r</span><span class="p">){</span>
+</span><span id="__span-0-4"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">toenhance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span>
+</span><span id="__span-0-5"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-6"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">xxx</span>
+</span><span id="__span-0-7"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>以后用户线程直接调用的都是该增强类的方法,然后由该类统一增强，除了增强逻辑之外，其他部分都与被增强的类耦合。</p>
+<h4 id="bufferedreader">BufferedReader<a class="headerlink" href="#bufferedreader" title="Permanent link">&para;</a></h4>
+<p>具体来看<code>BufferedReader</code></p>
+<p><strong>字段</strong></p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">in</span><span class="p">;</span>
+</span><span id="__span-1-2">
+</span><span id="__span-1-3"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">cb</span><span class="o">[]</span><span class="p">;</span>
+</span><span id="__span-1-4"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nChars</span><span class="p">,</span><span class="w"> </span><span class="n">nextChar</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>其他字段均为实现增强功能所需要的字段。</p>
+<p><strong>构造方法</strong></p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1">    /**
+</span><span id="__span-2-2">     * Creates a buffering character-input stream that uses an input buffer of
+</span><span id="__span-2-3">     * the specified size.
+</span><span id="__span-2-4">     *
+</span><span id="__span-2-5">     * @param  in   A Reader
+</span><span id="__span-2-6">     * @param  sz   Input-buffer size
+</span><span id="__span-2-7">     *
+</span><span id="__span-2-8">     * @exception  IllegalArgumentException  If {@code sz &lt;= 0}
+</span><span id="__span-2-9">     */
+</span><span id="__span-2-10">    public BufferedReader(Reader in, int sz) {
+</span><span id="__span-2-11">        super(in);
+</span><span id="__span-2-12">        if (sz &lt;= 0)
+</span><span id="__span-2-13">            throw new IllegalArgumentException(&quot;Buffer size &lt;= 0&quot;);
+</span><span id="__span-2-14">        this.in = in;
+</span><span id="__span-2-15">        cb = new char[sz];
+</span><span id="__span-2-16">        nextChar = nChars = 0;
+</span><span id="__span-2-17">    }
+</span></code></pre></div></td></tr></table></div>
+<p><strong>read</strong></p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-3-2"><span class="cm">     * Reads a single character.</span>
+</span><span id="__span-3-3"><span class="cm">     *</span>
+</span><span id="__span-3-4"><span class="cm">     * @return The character read, as an integer in the range</span>
+</span><span id="__span-3-5"><span class="cm">     *         0 to 65535 ({@code 0x00-0xffff}), or -1 if the</span>
+</span><span id="__span-3-6"><span class="cm">     *         end of the stream has been reached</span>
+</span><span id="__span-3-7"><span class="cm">     * @exception  IOException  If an I/O error occurs</span>
+</span><span id="__span-3-8"><span class="cm">     */</span>
+</span><span id="__span-3-9"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">read</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-10"><span class="w">        </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">lock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-11"><span class="w">            </span><span class="n">ensureOpen</span><span class="p">();</span>
+</span><span id="__span-3-12"><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-13"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextChar</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nChars</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-14"><span class="w">                    </span><span class="n">fill</span><span class="p">();</span>
+</span><span id="__span-3-15"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextChar</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nChars</span><span class="p">)</span>
+</span><span id="__span-3-16"><span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-3-17"><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-3-18"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">skipLF</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-19"><span class="w">                    </span><span class="n">skipLF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-3-20"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cb</span><span class="o">[</span><span class="n">nextChar</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-21"><span class="w">                        </span><span class="n">nextChar</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-3-22"><span class="w">                        </span><span class="k">continue</span><span class="p">;</span>
+</span><span id="__span-3-23"><span class="w">                    </span><span class="p">}</span>
+</span><span id="__span-3-24"><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-3-25"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">cb</span><span class="o">[</span><span class="n">nextChar</span><span class="o">++]</span><span class="p">;</span>
+</span><span id="__span-3-26"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-3-27"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-3-28"><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这里读取单个字符，里面调用的是<code>fill</code>方法来读取单个字符到缓冲区，其核心逻辑如下：</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+</span><span id="__span-4-2"><span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">cb</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dst</span><span class="p">);</span>
+</span><span id="__span-4-4"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-4-5"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-6"><span class="w">            </span><span class="n">nChars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+</span><span id="__span-4-7"><span class="w">            </span><span class="n">nextChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst</span><span class="p">;</span>
+</span><span id="__span-4-8"><span class="w">        </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到，最终其实还是调用的被修饰类的方法，但是实现了增强功能与基础功能解耦，由继承变为组合，灵活更强的好处。</p>
+<h3 id="files">Files工具类<a class="headerlink" href="#files" title="Permanent link">&para;</a></h3>
+<p><code>从JDK7</code>开始，提供的文件/目录操作工具类，封装了很多常用的逻辑。</p>
+<h4 id="path">Path<a class="headerlink" href="#path" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>An object that may be used to locate a file in a file system. It will typically represent a system dependent file path.
+A Path represents a path that is hierarchical and composed of a sequence of directory and file name elements separated by a special separator or delimiter. A root component, that identifies a file system hierarchy, may also be present. The name element that is farthest from the root of the directory hierarchy is the name of a file or directory. The other name elements are directory names. A Path can represent a root, a root and a sequence of names, or simply one or more name elements. A Path is considered to be an empty path if it consists solely of one name element that is empty. Accessing a file using an empty path is equivalent to accessing the default directory of the file system. Path defines the getFileName, getParent, getRoot, and subpath methods to access the path components or a subsequence of its name elements.</p>
+</blockquote>
+<p>说明了其就是用于在文件系统中定位文件的类。</p>
+<p>文档中还给了一个简单的例子：</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><span class="c1">//Paths may be used with the Files class to operate on files, directories, and other types of files. For example, suppose we want a java. io. BufferedReader to read text from a file &quot;access. log&quot;. The file is located in a directory &quot;logs&quot; relative to the current working directory and is UTF-8 encoded.</span>
+</span><span id="__span-5-2"><span class="w">      </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystems</span><span class="p">.</span><span class="w"> </span><span class="nf">getDefault</span><span class="p">().</span><span class="na">getPath</span><span class="p">(</span><span class="s">&quot;logs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;access. log&quot;</span><span class="p">);</span>
+</span><span id="__span-5-3"><span class="w">      </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="w"> </span><span class="nf">newBufferedReader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="w"> </span><span class="n">UTF_8</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>创建path</strong></p>
+<p>使用<code>Path.of</code>方法进行创建，参数可以是文件路径/URL。这里要注意<code>idea</code>运行时配置的默认工作路径。</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">demo1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;src/main/java/org/lxbigdata/io/hello.txt&quot;</span><span class="p">);</span>
+</span><span id="__span-6-3"><span class="w">        </span><span class="k">try</span><span class="p">(</span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">newBufferedReader</span><span class="p">(</span><span class="n">path</span><span class="p">)){</span>
+</span><span id="__span-6-4"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-6-5"><span class="w">            </span><span class="k">while</span><span class="p">((</span><span class="n">s</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">){</span>
+</span><span id="__span-6-6"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span><span id="__span-6-7"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-6-8"><span class="w">            </span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+</span><span id="__span-6-9"><span class="w">        </span><span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+</span><span id="__span-6-10"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+</span><span id="__span-6-11"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-6-12"><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="files_1">Files<a class="headerlink" href="#files_1" title="Permanent link">&para;</a></h4>
+<p><strong>创建文件/目录</strong></p>
+<ul>
+<li>create[Temp]File</li>
+<li>create[Temp]Directory</li>
+</ul>
+<p><strong>增删改查</strong></p>
+<ul>
+<li>增</li>
+<li>createFile</li>
+<li>...</li>
+<li>删</li>
+<li>delete</li>
+<li>deteleIfexists</li>
+<li>改</li>
+<li>newInput/OutputStream</li>
+<li>newBufferedReader/Writer</li>
+<li>move/copy</li>
+<li>查</li>
+<li>exists</li>
+<li>....</li>
+</ul>
+<h2 id="io">I/O 模型<a class="headerlink" href="#io" title="Permanent link">&para;</a></h2>
+<h3 id="unix-like-io">Unix-like IO<a class="headerlink" href="#unix-like-io" title="Permanent link">&para;</a></h3>
+<h4 id="_8">前置知识<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p><strong>文件描述符 &amp; 打开文件表 &amp; inode表</strong></p>
+<blockquote>
+<p>关于文件描述符，文件句柄，以及inode:</p>
+<p><a href="https://blog.csdn.net/nazeniwaresakini/article/details/104220111">彻底搞懂文件描述符/文件句柄/文件指针的区别与联系-CSDN博客</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/143430585">理解Linux的文件描述符FD与Inode - 知乎 (zhihu.com)</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/Inode">inode - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+</blockquote>
+<p>都知道<code>OS</code>中一个进程维护一个<code>PCB</code>，其用于控制进程，并维护进程的上下文信息。其中就包括了一个<code>file descriptor table</code>。这是一个<code>Array[filedescriptor]</code>。而一个文件描述符<code>fd</code>，就是用来获取对应的<code>filedescriptor</code>的，也就是<code>filedescriptor curfd = arr(fd)</code>。其有一个字段指向了<code>file结构</code>，也就是<code>file curfile = curfd.file</code></p>
+<p><code>OS</code>中维护了一个全局<code>open file table</code>，这是一个<code>Array[file]</code>,维护了所有被打开文件的信息，比如<code>offset,mode</code>等，以及最重要的<code>inode 指针</code>。这里的index，就称为文件描述/文件句柄。也就是<code>file curfile = arr(handle)</code>。</p>
+<blockquote>
+<p>window下通常将一组指针/引用对应的数据的下标称为<code>句柄</code>。</p>
+</blockquote>
+<p>然后就是<code>inode table</code>。</p>
+<p><code>inode</code>是<code>unix</code>文件系统中的数据结构，用于描述文件系统对象，包括<code>文件，目录，socket等</code>，其中有文件创建者，模式等信息，并存储着<code>block</code>指针。一个文件如果要存储，则需要存储元数据信息，以及其本身数据信息两部分内容。而<code>unix</code>文件系统，一般初始化的时候就把存储区域分为两部分，分别用于存储这两部分信息。</p>
+<p>文件系统对象才是一个文件系统中的标准描述，而文件/目录都只是别名。</p>
+<ul>
+<li>元数据部分就是<code>inode</code>组成的表，一个<code>inode</code>一般占据<code>256/128</code>字节。</li>
+<li>数据部分以<code>block</code>形式存储，一个<code>block</code>为4KB。</li>
+</ul>
+<p>在操作系统内存中，对应着<code>inode cache</code>以及<code>page cache</code>。</p>
+<p><strong>网卡到用户进程</strong></p>
+<blockquote>
+<p><a href="https://hlog.cc/archives/156/">内功修炼-网络数据包的发送、传输、接受过程 - 沉迷于学习，无法自拔^_^ (hlog.cc)</a></p>
+<p>ring buffer：环形缓冲区，这里的实现内部有两个环形数组，一个是内核驱动使用，一个是网卡硬件使用。两者可以通过<code>share</code>同一块内核内存来实现消费者-生产者模式，比如<code>skb_buffer</code>。</p>
+<p>DMA：数据传输技术，将数据不通过CPU，而是通过总线，来直接从外设缓冲区复制到内核内存，或者另一个外设缓冲区。</p>
+</blockquote>
+<ul>
+<li>数据以高低电平形式来到网卡，被网卡硬件转换为数据并刷到<code>FIFO</code>缓冲区，然后网卡申请<code>skb_buffer</code>的引用，然后数据就可以通过<code>DMA</code>方式，从<code>fifo-buffer</code>到<code>skb_buffer</code>。</li>
+<li>硬中断：由于是<code>DMA</code>写入，内核无法监控，所以需要发起中断，这里网卡会触发硬中断，然后处理程序来调用<code>Driver</code>来处理</li>
+<li>软中断：<code>Driver</code>处理完毕，触发软中断，由内核中的专门进程处理，这里中断处理程序会调用<code>网卡Driver所对应的处理函数</code>。</li>
+<li>驱动处理：由网卡驱动对数据进行格式处理。处理完毕传递给<code>协议栈</code></li>
+<li>协议栈到<code>socket</code>：协议栈经过处理，并且可以拿到数据的<code>端口，IP</code>信息，将数据发送到<code>scoket buffer</code>,然后给<code>socket</code>信号说明有数据来了。一个<code>socket</code>有两个<code>buffer</code>，分别用于发送数据和接收数据。</li>
+<li>应用进程响应</li>
+<li>阻塞式，则<code>receivefrom</code>函数阻塞直到数据过来，然后将数据存储到用户进程内存。</li>
+<li>非阻塞式：使用<code>poll/select</code>监听<code>socket</code>,有数据过来，就读取数据</li>
+</ul>
+<h4 id="io_1">阻塞式IO<a class="headerlink" href="#io_1" title="Permanent link">&para;</a></h4>
+<p>就是线程调用函数<code>receivefrom</code>之后，如果<code>socket buffer</code>无数据，则阻塞，期间进程<code>OS</code>挂起然后加入队列进行调度。</p>
+<p>直到<code>socket buffer</code>有数据，则<strong>操作系统可以重新执行该进程</strong>，该函数将数据从<code>socket buffer</code> 复制到 <code>用户进程的buf</code>。</p>
+<p><code>receivefrom</code>函数原型：</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><span class="kt">ssize_t</span><span class="w"> </span><span class="nf">recvfrom</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">sockfd</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+</span><span id="__span-7-2"><span class="w">                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">sockaddr</span><span class="w"> </span><span class="o">*</span><span class="n">src_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">socklen_t</span><span class="w"> </span><span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到，其拿到<code>socket文件描述符</code>，以及<code>buf指针</code>，并将数据从<code>socket buffer</code>复制到<code>进程buf</code>。</p>
+<h4 id="io_2">非阻塞式IO<a class="headerlink" href="#io_2" title="Permanent link">&para;</a></h4>
+<p>用户执行<code>recvfrom</code>之后，如果<code>socket buffer</code>没有数据，进程不被阻塞，而是一直轮询，比如在一个<code>while</code>循环中间接性调用该函数。</p>
+<p>如果<code>socket buffer</code>有数据，则立刻可以返回。</p>
+<p><strong>与阻塞式IO区别</strong></p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/681876317">聊聊计算机里面的“中断”和“轮询” - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>区别就是信息的控制方不同。当然非阻塞式IO可以尽力细化粒度(比如<code>Thread.sleep</code>的间隔减小)的进行控制，但是由于其无法控制信息，则只能同时将压力给到用户进程。阻塞时候控制权重新交给了<code>OS</code>，则无法精确满足要求。</p>
+<h4 id="io_3">I/O复用<a class="headerlink" href="#io_3" title="Permanent link">&para;</a></h4>
+<p>将感兴趣的多个<code>socket文件描述符</code>维护起来，然后调用<code>select</code>将程序阻塞并挂起。</p>
+<p>如果有一个<code>socket</code>发生了变化，则<code>select</code>会立即返回。此时可以再使用<code>recvfrom</code>将数据从<code>socket buffer</code>复制到<code>进程内存区域</code>。</p>
+<p>其使得单个进程有了处理多个<code>event</code>的能力，而不是一个线程一个<code>socket</code>连接。</p>
+<h4 id="io_4">信号驱动I/O<a class="headerlink" href="#io_4" title="Permanent link">&para;</a></h4>
+<p>应用进程发送<code>sigaction</code>调用，此时主线程不会被阻塞。如果有<code>socket buffer</code>无数据，则直接<code>return</code>。如果有数据，则返回信号，<strong>通知用户进程可以开始读数据</strong>。此时用户线程可以执行<code>recvfrom</code>。</p>
+<p>相比于非阻塞式IO，CPU浪费较少。</p>
+<h4 id="io_5">异步I/O<a class="headerlink" href="#io_5" title="Permanent link">&para;</a></h4>
+<p>执行异步io，调用立即返回，内核完成所有事情，向进程发送信号，<strong>通知用户进程IO任务已经完毕</strong></p>
+<h3 id="reactor">Reactor模型<a class="headerlink" href="#reactor" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/26943938/answer/1856426252">如何深刻理解Reactor和Proactor？ - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>Reactor模型是整个<code>NIO</code>的实现基础。也称为<code>Dispatcher</code>模型。对于<code>Spark</code>熟悉的人肯定知道,<code>Spark rpc</code>的核心就是<code>Dispatcher</code>。</p>
+<p>这里的<code>NIO</code>采用<code>多reactor多线程</code>的模式。</p>
+<p><code>Client</code>发送请求之后，被主线程的<code>main Reactor 通过selector</code>收到并进行<code>Dispatch</code>，发送到主线程的<code>Acceptor</code>，获取连接(<code>accept</code>)。</p>
+<p>获取连接之后，主线程将其分发到子线程的<code>sub Reactor</code>中。在子线程中，同样是连接被加入到<code>selelctor</code>中，再次等待被选中。</p>
+<p>子线程中的<code>selelctor</code>返回之后，则可以通过<code>Handler</code>进行业务逻辑处理。</p>
+<p>这里主线程和子线程分工明确：</p>
+<ul>
+<li>主线程只用于创建连接</li>
+<li>子线程只用于处理业务逻辑，并且可以将结果发送给客户端</li>
+</ul>
+<p><code>Netty</code>中亦有<code>BOSS GROUP</code>以及<code>Worker GROUP</code></p>
+<h3 id="nio">NIO<a class="headerlink" href="#nio" title="Permanent link">&para;</a></h3>
+<p>从<code>JDK4</code>引入，高速并且面向块。</p>
+<h4 id="_9">基础概念<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p>传统的<code>InputStream/OutputStream</code>是基于<code>单个Byte</code>的，但是这里的NIO基于的是<code>Block</code>，也就是<code>Byte[]</code>。</p>
+<h4 id="_10">核心组件<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p><strong>Channel</strong></p>
+<blockquote>
+<p>A channel represents an open connection to an entity such as a hardware device, a file, a network socket, or a program component that is capable of performing one or more distinct I/ O operations, for example reading or writing.
+A channel is either open or closed. A channel is open upon creation, and once closed it remains closed. Once a channel is closed, any attempt to invoke an I/ O operation upon it will cause a ClosedChannelException to be thrown. Whether or not a channel is open may be tested by invoking its isOpen method.
+Channels are, in general, intended to be safe for multithreaded access as described in the specifications of the interfaces and classes that extend and implement this interface.</p>
+</blockquote>
+<p>简单来说，就是面向<code>文件/socket/其它用于IO的组件</code>的一种连接。</p>
+<p>其状态具有二值性：<code>open &amp; close</code>，而不是和<code>SQL &amp; 分布式系统</code>那种的三值语义。</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Channel</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Closeable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2">
+</span><span id="__span-8-3"><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-8-4"><span class="cm">     * Tells whether or not this channel is open.</span>
+</span><span id="__span-8-5"><span class="cm">     *</span>
+</span><span id="__span-8-6"><span class="cm">     * @return {@code true} if, and only if, this channel is open</span>
+</span><span id="__span-8-7"><span class="cm">     */</span>
+</span><span id="__span-8-8"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isOpen</span><span class="p">();</span>
+</span><span id="__span-8-9">
+</span><span id="__span-8-10"><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-8-11"><span class="cm">     * Closes this channel.</span>
+</span><span id="__span-8-12"><span class="cm">     *</span>
+</span><span id="__span-8-13"><span class="cm">     * &lt;p&gt; After a channel is closed, any further attempt to invoke I/O</span>
+</span><span id="__span-8-14"><span class="cm">     * operations upon it will cause a {@link ClosedChannelException} to be</span>
+</span><span id="__span-8-15"><span class="cm">     * thrown.</span>
+</span><span id="__span-8-16"><span class="cm">     *</span>
+</span><span id="__span-8-17"><span class="cm">     * &lt;p&gt; If this channel is already closed then invoking this method has no</span>
+</span><span id="__span-8-18"><span class="cm">     * effect.</span>
+</span><span id="__span-8-19"><span class="cm">     *</span>
+</span><span id="__span-8-20"><span class="cm">     * &lt;p&gt; This method may be invoked at any time.  If some other thread has</span>
+</span><span id="__span-8-21"><span class="cm">     * already invoked it, however, then another invocation will block until</span>
+</span><span id="__span-8-22"><span class="cm">     * the first invocation is complete, after which it will return without</span>
+</span><span id="__span-8-23"><span class="cm">     * effect. &lt;/p&gt;</span>
+</span><span id="__span-8-24"><span class="cm">     *</span>
+</span><span id="__span-8-25"><span class="cm">     * @throws  IOException  If an I/O error occurs</span>
+</span><span id="__span-8-26"><span class="cm">     */</span>
+</span><span id="__span-8-27"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+</span><span id="__span-8-28">
+</span><span id="__span-8-29"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>Buffer</strong></p>
+<blockquote>
+<p>A container for data of a specific primitive type.</p>
+</blockquote>
+<p>是一种线性的，面相特定数据类型(Int,Char等)的容器。</p>
+<p>通过三个核心变量操作：</p>
+<blockquote>
+<p>A buffer's capacity is the number of elements it contains. The capacity of a buffer is never negative and never changes.
+A buffer's limit is the index of the first element that should not be read or written. A buffer's limit is never negative and is never greater than its capacity.
+A buffer's position is the index of the next element to be read or written. A buffer's position is never negative and is never greater than its limit.</p>
+</blockquote>
+<p><code>channel</code>过来的数据以及发送给其的数据必须到<code>buffer</code>中，也就是其常作为参数传入<code>read/write</code>方法中。</p>
+<p>其中的<code>position</code>即是下一个要读取的位置，也是当前已经读取的字节数:</p>
+<p><code>x - 1  - 0 + 1 = x</code></p>
+<p>以<code>ByteBuffer</code>为例，常见方法如下：</p>
+<ul>
+<li>初始化：<code>ByteBuffer.allocate(16)</code></li>
+<li><code>从channel读数据到buffer</code>：<code>int readbytes = channel.read(buf) / buf.put([i])</code></li>
+<li><code>从buffer写数据到channel</code>：<code>int writebytes = channel.write(buf) / buf.get()</code></li>
+<li>mark &amp; reset：在某个pos做标记，然后reset就可以回到这里</li>
+</ul>
+<p>如下：</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">NIOSocketDemo</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><span class="w">        </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
+</span><span id="__span-9-3"><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-9-4"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="na">hasRemaining</span><span class="p">()){</span>
+</span><span id="__span-9-5"><span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">buffer</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+</span><span id="__span-9-6"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+</span><span id="__span-9-7"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">){</span>
+</span><span id="__span-9-8"><span class="w">                </span><span class="n">buffer</span><span class="p">.</span><span class="na">mark</span><span class="p">();</span>
+</span><span id="__span-9-9"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;mark&quot;</span><span class="p">);</span>
+</span><span id="__span-9-10"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-9-11"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">flag</span><span class="p">){</span>
+</span><span id="__span-9-12"><span class="w">                </span><span class="n">buffer</span><span class="p">.</span><span class="na">reset</span><span class="p">();</span>
+</span><span id="__span-9-13"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;reset&quot;</span><span class="p">);</span>
+</span><span id="__span-9-14"><span class="w">                </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-9-15"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-9-16"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-9-17"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">);</span>
+</span><span id="__span-9-18"><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则这段程序的<code>llo</code>被重新又输出了一遍。</p>
+<p><strong>Selector</strong></p>
+<p>这里就是IO多路复用模型上的select。这里JDK已经将与<code>socket/file</code>的连接抽象为<code>Channel</code>，则<code>Selcetor</code>只需要监听多个<code>Channel</code>既可以达到多路复用。</p>
+<p>如果是<code>SocketChannel</code>，可以配置为非阻塞。这时候<code>Selector</code>可以同时监听一批<code>Channel</code>，而不是在一个上面阻塞。</p>
+<p><code>Selector</code>可以同时监听<code>ServerSocketChannel以及SocketChannel</code>，而如果来的是<code>OP_ACCEPT</code>，则必然是<code>SSChannel</code>的请求，因为只有它用于处理连接。其<code>bind</code>方法解释如下:</p>
+<blockquote>
+<p>Binds the channel's socket to a local address and configures the socket to listen for connections.</p>
+</blockquote>
+<p>而<code>accpet</code>方法就是建立连接。</p>
+<h4 id="_11">例子<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://www.pdai.tech/md/java/io/java-io-nio.html#%E9%80%89%E6%8B%A9%E5%99%A8">Java NIO - 基础详解 | Java 全栈知识体系 (pdai.tech)</a></p>
+</blockquote>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NIOServerDemo</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><span class="w">        </span><span class="n">Selector</span><span class="w"> </span><span class="n">selector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Selector</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+</span><span id="__span-10-4"><span class="w">        </span><span class="n">ServerSocketChannel</span><span class="w"> </span><span class="n">ssChannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ServerSocketChannel</span><span class="p">.</span><span class="na">open</span><span class="p">();</span>
+</span><span id="__span-10-5"><span class="w">        </span><span class="n">ssChannel</span><span class="p">.</span><span class="na">configureBlocking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span id="__span-10-6"><span class="w">        </span><span class="n">ssChannel</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_ACCEPT</span><span class="p">);</span>
+</span><span id="__span-10-7"><span class="w">        </span><span class="n">ssChannel</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InetSocketAddress</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">));</span>
+</span><span id="__span-10-8">
+</span><span id="__span-10-9"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+</span><span id="__span-10-10"><span class="w">            </span><span class="n">selector</span><span class="p">.</span><span class="na">select</span><span class="p">();</span><span class="w"> </span><span class="c1">// 阻塞方法，直到有Channel(或者Channels)被选中(发生event)</span>
+</span><span id="__span-10-11"><span class="w">            </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">SelectionKey</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">selector</span><span class="p">.</span><span class="na">selectedKeys</span><span class="p">();</span><span class="w"> </span><span class="c1">//查看这些Channel本次事件的key，key =&gt; 某个channel发生了某种event</span>
+</span><span id="__span-10-12"><span class="w">            </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">SelectionKey</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keys</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
+</span><span id="__span-10-13"><span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="na">hasNext</span><span class="p">()){</span>
+</span><span id="__span-10-14"><span class="w">                </span><span class="n">SelectionKey</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+</span><span id="__span-10-15"><span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">isAcceptable</span><span class="p">()){</span><span class="w"> </span><span class="c1">//只有ssChannel可以建立连接</span>
+</span><span id="__span-10-16"><span class="w">                    </span><span class="c1">//处理新接入的请求消息</span>
+</span><span id="__span-10-17"><span class="w">                    </span><span class="kd">var</span><span class="w"> </span><span class="n">channel1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ServerSocketChannel</span><span class="p">)</span><span class="n">key</span><span class="p">.</span><span class="na">channel</span><span class="p">();</span>
+</span><span id="__span-10-18"><span class="w">                    </span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">sChannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel1</span><span class="p">.</span><span class="na">accept</span><span class="p">();</span>
+</span><span id="__span-10-19"><span class="w">                    </span><span class="n">sChannel</span><span class="p">.</span><span class="na">configureBlocking</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span id="__span-10-20"><span class="w">                    </span><span class="c1">//建立新连接，从客户端读取消息</span>
+</span><span id="__span-10-21"><span class="w">                    </span><span class="n">sChannel</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="n">SelectionKey</span><span class="p">.</span><span class="na">OP_READ</span><span class="p">);</span><span class="w"> </span><span class="c1">//表明select对这个channel,只做读操作</span>
+</span><span id="__span-10-22"><span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">isReadable</span><span class="p">()){</span>
+</span><span id="__span-10-23"><span class="w">                    </span><span class="c1">//sChannel可读，则从中读取数据到server端的buffer</span>
+</span><span id="__span-10-24"><span class="w">                    </span><span class="kd">var</span><span class="w"> </span><span class="n">channel1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SocketChannel</span><span class="p">)</span><span class="n">key</span><span class="p">.</span><span class="na">channel</span><span class="p">();</span>
+</span><span id="__span-10-25"><span class="w">                    </span><span class="kd">var</span><span class="w"> </span><span class="n">remoteAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">InetSocketAddress</span><span class="p">)</span><span class="n">channel1</span><span class="p">.</span><span class="na">getRemoteAddress</span><span class="p">();</span>
+</span><span id="__span-10-26"><span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remoteAddress</span><span class="p">.</span><span class="na">getPort</span><span class="p">();</span>
+</span><span id="__span-10-27"><span class="w">                    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;port:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">port</span><span class="p">);</span>
+</span><span id="__span-10-28"><span class="w">                    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">readDataFromChannel</span><span class="p">(</span><span class="n">channel1</span><span class="p">));</span>
+</span><span id="__span-10-29"><span class="w">                    </span><span class="n">channel1</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+</span><span id="__span-10-30"><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-10-31"><span class="w">                </span><span class="n">iterator</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span><span class="w"> </span><span class="c1">//必须删除，否则会重复处理引发空指针</span>
+</span><span id="__span-10-32"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-10-33"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-34"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-35">
+</span><span id="__span-10-36"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">readDataFromChannel</span><span class="p">(</span><span class="n">SocketChannel</span><span class="w"> </span><span class="n">sChannel</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-37"><span class="w">        </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="p">.</span><span class="na">allocate</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+</span><span id="__span-10-38"><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuffer</span><span class="p">();</span>
+</span><span id="__span-10-39">
+</span><span id="__span-10-40"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+</span><span id="__span-10-41"><span class="w">            </span><span class="n">buffer</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">//切换至写模式</span>
+</span><span id="__span-10-42"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sChannel</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span><span id="__span-10-43"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="c1">//读取完毕</span>
+</span><span id="__span-10-44"><span class="w">            </span><span class="n">buffer</span><span class="p">.</span><span class="na">flip</span><span class="p">();</span><span class="w"> </span><span class="c1">//切换至读模式</span>
+</span><span id="__span-10-45"><span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="na">hasRemaining</span><span class="p">()){</span>
+</span><span id="__span-10-46"><span class="w">                </span><span class="n">data</span><span class="p">.</span><span class="na">append</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span><span class="n">buffer</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+</span><span id="__span-10-47"><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-10-48"><span class="w">            </span><span class="n">buffer</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">//切换至写模式</span>
+</span><span id="__span-10-49"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-50"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+</span><span id="__span-10-51"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-52"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则此时将数据从<code>client</code>写入<code>socket</code>即可在<code>server</code>得到响应。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      lx CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

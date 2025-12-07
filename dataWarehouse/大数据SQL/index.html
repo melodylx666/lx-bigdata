@@ -1,0 +1,4159 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="li-xiao的个人网站">
+      
+      
+        <meta name="author" content="li-xiao">
+      
+      
+        <link rel="canonical" href="https://melodylx666.github.io/lx-bigdata/dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/">
+      
+      
+        <link rel="prev" href="../hadoop/">
+      
+      
+        <link rel="next" href="../flink_learn/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>大数据SQL剖析 - lx-bigdata</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="lx-bigdata" class="md-header__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            lx-bigdata
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              大数据SQL剖析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Project/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  随手总结
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据存储与计算
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../LANG/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  计算机基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  杂项
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="lx-bigdata" class="md-nav__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    lx-bigdata
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Project/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随手总结
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    随手总结
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/dynamic-Cep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态CEP解析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/econ-rule-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    金融风控引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/AbstractStreamOperatorDesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义StreamOperator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/ruleCoreSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    规则动态加载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/first-intern-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一段实习总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scala Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-scopt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scopt库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    秋招复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/mac_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自用Mac入手文章指南合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总结分析合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/asyncToolLearn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    asyncTool框架梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JVM/JVM%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM并发总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java/Scala I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/design-pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计模式总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/leveldb_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LevelDB源码学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据存储与计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据存储与计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hadoop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDFS 与 YARN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据SQL剖析
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据SQL剖析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编译本质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="编译本质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antlr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ANTLR与编译
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ANTLR与编译">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SparkSQL Parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hivesql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HiveSQL概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SparkSQL概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rbocbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RBO与CBO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RBO与CBO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RBO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CBO
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="聚合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        aggregate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合算子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        window
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        olap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="olap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上卷与下钻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        底层原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行计划
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5种JOIN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5种JOIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        划分依据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        构建细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数调优
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="参数调优">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        partition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        join
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        skew
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aqe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AQE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AQE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功能和范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spj" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPJ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        火山模型与向量化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="火山模型与向量化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        火山模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="火山模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        改进
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        向量化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spark">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spark-and-mr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark and MR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spark_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark进程类别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spark_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark内存模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合、开窗、连接的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL调优
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flink_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E4%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数仓理论总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    查缺补漏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graphDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图数据库总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn_db_from_paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从论文学隔离级别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../LANG/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LANG/DS-leetcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构与算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/gitSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git 规范总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ci/cd流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../backend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    杂项
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    杂项
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/springboot-doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前端开发
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TS学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试的复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/javaweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    javaweb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字图像处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/blockchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    blockchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编译本质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="编译本质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antlr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ANTLR与编译
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ANTLR与编译">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SparkSQL Parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hivesql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HiveSQL概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparksql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SparkSQL概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rbocbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RBO与CBO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RBO与CBO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RBO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CBO
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="聚合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        aggregate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合算子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        window
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        olap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="olap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上卷与下钻
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        底层原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行计划
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5种JOIN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5种JOIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        划分依据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        构建细节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        执行机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数调优
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="参数调优">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        partition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        join
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skew" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        skew
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aqe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AQE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AQE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功能和范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spj" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPJ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        火山模型与向量化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="火山模型与向量化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        火山模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="火山模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        改进
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        向量化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spark">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spark-and-mr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark and MR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spark_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark进程类别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spark_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark内存模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        聚合、开窗、连接的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL调优
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/melodylx666/lx-bigdata/edit/main/docs/dataWarehouse/大数据SQL.md" title="编辑此页" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="sql">大数据SQL剖析<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h1>
+<h2 id="_1">编译本质<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="antlr">ANTLR与编译<a class="headerlink" href="#antlr" title="Permanent link">&para;</a></h3>
+<p>通常意义上的SQL，算是一种DSL，也就是特定领域语言，其在完备性上与通用语言，如<code>Java,Scala</code></p>
+<p>等存在差距，但是擅长特定领域的工作。</p>
+<p>它的构建与通用语言类似，分下面两部：</p>
+<ul>
+<li>设计语法，以及语义，定义DSL中具体元素</li>
+<li>实现词法分析器<code>Lexer</code>以及语法分析器<code>Parser</code>，完成对DSL的解析，最后执行</li>
+</ul>
+<p>而<code>ANTLR</code>，一种语法分析工具，就是用于生成<code>Lexer,Parser</code>，以及基于监听器以及访问者模式的树遍历器。</p>
+<h4 id="_2">核心概念<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p><strong>token</strong></p>
+<p>以读书为例子，通常，我们并不是一个字符一个字符的读一句话，而是通过先将字符聚合为单词粒度，然后获取每个单词的意思从而理解整个句子。</p>
+<p>将字符聚集为符号粒度(<code>token：词法符号</code>)的过程，称为词法分析，其通过词法分析器<code>lexer</code>来实现，它可以将<code>token</code>归类，比如<code>Int,Double，val</code>等。</p>
+<p>一个<code>token</code>包含：<code>token对应的文本与其对应的类型(ID)</code>，其实一个type就是一个整数，而对应的文本就是一组字符。</p>
+<p>比如在一个大数据引擎的<code>SqlBase.g4</code>文件中，通过ANTLR生成的<code>.tokens</code>文件中，<code>JOIN=48</code>，就是如此，一般<code>tokens</code>文件也就是几百个这样的等式组成。</p>
+<p><strong>lexer</strong></p>
+<p>词法分析器，将语言文本汇聚为一个个的<code>token</code></p>
+<p><strong>parser</strong></p>
+<p>根据<code>.g4语法文件</code>，消费解析出的<code>token</code>流，将其转换为一个语法分析树(<code>parse tree</code>)。这个树的根节点永远是<code>输入的token</code>，从而表达出这个词组的含义。</p>
+<p><code>parse tree</code>的子树根节点是<code>语法规则</code>，而叶子结点是<code>token</code></p>
+<p>要注意，整个的过程，是一个<code>lazy</code>的过程，也就是如果不被消费，则不会有<code>token</code>生成。</p>
+<p><strong>listener &amp; visitor</strong></p>
+<p>这个是两种访问语法树的方式。</p>
+<p><code>访问者模式</code>,是一种将算法与对象结构分离的模式。对象结构中的每个对象，可以以不同的方式进行处理。遍历的整个对象结构，每个位置的对象通过调用<code>accept</code>方法，将<code>visitor</code>包含进来，然后再在内部通过<code>visitor::visit</code>方法进行不同逻辑的处理。</p>
+<h4 id="sparksql-parser">SparkSQL Parser<a class="headerlink" href="#sparksql-parser" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://github.com/DonnyZone/ANTLR4-SqlBase">DonnyZone/ANTLR4-SqlBase: 剥离的模块，用于查看Spark SQL生成的语法树 (github.com)</a></p>
+</blockquote>
+<p>通过剥离开的<code>sparksql</code>的g4文件，我们可以通过<code>ANTLR</code>生成<code>lexer,parser,listener,visitor等类文件</code>，并且可以直接使用。</p>
+<p><strong>Demo</strong></p>
+<p>将文本转化为<code>tokens</code>流</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><span class="w">    </span><span class="nd">@Test</span>
+</span><span id="__span-0-2"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tokenTest</span><span class="p">(){</span>
+</span><span id="__span-0-3"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT `name` FROM `user` WHERE `age`&gt;18 ORDER BY `id` DESC&quot;</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-0-4"><span class="w">        </span><span class="n">SqlBaseLexer</span><span class="w"> </span><span class="n">lexer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlBaseLexer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ANTLRInputStream</span><span class="p">(</span><span class="n">query</span><span class="p">));</span>
+</span><span id="__span-0-5"><span class="w">        </span><span class="n">CommonTokenStream</span><span class="w"> </span><span class="n">commonTokenStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CommonTokenStream</span><span class="p">(</span><span class="n">lexer</span><span class="p">);</span>
+</span><span id="__span-0-6"><span class="w">        </span><span class="n">SqlBaseParser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlBaseParser</span><span class="p">(</span><span class="n">commonTokenStream</span><span class="p">);</span>
+</span><span id="__span-0-7"><span class="w">        </span><span class="n">commonTokenStream</span><span class="p">.</span><span class="na">fill</span><span class="p">();</span>
+</span><span id="__span-0-8"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Token</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">commonTokenStream</span><span class="p">.</span><span class="na">getTokens</span><span class="p">();</span>
+</span><span id="__span-0-9"><span class="w">        </span><span class="n">tokens</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">token</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="na">getText</span><span class="p">()</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="n">token</span><span class="p">.</span><span class="na">getType</span><span class="p">()));</span>
+</span><span id="__span-0-10"><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>上述的测试代码的整个流程：</p>
+<ul>
+<li>用户输入SQL文本</li>
+<li>使用<code>lexer</code>，将其转换为<code>token stream</code></li>
+<li>强迫将<code>token</code>加载，因为默认是懒加载就看不到了。</li>
+<li>打印输出，结果如下</li>
+</ul>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1">SELECT 8
+</span><span id="__span-1-2">  241
+</span><span id="__span-1-3">`name` 238
+</span><span id="__span-1-4">  241
+</span><span id="__span-1-5">FROM 9
+</span><span id="__span-1-6">  241
+</span><span id="__span-1-7">`user` 238
+</span><span id="__span-1-8">  241
+</span><span id="__span-1-9">WHERE 14
+</span><span id="__span-1-10">  241
+</span><span id="__span-1-11">`age` 238
+</span><span id="__span-1-12">&gt; 122
+</span><span id="__span-1-13">18 233
+</span><span id="__span-1-14">  241
+</span><span id="__span-1-15">ORDER 21
+</span><span id="__span-1-16">  241
+</span><span id="__span-1-17">BY 16
+</span><span id="__span-1-18">  241
+</span><span id="__span-1-19">`id` 238
+</span><span id="__span-1-20">  241
+</span><span id="__span-1-21">DESC 40
+</span><span id="__span-1-22">&lt;EOF&gt; -1
+</span></code></pre></div></td></tr></table></div>
+<p>可以推测出，空格是<code>241</code>。该结果完美符合<code>.tokens</code>文件。</p>
+<p>使用访问者模式访问<code>parse tree</code>，根据具体框架，有具体的<code>visitor</code>实现类，从而得到想要的东西。</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT `name` FROM `user` WHERE `age`&gt;18 ORDER BY `id` DESC&quot;</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-2-2"><span class="c1">//        String query2 = &quot;SELECT `id`, COUNT(`name`) FROM `user` GROUP BY `id`&quot;;</span>
+</span><span id="__span-2-3"><span class="w">        </span><span class="n">SqlBaseLexer</span><span class="w"> </span><span class="n">lexer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlBaseLexer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ANTLRInputStream</span><span class="p">(</span><span class="n">query</span><span class="p">));</span>
+</span><span id="__span-2-4"><span class="w">        </span><span class="n">CommonTokenStream</span><span class="w"> </span><span class="n">commonTokenStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CommonTokenStream</span><span class="p">(</span><span class="n">lexer</span><span class="p">);</span>
+</span><span id="__span-2-5"><span class="w">        </span><span class="n">SqlBaseParser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlBaseParser</span><span class="p">(</span><span class="n">commonTokenStream</span><span class="p">);</span>
+</span><span id="__span-2-6"><span class="w">        </span><span class="n">MyVisitor</span><span class="w"> </span><span class="n">visitor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyVisitor</span><span class="p">();</span>
+</span><span id="__span-2-7"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">visitor</span><span class="p">.</span><span class="na">visitSingleStatement</span><span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="na">singleStatement</span><span class="p">());</span>
+</span><span id="__span-2-8"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;res=&quot;</span><span class="o">+</span><span class="n">res</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>使用<code>idea插件</code>可以看到整个<code>parser tree</code></p>
+<p><img alt="image.png" src="../assets/parser-tree.png" /></p>
+<p>对应到<code>SparkSQL</code>中，其中的<code>ASTBuilder</code>就是一个<code>visitor</code>,其会根据<code>parse tree</code>，生成未解析的<code>logic plan（未绑定具体数据的plan）</code>，也就是逻辑算子树。</p>
+<p>然后，使用<code>Analyzer</code>对每个节点绑定数据信息，生成<code>analyzed tree</code></p>
+<p><code>sparksql</code>的AST就有<code>logic plan</code>这种形式，然后进行逻辑优化，以及物理优化。</p>
+<p><img alt="image.png" src="../assets/astbuilder.png" /></p>
+<blockquote>
+<p>关于AST tree与Parse tree的区别，前者是后者的浓缩，详见下文：</p>
+<p><a href="https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-trees-and-abstract-syntax-trees-asts">compiler construction - What's the difference between parse trees and abstract syntax trees (ASTs)? - Stack Overflow</a></p>
+</blockquote>
+<h3 id="hivesql">HiveSQL概述<a class="headerlink" href="#hivesql" title="Permanent link">&para;</a></h3>
+<p>逻辑同上，这里执行到Hive自己的AST树表达形式。</p>
+<p>同样需要执行<code>analyze</code>的部分，将<code>AST tree</code>转换为绑定数据信息的一个<code>logic plan（operator tree）</code>，称为逻辑算子树，之后进行逻辑优化，以及物理优化。</p>
+<h3 id="sparksql">SparkSQL概述<a class="headerlink" href="#sparksql" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><a href="https://book.douban.com/subject/30296615/">Spark SQL内核剖析 (豆瓣) (douban.com)</a></p>
+</blockquote>
+<p>我写的解读很大一部分知识来源于上述这本书，这里我并不会再去大篇幅的摘抄，而是精简概述所需要的部分。</p>
+<p><code>Catalog</code>就是集群环境中的各种函数，以及元数据信息(库，表，分区，视图等)的统一抽象。具体包括了:</p>
+<ul>
+<li>全局临时视图管理</li>
+<li>函数资源加载器(UDF,以及Hive Func，通过jar包提供，所以需要加载)</li>
+<li>函数注册接口</li>
+<li>外部存储的<code>Catalog</code>，比如<code>Hive Catalog</code>，或者基于内存的<code>InMemory Catalog</code></li>
+</ul>
+<p><code>unresovled logic plan</code>得到之后，需要进行具体的数据信息绑定，这里是通过<code>SparkSQL</code>中全局维护的<code>Catalog</code>来实现的，数据信息也只有从那里可以拿到。</p>
+<p>这里着重描述<code>Analyze</code>的逻辑，因为具体的优化以及物理计划<code>Hive</code>与<code>Spark</code>并不同，后续优化分析的时候还会展开。</p>
+<p><code>Analyzer</code>基于内置的6类规则来对AST节点进行6种处理逻辑：</p>
+<ul>
+<li>替换操作</li>
+<li>具体算子的解析</li>
+<li>对UDF进行处理</li>
+<li>null值处理</li>
+<li>删除无用别名</li>
+<li>PullOutNondeterm inistic：// todo没看懂这个</li>
+</ul>
+<p>用户可以规定迭代次数，不断使用<code>Analyzer</code>对<code>plan</code>进行转换。在<code>Spark3.3.3</code>中，迭代次数默认<code>100</code>。</p>
+<p>然后后续就是最核心的<code>optimizer</code>，这里是<code>RBO</code>，也就是<code>rule based optimize</code>，SparkSQL与hiveSQL都内置了一系列规则，同样用于对树节点进行转换。</p>
+<p>然后就是物理计划，这里的话一般会进行<code>CBO</code>，也就是<code>cost based optimize</code>，其分为两个部分，分别是信息统计，以及代价模型。最后进过评估，选择最优的路径进行执行。</p>
+<h2 id="rbocbo">RBO与CBO<a class="headerlink" href="#rbocbo" title="Permanent link">&para;</a></h2>
+<h3 id="rbo">RBO<a class="headerlink" href="#rbo" title="Permanent link">&para;</a></h3>
+<p>RBO通常基于一组固定的规则，用于对<code>logical plan</code>进行转换。</p>
+<p>在<code>SparkSQL</code>中，这些规则被封装为一个个的<code>batch</code>，在<code>Optimizer</code>类中可以具体查看。</p>
+<p>一些常见的<code>谓词下推，列裁剪，简单等价重写</code>均在RBO。</p>
+<p>总结一下，RBO有如下几种方式：</p>
+<ol>
+<li>常量：比如常量传递。</li>
+<li>表达式：比如bool,if else,谓词下推</li>
+<li>结构，比如列裁剪</li>
+</ol>
+<p>这里的谓词下推，分为从构建表和流式表两者来看。一般在构建过程中就判断是否能够进行谓词下推，也就是此时where,on都可以作用于构建表，进行下推，但是on不能作用于流表。</p>
+<h3 id="cbo">CBO<a class="headerlink" href="#cbo" title="Permanent link">&para;</a></h3>
+<p><a href="https://learn.microsoft.com/zh-cn/azure/databricks/optimizations/cbo">基于成本的优化器 - Azure Databricks | Microsoft Learn</a></p>
+<p>大数据SQL在这里的处理依旧很初期，集中于一组Join排序的优化。而关系型数据库在此处发展完备。</p>
+<p>这里因为RBO没办法拿实际数据量信息，所以需要在此阶段进行信息统计，并应用于代价模型来选取最佳计划。</p>
+<p>为了防止统计信息过期，可以手动收集信息，就是使用:</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><span class="k">ANALYZE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">clause</span><span class="w"> </span><span class="p">]</span>
+</span><span id="__span-3-2"><span class="w">    </span><span class="n">COMPUTE</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">DELTA</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="k">STATISTICS</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">NOSCAN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="n">COLUMNS</span><span class="w"> </span><span class="n">col1</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="p">...]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="n">COLUMNS</span><span class="w"> </span><span class="p">]</span>
+</span><span id="__span-3-3">
+</span><span id="__span-3-4"><span class="k">ANALYZE</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">schema_name</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="n">COMPUTE</span><span class="w"> </span><span class="k">STATISTICS</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">NOSCAN</span><span class="w"> </span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>如果环境更为复杂，还可以动态采样，比如使用<code>Sample</code>算子，但这是同步阻塞的操作，所以要严格控制。</p>
+<p>可以评估一些指标，比如：</p>
+<ul>
+<li>网络IO +磁盘IO：一字节从HDFS读过来的时间，表有多少字节。</li>
+<li>CPU：一个最小操作的<code>CPU</code>消耗时间</li>
+</ul>
+<p>然后通过计算公式，将其应用在每个树节点，最后相加则为某个计划的<code>cost</code>。</p>
+<p>从中选取<code>cost</code>最小的<code>plan</code>即可。</p>
+<h2 id="_3">聚合<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="aggregate">aggregate<a class="headerlink" href="#aggregate" title="Permanent link">&para;</a></h3>
+<p>这里执行的是不包含窗口的聚合。</p>
+<h4 id="_4">聚合模式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p><code>SparkSQL</code>中，聚合一共有4种模式</p>
+<p><strong>Partial + Final</strong></p>
+<p>其中<code>partial</code>是局部聚合，通常在<code>map</code>阶段。将输入转换为中间聚合的结果。</p>
+<p>而<code>final</code>是最终聚合，通常在<code>reduce</code>阶段。将中间结果汇聚，并进行再次聚合。</p>
+<p>通常一些优化思路中，开启预先聚合，就是使用的这种模式。</p>
+<p>比如SQL语句如下:</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><span class="k">select</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则在上游stage的每个task中，会先将数据进行预先聚合，也就是<code>partial</code>聚合模式。经过shuffle之后，在下游stage，每个task会进行<code>final</code>聚合模式。核心就是减少shuffle IO带来的影响。</p>
+<p><strong>Complete</strong></p>
+<p>就是直接将数据拉到<code>reducer</code>阶段进行聚合，通常用在不支持局部聚合的聚合函数中。</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><span class="k">select</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>同样的SQL，则数据行不会在上游Stage的task中进行预聚合，而是Shuffle完毕，在下游Stage的task中进行聚合。</p>
+<p><strong>PartialMerge</strong></p>
+<p>这种操作主要用在<code>distinct</code>操作中，用于对中间的结果缓冲区合并，但仍不是最终结果。</p>
+<blockquote>
+<p>这里注意，Spark在默认情况下，就对distinct进行了优化，底层实现其实就是多阶段聚合。
+像Hive on MR，它执行count(distinct)就只会将所有数据拉取到一个Reduce Task中进行去重聚合，非常低效。通常需要手动进行多阶段聚合。</p>
+</blockquote>
+<p><code>distinct</code>一般又会被分为<code>单distinct</code>和<code>多distinct</code>两种。这里只看<code>单distinct</code>。</p>
+<p>比如语句</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><span class="k">select</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">disctinct</span><span class="w"> </span><span class="k">C</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+</span><span id="__span-6-2"><span class="k">select</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">B</span><span class="p">),</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">disctinct</span><span class="w"> </span><span class="k">C</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>执行链路一般如下：
+Partial -&gt; PartialMerge -&gt; Partial -&gt; Final</p>
+<p>首先，对于只有单个count(distinct a), 没有其他聚合函数来说，步骤如下：</p>
+<ol>
+<li>Partial，也就是按照(A,C)为key，进行局部聚合(其实这里就是去重了，因为没有聚合字段。可以看做通过HashMap进行聚合，但是只保留keys)。</li>
+<li>Shuffle，按照(A,C)为key</li>
+<li>PartialMerge。将Shuffle Read过来的数据再次进行聚合(就是去重)。此时，(A,C)已经被全局去重，等同于A粒度下为C的record唯一。</li>
+<li>Partial，此时A下C的每种，对应一行record，可以将其map为(A,1)。则此时按照A粒度进行聚合，则输出为(A,3)。后者为(A,C)粒度下，C的种类。</li>
+<li>Shuffle，按照A为key</li>
+<li>Final，则按照a为key,聚合之后，则可以知道A粒度下C的种类全局为多少。最终输出结果就可以。</li>
+</ol>
+<p>而如果还有其他聚合函数，则语义变为如下：</p>
+<p>Partial -&gt; PartialMerge -&gt; Partial -&gt; Final</p>
+<ol>
+<li>(A,C) 聚合，得到局部B值</li>
+<li>shuffle,按照(A,C)为key hash</li>
+<li>(A,C) 聚合 ，则此时得到(A,C)为key的B的全局值。</li>
+<li>merge，按照A为key,将C进行去重计数，而B进行局部聚合。</li>
+<li>shuffle，按照A粒度为hash key</li>
+<li>此时进行聚合，则得到的是全局每种A下的C的种类，以及按照A为粒度B的总和，也就是SQL结果。</li>
+</ol>
+<p>对一张<code>person</code>表，执行</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><span class="k">select</span>
+</span><span id="__span-7-2"><span class="w">    </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-7-3"><span class="w">    </span><span class="k">sum</span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">),</span>
+</span><span id="__span-7-4"><span class="w">    </span><span class="k">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="p">)</span>
+</span><span id="__span-7-5"><span class="k">from</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-7-6"><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这时候，同时出现了<code>sum</code>以及<code>count distinct</code>，则会使用到<code>partialMerge</code>模式。</p>
+<p>物理执行计划如下所示：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1">== Physical Plan ==
+</span><span id="__span-8-2">*(3) HashAggregate(keys=[id#17], functions=[sum(cast(score#23 as double)), count(distinct handsome#22)], output=[id#17, sum(score)#34, count(DISTINCT handsome)#33L])
+</span><span id="__span-8-3">+- Exchange hashpartitioning(id#17, 200), ENSURE_REQUIREMENTS, [plan_id=52]
+</span><span id="__span-8-4">   +- *(2) HashAggregate(keys=[id#17], functions=[merge_sum(cast(score#23 as double)), partial_count(distinct handsome#22)], output=[id#17, sum#39, count#42L])
+</span><span id="__span-8-5">      +- *(2) HashAggregate(keys=[id#17, handsome#22], functions=[merge_sum(cast(score#23 as double))], output=[id#17, handsome#22, sum#39])
+</span><span id="__span-8-6">         +- Exchange hashpartitioning(id#17, handsome#22, 200), ENSURE_REQUIREMENTS, [plan_id=47]
+</span><span id="__span-8-7">            +- *(1) HashAggregate(keys=[id#17, handsome#22], functions=[partial_sum(cast(score#23 as double))], output=[id#17, handsome#22, sum#39])
+</span><span id="__span-8-8">               +- FileScan csv [id#17,handsome#22,score#23] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;id:string,handsome:string,score:string&gt;
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到，对于<code>sum</code>以及<code>count distinct</code>，分别从局部到全局进行处理。首先，注重<code>sum</code>逻辑，然后将分组也就是<code>hash</code>的键做改变，再注重<code>count distinct</code>逻辑，最后全局做一次汇总。</p>
+<p><img alt="image.png" src="../assets/partialMerge.png" /></p>
+<h4 id="_5">聚合算子<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>有两种模式的聚合算子，分别是<code>SortAggregateExec</code>以及<code>HashAggregateExec</code>.</p>
+<p><strong>SortAggregateExec</strong></p>
+<p>具体实现，就是对于数据进行按照<code>group id</code>进行分区，之后分区内排序，相同键相邻，然后进行聚合即可。</p>
+<p><strong>HashAggregateExec</strong></p>
+<p>具体实现相对复杂，大致思路就是在内存中开一个<code>Map</code>(Spark中有特殊的<code>AppendOnlyMap</code>)，然后不断对数据进行聚合或者添加，满了就溢出写入磁盘。溢出的时候需要排序并合并。</p>
+<h3 id="window">window<a class="headerlink" href="#window" title="Permanent link">&para;</a></h3>
+<p>之前跳过了，现在补上。</p>
+<p><img alt="image.png" src="../assets/windowExec.png" /></p>
+<p>其与普通<code>group by</code>的如下：</p>
+<ul>
+<li>行数变化：<code>group by</code>聚合行数减小，但是开窗函数不变，为每行输出结果</li>
+<li>功能增加：<code>group by</code>针对一个分区只能输出一种结果，但是开窗函数可以在分组窗口内做累积等逻辑，输出不同结果。并且支持的聚合函数更多。</li>
+<li>聚合模式不同：<code>group by</code>可以<code>partial + final</code>，而<code>window</code>只能<code>complete</code>模型运行，聚合逻辑全局在<code>reducer</code>端。</li>
+<li>聚合算子不同：<code>group by</code>可以<code>hash or sort</code>,但是<code>window</code>只能<code>sort</code>，因为窗口默认都有排序要求。</li>
+</ul>
+<p>具体来说，步骤如下:</p>
+<ol>
+<li>对要开窗的表的数据，进行shuffle之后，每个分区内排序(partition by xxx)。</li>
+<li>对每个排序的分区，不断进行开窗操作。也就是说，不断在这一个缓冲数组(<code>RowBuffer</code>)上做文章。</li>
+<li>最终将所有分区的结果拼到一起。</li>
+</ol>
+<p>而对每个排序的分区操作，就是窗口函数语义的事情。具体来说，有两个核心点:</p>
+<ul>
+<li>窗口范围</li>
+<li>窗口内作用函数</li>
+</ul>
+<p>首先是窗口范围(针对的是单个分区)，一共有5种：</p>
+<ul>
+<li>全局窗口-unbound preceding and unbound following</li>
+<li>扩张窗口-unbound preceding and xxx，也就是说，窗口随着行的遍历，开始端一直都是第一行，size是单调递增的。</li>
+<li>收缩窗口-shrink Frame：xxx and unbound following ，也就是说，窗口随着行的遍历，逐渐逼近最后一行，size单调递减。</li>
+<li>移动窗口- xx preceding and yy following，每次有进有出</li>
+<li>偏移窗口- 也就是特定偏移量的行，一对一。</li>
+</ul>
+<p>如果窗口函数和Group By一起会怎么样？</p>
+<p>可以看到，也就是先进行group by ，局部聚合和全局聚合之后，在它的基础上，因为已经分好区了(分区粒度不同的话应该还是会再shuffle)，直接做window操作就可以。</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><span class="o">==</span><span class="w"> </span><span class="n">Physical</span><span class="w"> </span><span class="n">Plan</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-9-2"><span class="n">Window</span><span class="w"> </span><span class="p">[</span><span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">windowspecdefinition</span><span class="p">(</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">,</span><span class="w"> </span><span class="n">specifiedwindowframe</span><span class="p">(</span><span class="n">RowFrame</span><span class="p">,</span><span class="w"> </span><span class="n">unboundedpreceding$</span><span class="p">(),</span><span class="w"> </span><span class="n">unboundedfollowing$</span><span class="p">()))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">count</span><span class="o">#</span><span class="mi">2662</span><span class="n">L</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">]</span>
+</span><span id="__span-9-3"><span class="o">+-</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">Sort</span><span class="w"> </span><span class="p">[</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="w"> </span><span class="k">ASC</span><span class="w"> </span><span class="n">NULLS</span><span class="w"> </span><span class="k">FIRST</span><span class="p">],</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+</span><span id="__span-9-4"><span class="w">   </span><span class="o">+-</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">HashAggregate</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">],</span><span class="w"> </span><span class="n">functions</span><span class="o">=</span><span class="p">[])</span>
+</span><span id="__span-9-5"><span class="w">      </span><span class="o">+-</span><span class="w"> </span><span class="n">Exchange</span><span class="w"> </span><span class="n">hashpartitioning</span><span class="p">(</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+</span><span id="__span-9-6"><span class="w">         </span><span class="o">+-</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">HashAggregate</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">],</span><span class="w"> </span><span class="n">functions</span><span class="o">=</span><span class="p">[])</span>
+</span><span id="__span-9-7"><span class="w">            </span><span class="o">+-</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">FileScan</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="p">[</span><span class="n">lesson</span><span class="o">#</span><span class="mi">315</span><span class="p">]</span><span class="w"> </span><span class="n">Batched</span><span class="p">:</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Format</span><span class="p">:</span><span class="w"> </span><span class="n">JSON</span><span class="p">,</span><span class="w"> </span><span class="k">Location</span><span class="p">:</span><span class="w"> </span><span class="n">InMemoryFileIndex</span><span class="p">[</span><span class="n">file</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">score</span><span class="p">.</span><span class="n">json</span><span class="p">],</span><span class="w"> </span><span class="n">PartitionFilters</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="n">PushedFilters</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="n">ReadSchema</span><span class="p">:</span><span class="w"> </span><span class="n">struct</span><span class="o">&lt;</span><span class="n">lesson</span><span class="p">:</span><span class="n">string</span><span class="o">&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="olap">olap<a class="headerlink" href="#olap" title="Permanent link">&para;</a></h3>
+<h4 id="_6">上卷与下钻<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>Sparksql中，支持<code>上卷</code>以及<code>下钻</code>，并有特定的语法支持。</p>
+<p><strong>grouping sets</strong></p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><span class="k">select</span>
+</span><span id="__span-10-2"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">,</span>
+</span><span id="__span-10-3"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="p">,</span>
+</span><span id="__span-10-4"><span class="w">  </span><span class="k">count</span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_count</span>
+</span><span id="__span-10-5"><span class="k">from</span>
+</span><span id="__span-10-6"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-10-7"><span class="k">group</span><span class="w"> </span><span class="k">by</span>
+</span><span id="__span-10-8"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">,</span>
+</span><span id="__span-10-9"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="w"> </span><span class="k">grouping</span><span class="w"> </span><span class="k">sets</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-10-10"><span class="w">    </span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="p">),</span>
+</span><span id="__span-10-11"><span class="w">    </span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">),</span>
+</span><span id="__span-10-12"><span class="w">    </span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="p">)</span>
+</span><span id="__span-10-13"><span class="w">  </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>效果上等同于将不同粒度的聚合操作通过<code>union</code>拼接在一起。</p>
+<p><strong>cube</strong></p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><span class="k">select</span>
+</span><span id="__span-11-2"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">,</span>
+</span><span id="__span-11-3"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span><span class="p">,</span>
+</span><span id="__span-11-4"><span class="w">  </span><span class="k">count</span><span class="p">(</span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_count</span>
+</span><span id="__span-11-5"><span class="k">from</span>
+</span><span id="__span-11-6"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-11-7"><span class="k">group</span><span class="w"> </span><span class="k">by</span>
+</span><span id="__span-11-8"><span class="w">  </span><span class="k">cube</span><span class="p">(</span>
+</span><span id="__span-11-9"><span class="w">    </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="p">,</span>
+</span><span id="__span-11-10"><span class="w">    </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">handsome</span>
+</span><span id="__span-11-11"><span class="w">  </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>下钻操作</p>
+<p><code>cube(a,b,c) = grouping sets((a,b,c),(a,b),(a,c),(b,c),(a),(b),(c),())</code></p>
+<p><strong>rollup</strong></p>
+<p>上卷操作</p>
+<p><code>rollup(a,b,c) = grouping sets((),(a),(a,b),(a,b,c))</code></p>
+<p><strong>null值</strong></p>
+<p>执行中的<code>null</code>值，与实际生产中的<code>null</code>值，通过<code>grouping</code>函数处理。其返回的结果如果是1，则代表是grouping的null值。如果是0，则是本身的null值。</p>
+<h4 id="_7">底层原理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><code>grouping sets</code>实质上是<code>Project + Expand + Aggregate</code>节点组合。</p>
+<p>上述的<code>sql</code>的<code>resolved logical plan</code>如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1">== Analyzed Logical Plan ==
+</span><span id="__span-12-2">score: string, final_name: string, id_count: bigint
+</span><span id="__span-12-3">Aggregate [score#37, handsome#38, spark_grouping_id#36L], [score#37, concat(handsome#38, -, hello) AS final_name#31, count(id#17) AS id_count#32L]
+</span><span id="__span-12-4">+- Expand [[id#17, name#18, age#19, height#20, weight#21, handsome#22, score#23, score#34, handsome#35, 0], [id#17, name#18, age#19, height#20, weight#21, handsome#22, score#23, score#34, null, 1], [id#17, name#18, age#19, height#20, weight#21, handsome#22, score#23, null, handsome#35, 2]], [id#17, name#18, age#19, height#20, weight#21, handsome#22, score#23, score#37, handsome#38, spark_grouping_id#36L]
+</span><span id="__span-12-5">   +- Project [id#17, name#18, age#19, height#20, weight#21, handsome#22, score#23, score#23 AS score#34, handsome#22 AS handsome#35]
+</span><span id="__span-12-6">      +- SubqueryAlias person
+</span><span id="__span-12-7">         +- View (`person`, [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23])
+</span><span id="__span-12-8">            +- Relation [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23] csv
+</span></code></pre></div></td></tr></table></div>
+<p>经过<code>optimize</code>之后如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1">Aggregate [score#37, handsome#38, spark_grouping_id#36L], [score#37, concat(handsome#38, -, hello) AS final_name#31, count(id#17) AS id_count#32L]
+</span><span id="__span-13-2">+- Expand [[id#17, score#23, handsome#22, 0], [id#17, score#23, null, 1], [id#17, null, handsome#22, 2]], [id#17, score#37, handsome#38, spark_grouping_id#36L]
+</span><span id="__span-13-3">   +- Project [id#17, score#23, handsome#22]
+</span><span id="__span-13-4">      +- Relation [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23] csv
+</span></code></pre></div></td></tr></table></div>
+<p>其中<code>Project</code>部分就对应着数据源进行选择，以及列裁剪之后的部分。</p>
+<p>而<code>Expand</code>部分中的结果，就是添加特殊的分组标签。其对每行数据应用投影操作，输出多行数据。而输出的行数，就是这里额外添加的分组标签。不用的列会将其作为<code>null</code>然后进行操作。里面一个<code>Seq[Seq[Expression]]</code>，具体每种分组策略都展示出来了，ID有<code>0,1,2</code>。</p>
+<p>最后的<code>Aggregate</code>就是针对每种组合，也就是<code>score,handsome,[0,1,2]</code>，分别进行聚合操作，最后汇总。</p>
+<p>其物理计划如下：</p>
+<p>由于<code>count</code>支持局部聚合，所以是<code>partial + final</code>，有预先聚合。</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1">== Physical Plan ==
+</span><span id="__span-14-2">*(2) HashAggregate(keys=[score#37, handsome#38, spark_grouping_id#36L], functions=[count(id#17)], output=[score#37, final_name#31, id_count#32L])
+</span><span id="__span-14-3">+- Exchange hashpartitioning(score#37, handsome#38, spark_grouping_id#36L, 200), ENSURE_REQUIREMENTS, [plan_id=47]
+</span><span id="__span-14-4">   +- *(1) HashAggregate(keys=[score#37, handsome#38, spark_grouping_id#36L], functions=[partial_count(id#17)], output=[score#37, handsome#38, spark_grouping_id#36L, count#50L])
+</span><span id="__span-14-5">      +- *(1) Expand [[id#17, score#23, handsome#22, 0], [id#17, score#23, null, 1], [id#17, null, handsome#22, 2]], [id#17, score#37, handsome#38, spark_grouping_id#36L]
+</span><span id="__span-14-6">         +- FileScan csv [id#17,handsome#22,score#23] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;id:string,handsome:string,score:string&gt;
+</span></code></pre></div></td></tr></table></div>
+<h2 id="_8">连接<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">执行计划<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>执行一个<code>person</code>表和<code>person_info</code>表的<code>join</code>：</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><span class="k">select</span>
+</span><span id="__span-15-2"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-15-3"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-15-4"><span class="w">  </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">class_name</span>
+</span><span id="__span-15-5"><span class="k">from</span>
+</span><span id="__span-15-6"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-15-7"><span class="w">  </span><span class="k">join</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">id</span>
+</span><span id="__span-15-8"><span class="k">where</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>执行计划如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1">== Parsed Logical Plan ==
+</span><span id="__span-16-2">&#39;Project [&#39;person.id, &#39;person.name, &#39;person_info.class_name]
+</span><span id="__span-16-3">+- &#39;Filter (&#39;person.score &gt; 90)
+</span><span id="__span-16-4">   +- &#39;Join Inner, (&#39;person.id = &#39;person_info.id)
+</span><span id="__span-16-5">      :- &#39;UnresolvedRelation [person], [], false
+</span><span id="__span-16-6">      +- &#39;UnresolvedRelation [person_info], [], false
+</span><span id="__span-16-7">
+</span><span id="__span-16-8">== Analyzed Logical Plan ==
+</span><span id="__span-16-9">id: string, name: string, class_name: string
+</span><span id="__span-16-10">Project [id#17, name#18, class_name#70]
+</span><span id="__span-16-11">+- Filter (cast(score#23 as int) &gt; 90)
+</span><span id="__span-16-12">   +- Join Inner, (id#17 = id#69)
+</span><span id="__span-16-13">      :- SubqueryAlias person
+</span><span id="__span-16-14">      :  +- View (`person`, [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23])
+</span><span id="__span-16-15">      :     +- Relation [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23] csv
+</span><span id="__span-16-16">      +- SubqueryAlias person_info
+</span><span id="__span-16-17">         +- View (`person_info`, [id#69,class_name#70])
+</span><span id="__span-16-18">            +- Relation [id#69,class_name#70] csv
+</span><span id="__span-16-19">
+</span><span id="__span-16-20">== Optimized Logical Plan ==
+</span><span id="__span-16-21">Project [id#17, name#18, class_name#70]
+</span><span id="__span-16-22">+- Join Inner, (id#17 = id#69)
+</span><span id="__span-16-23">   :- Project [id#17, name#18]
+</span><span id="__span-16-24">   :  +- Filter ((isnotnull(score#23) AND (cast(score#23 as int) &gt; 90)) AND isnotnull(id#17))
+</span><span id="__span-16-25">   :     +- Relation [id#17,name#18,age#19,height#20,weight#21,handsome#22,score#23] csv
+</span><span id="__span-16-26">   +- Filter isnotnull(id#69)
+</span><span id="__span-16-27">      +- Relation [id#69,class_name#70] csv
+</span><span id="__span-16-28">
+</span><span id="__span-16-29">== Physical Plan ==
+</span><span id="__span-16-30">*(2) Project [id#17, name#18, class_name#70]
+</span><span id="__span-16-31">+- *(2) BroadcastHashJoin [id#17], [id#69], Inner, BuildRight, false
+</span><span id="__span-16-32">   :- *(2) Project [id#17, name#18]
+</span><span id="__span-16-33">   :  +- *(2) Filter ((isnotnull(score#23) AND (cast(score#23 as int) &gt; 90)) AND isnotnull(id#17))
+</span><span id="__span-16-34">   :     +- FileScan csv [id#17,name#18,score#23] Batched: false, DataFilters: [isnotnull(score#23), (cast(score#23 as int) &gt; 90), isnotnull(id#17)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person.csv], PartitionFilters: [], PushedFilters: [IsNotNull(score), IsNotNull(id)], ReadSchema: struct&lt;id:string,name:string,score:string&gt;
+</span><span id="__span-16-35">   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, false]),false), [plan_id=116]
+</span><span id="__span-16-36">      +- *(1) Filter isnotnull(id#69)
+</span><span id="__span-16-37">         +- FileScan csv [id#69,class_name#70] Batched: false, DataFilters: [isnotnull(id#69)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person_info.csv], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct&lt;id:string,class_name:string&gt;
+</span></code></pre></div></td></tr></table></div>
+<p>从逻辑计划看出，依次进行了数据绑定，变为<code>resolved</code>。</p>
+<p>然后进行列裁剪，以及<code>push down（谓词下推到靠近数据源）</code>操作，变为优化好的<code>optimized plan。</code></p>
+<h3 id="5join">5种JOIN<a class="headerlink" href="#5join" title="Permanent link">&para;</a></h3>
+<h4 id="_10">具体类型<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>BoardcastHashJoin</li>
+<li>ShuffleHashJoin</li>
+<li>SortMergeJoin</li>
+<li>BoardcastNestedLoopJoin</li>
+<li>CartesionProductJoin</li>
+</ul>
+<h4 id="_11">划分依据<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p><strong>数据表能否被广播</strong></p>
+<p>适用于<code>小小表</code></p>
+<p>通过<code>spark.sql.autoBoardcastJoinThreshold</code>参数设置广播表大小。默认<code>10MB</code>.</p>
+<p><strong>BuildSide</strong></p>
+<p>也就是左表/右表能否被特殊作用，这里其实是看左右两边哪个是流式表，哪个是构建表。</p>
+<p><strong>能否构建HashMap</strong></p>
+<p>在单个分区上创建<code>HashMap</code>以用来进行单分区的JOIN，有内存限制，所以需要判断条件。</p>
+<h4 id="_12">构建细节<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>canboardcast  &amp;canBuild=&gt; BoardcastHashJoin</li>
+<li>canbuildLocalHashMap &amp; 无排序 &amp; canBuild  &amp; muchsmaller=&gt; ShuffleHashJoin</li>
+<li>要排序 || 非等值Join =&gt; sortMergeJoin</li>
+<li>笛卡尔积 =&gt; ca......</li>
+<li>最后：BoardcastLoopJoin</li>
+</ul>
+<p><strong>流式表和构建表</strong></p>
+<p>SparkSQL包括其他大数据SQL很多都遵循这样一个原则，就是将<code>A join B</code>的两个表区分开来。</p>
+<p><code>流式表</code>:拿到的是<code>streaming iter</code>，是遍历每条数据</p>
+<p><code>构建表</code>:拿到的是<code>build iter</code>，是根据<code>key</code>找到对应的数据</p>
+<p>则如果<code>build table</code>在右侧，就成为这个Join是<code>build right</code>。</p>
+<p><strong>各种Join的build规定</strong></p>
+<p><code>BuildRight</code>:<code>left join,left semi join,inner join</code></p>
+<p><code>BuildLeft</code>：<code>right join, right semi join,inner join</code></p>
+<h4 id="_13">执行机制<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p><strong>BroadcastHashJoin</strong></p>
+<p>数仓中的表一般分为事实表以及维度表，而对应的就是大表和小小表。</p>
+<p>为了避免<code>shuffle</code>，则可以选择由<code>Driver</code>收集并广播小小表(<code>build table</code>)，则大表的分区数据可以在本地进行<code>join</code>.</p>
+<p>假设sql如下：</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><span class="k">select</span>
+</span><span id="__span-17-2"><span class="w">   </span><span class="cm">/*+ BROADCASTJOIN(person_info) */</span>
+</span><span id="__span-17-3"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-17-4"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-17-5"><span class="w">  </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">class_name</span>
+</span><span id="__span-17-6"><span class="k">from</span>
+</span><span id="__span-17-7"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-17-8"><span class="w">  </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">id</span>
+</span><span id="__span-17-9"><span class="k">where</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则物理执行计划如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1">== Physical Plan ==
+</span><span id="__span-18-2">*(2) Project [id#17, name#18, class_name#70]
+</span><span id="__span-18-3">+- *(2) BroadcastHashJoin [id#17], [id#69], LeftOuter, BuildRight, false
+</span><span id="__span-18-4">   :- *(2) Project [id#17, name#18]
+</span><span id="__span-18-5">   :  +- *(2) Filter (isnotnull(score#23) AND (cast(score#23 as int) &gt; 90))
+</span><span id="__span-18-6">   :     +- FileScan csv [id#17,name#18,score#23] Batched: false, DataFilters: [isnotnull(score#23), (cast(score#23 as int) &gt; 90)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person.csv], PartitionFilters: [], PushedFilters: [IsNotNull(score)], ReadSchema: struct&lt;id:string,name:string,score:string&gt;
+</span><span id="__span-18-7">   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, false]),false), [plan_id=116]
+</span><span id="__span-18-8">      +- *(1) Filter isnotnull(id#69)
+</span><span id="__span-18-9">         +- FileScan csv [id#69,class_name#70] Batched: false, DataFilters: [isnotnull(id#69)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person_info.csv], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct&lt;id:string,class_name:string&gt;
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到是将右表广播的，进行了Exchange，然后将两者进行hash join。</p>
+<p><strong>ShuffleHashJoin</strong></p>
+<p>构建条件比较严苛。需要<code>canBuildHashMap</code> &amp; 有明显数据量差(比值&gt;=3) &amp; 不能被<code>ShuffleSortMergeJoin抢先</code>。</p>
+<p>经过考虑，直接加入<code>Hint</code>强制进行<code>ShuffleHashJoin</code>,但是这里<code>buildSide</code>不强制是某个表，让Spark自己选，然后构建<code>HashMap</code>。</p>
+<p>这里已经关掉了<code>AQE</code></p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><span class="k">select</span>
+</span><span id="__span-19-2"><span class="w">   </span><span class="cm">/*+SHUFFLE_HASH(person,person_info)*/</span>
+</span><span id="__span-19-3"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-19-4"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-19-5"><span class="w">  </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">class_name</span>
+</span><span id="__span-19-6"><span class="k">from</span>
+</span><span id="__span-19-7"><span class="w">  </span><span class="o">`</span><span class="n">person</span><span class="o">`</span>
+</span><span id="__span-19-8"><span class="w">  </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">`</span><span class="n">person_info</span><span class="o">`</span><span class="p">.</span><span class="n">id</span>
+</span><span id="__span-19-9"><span class="k">where</span><span class="w"> </span><span class="o">`</span><span class="n">person</span><span class="o">`</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>物理执行计划如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1">== Physical Plan ==
+</span><span id="__span-20-2">*(3) Project [id#17, name#18, class_name#70]
+</span><span id="__span-20-3">+- *(3) ShuffledHashJoin [id#17], [id#69], LeftOuter, BuildRight
+</span><span id="__span-20-4">   :- Exchange hashpartitioning(id#17, 200), ENSURE_REQUIREMENTS, [plan_id=116]
+</span><span id="__span-20-5">   :  +- *(1) Project [id#17, name#18]
+</span><span id="__span-20-6">   :     +- *(1) Filter (isnotnull(score#23) AND (cast(score#23 as int) &gt; 90))
+</span><span id="__span-20-7">   :        +- FileScan csv [id#17,name#18,score#23] Batched: false, DataFilters: [isnotnull(score#23), (cast(score#23 as int) &gt; 90)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person.csv], PartitionFilters: [], PushedFilters: [IsNotNull(score)], ReadSchema: struct&lt;id:string,name:string,score:string&gt;
+</span><span id="__span-20-8">   +- Exchange hashpartitioning(id#69, 200), ENSURE_REQUIREMENTS, [plan_id=121]
+</span><span id="__span-20-9">      +- *(2) Filter isnotnull(id#69)
+</span><span id="__span-20-10">         +- FileScan csv [id#69,class_name#70] Batched: false, DataFilters: [isnotnull(id#69)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/F:/workspace_scala/miniSpark/data/person_info.csv], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct&lt;id:string,class_name:string&gt;
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到两者都进行了<code>shuffle</code>，然后在每个分区上进行<code>hashjoin</code>。</p>
+<p><strong>SortMergeJoin</strong></p>
+<p>通常用于大表对大表。</p>
+<p>不用将任何表的数据完全加载到内存。首先将两个表的数据进行<code>shuffle</code>，然后在分区内进行排序。此时两个表的对应位置均已排好序。则进行归并排序并join结果即可。</p>
+<h2 id="_14">参数调优<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>这里主要暂时记载没有默认开启或者特殊化的优化手段。</p>
+<p>常规的加资源，加并行度以及一些默认开启的优化手段就不记载了。</p>
+<h3 id="hint">Hint<a class="headerlink" href="#hint" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><a href="https://learn.microsoft.com/zh-cn/azure/databricks/sql/language-manual/sql-ref-syntax-qry-select-hints">提示 - Azure Databricks - Databricks SQL | Microsoft Learn</a></p>
+</blockquote>
+<p>统一语法如下：</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><span class="cm">/*+ { partition_hint | join_hint | skew_hint } [, ...] */</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="partition">partition<a class="headerlink" href="#partition" title="Permanent link">&para;</a></h4>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ COALESCE(3) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-2">
+</span><span id="__span-22-3"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION(3) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-4">
+</span><span id="__span-22-5"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION(c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-6">
+</span><span id="__span-22-7"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION(3, c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-8">
+</span><span id="__span-22-9"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION_BY_RANGE(c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-10">
+</span><span id="__span-22-11"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION_BY_RANGE(3, c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-12">
+</span><span id="__span-22-13"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REBALANCE */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-14">
+</span><span id="__span-22-15"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REBALANCE(c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-16">
+</span><span id="__span-22-17"><span class="c1">-- When a column name has been occluded by an alias you must refere to it by the alias name.</span>
+</span><span id="__span-22-18"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REBALANCE(d) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-22-19">
+</span><span id="__span-22-20"><span class="c1">-- multiple partitioning hints</span>
+</span><span id="__span-22-21"><span class="o">&gt;</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="n">EXTENDED</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ REPARTITION(100), COALESCE(500), REPARTITION_BY_RANGE(3, c) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+</span><span id="__span-22-22"><span class="o">==</span><span class="w"> </span><span class="n">Parsed</span><span class="w"> </span><span class="n">Logical</span><span class="w"> </span><span class="n">Plan</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-22-23"><span class="s1">&#39;UnresolvedHint REPARTITION, [100]</span>
+</span><span id="__span-22-24"><span class="s1">+- &#39;</span><span class="n">UnresolvedHint</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">500</span><span class="p">]</span>
+</span><span id="__span-22-25"><span class="w">   </span><span class="o">+-</span><span class="w"> </span><span class="s1">&#39;UnresolvedHint REPARTITION_BY_RANGE, [3, &#39;</span><span class="k">c</span><span class="p">]</span>
+</span><span id="__span-22-26"><span class="w">      </span><span class="o">+-</span><span class="w"> </span><span class="s1">&#39;Project [*]</span>
+</span><span id="__span-22-27"><span class="s1">         +- &#39;</span><span class="n">UnresolvedRelation</span><span class="w"> </span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+</span><span id="__span-22-28">
+</span><span id="__span-22-29"><span class="o">==</span><span class="w"> </span><span class="n">Analyzed</span><span class="w"> </span><span class="n">Logical</span><span class="w"> </span><span class="n">Plan</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-22-30"><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">:</span><span class="w"> </span><span class="nb">int</span>
+</span><span id="__span-22-31"><span class="n">Repartition</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="k">true</span>
+</span><span id="__span-22-32"><span class="o">+-</span><span class="w"> </span><span class="n">Repartition</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="k">false</span>
+</span><span id="__span-22-33"><span class="w">   </span><span class="o">+-</span><span class="w"> </span><span class="n">RepartitionByExpression</span><span class="w"> </span><span class="p">[</span><span class="k">c</span><span class="o">#</span><span class="mi">30</span><span class="w"> </span><span class="k">ASC</span><span class="w"> </span><span class="n">NULLS</span><span class="w"> </span><span class="k">FIRST</span><span class="p">],</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-22-34"><span class="w">      </span><span class="o">+-</span><span class="w"> </span><span class="n">Project</span><span class="w"> </span><span class="p">[</span><span class="n">name</span><span class="o">#</span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="o">#</span><span class="mi">30</span><span class="p">]</span>
+</span><span id="__span-22-35"><span class="w">         </span><span class="o">+-</span><span class="w"> </span><span class="n">SubqueryAlias</span><span class="w"> </span><span class="n">spark_catalog</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">t</span>
+</span><span id="__span-22-36"><span class="w">            </span><span class="o">+-</span><span class="w"> </span><span class="n">Relation</span><span class="p">[</span><span class="n">name</span><span class="o">#</span><span class="mi">29</span><span class="p">,</span><span class="k">c</span><span class="o">#</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="n">parquet</span>
+</span><span id="__span-22-37">
+</span><span id="__span-22-38"><span class="o">==</span><span class="w"> </span><span class="n">Optimized</span><span class="w"> </span><span class="n">Logical</span><span class="w"> </span><span class="n">Plan</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-22-39"><span class="n">Repartition</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="k">true</span>
+</span><span id="__span-22-40"><span class="o">+-</span><span class="w"> </span><span class="n">Relation</span><span class="p">[</span><span class="n">name</span><span class="o">#</span><span class="mi">29</span><span class="p">,</span><span class="k">c</span><span class="o">#</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="n">parquet</span>
+</span><span id="__span-22-41">
+</span><span id="__span-22-42"><span class="o">==</span><span class="w"> </span><span class="n">Physical</span><span class="w"> </span><span class="n">Plan</span><span class="w"> </span><span class="o">==</span>
+</span><span id="__span-22-43"><span class="n">Exchange</span><span class="w"> </span><span class="n">RoundRobinPartitioning</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">id</span><span class="o">=#</span><span class="mi">121</span><span class="p">]</span>
+</span><span id="__span-22-44"><span class="o">+-</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">ColumnarToRow</span>
+</span><span id="__span-22-45"><span class="w">   </span><span class="o">+-</span><span class="w"> </span><span class="n">FileScan</span><span class="w"> </span><span class="n">parquet</span><span class="w"> </span><span class="k">default</span><span class="p">.</span><span class="n">t</span><span class="p">[</span><span class="n">name</span><span class="o">#</span><span class="mi">29</span><span class="p">,</span><span class="k">c</span><span class="o">#</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="n">Batched</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">DataFilters</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="n">Format</span><span class="p">:</span><span class="w"> </span><span class="n">Parquet</span><span class="p">,</span>
+</span><span id="__span-22-46"><span class="w">      </span><span class="k">Location</span><span class="p">:</span><span class="w"> </span><span class="n">CatalogFileIndex</span><span class="p">[</span><span class="n">file</span><span class="p">:</span><span class="o">/</span><span class="n">spark</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="n">warehouse</span><span class="o">/</span><span class="n">t</span><span class="p">],</span><span class="w"> </span><span class="n">PartitionFilters</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-22-47"><span class="w">      </span><span class="n">PushedFilters</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="n">ReadSchema</span><span class="p">:</span><span class="w"> </span><span class="n">struct</span><span class="o">&lt;</span><span class="n">name</span><span class="p">:</span><span class="n">string</span><span class="o">&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>其中：</p>
+<p><code>REBALANCE</code> 提示可用于重新平衡查询结果输出分区，使每个分区的大小合理（不小也不大）。 它可以将列名作为参数，并尽量按这些列对查询结果进行分区。 这项工作属于尽力而为：如果存在倾斜，Spark 会拆分倾斜的分区，以使这些分区不会太大。 当需要将此查询的结果写入表时，此提示很有用，可避免文件过小/过大。 如果未启用 AQE，则忽略此提示。</p>
+<h4 id="join">join<a class="headerlink" href="#join" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><code>BROADCAST ( table_name )</code></strong>
+  使用广播联接。 无论 <code>autoBroadcastJoinThreshold</code> 如何，都将广播带有提示的联接端。 如果联接的两端都具有广播提示，则广播较小的一端（根据统计信息确定）。</li>
+<li><strong><code>MERGE ( table_name )</code></strong>
+  使用随机排序合并联接(SortMergeJoin)。</li>
+<li><strong><code>SHUFFLE_HASH ( table_name )</code></strong>
+  使用随机哈希联接。 如果两端都有随机哈希提示，Databricks SQL 会选择较小的一端作为生成端（根据统计信息确定）。</li>
+<li><strong><code>SHUFFLE_REPLICATE_NL ( table_name )</code></strong>
+  使用随机复制嵌套循环联接。</li>
+</ul>
+<p>这些Hint可以一次写多个，但是SparkSQL会选择优先级高的:</p>
+<p><code>BroadcastJoin &gt; sortMergeJoin &gt; ShuffleHashJoin &gt; NLJoin</code>。</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><span class="c1">-- Join Hints for broadcast join</span>
+</span><span id="__span-23-2"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ BROADCAST(t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-3"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ BROADCASTJOIN (t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-4"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ MAPJOIN(t2) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">right</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-5">
+</span><span id="__span-23-6"><span class="c1">-- Join Hints for shuffle sort merge join</span>
+</span><span id="__span-23-7"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ SHUFFLE_MERGE(t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-8"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ MERGEJOIN(t2) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-9"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ MERGE(t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-10">
+</span><span id="__span-23-11"><span class="c1">-- Join Hints for shuffle hash join</span>
+</span><span id="__span-23-12"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ SHUFFLE_HASH(t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-13">
+</span><span id="__span-23-14"><span class="c1">-- Join Hints for shuffle-and-replicate nested loop join</span>
+</span><span id="__span-23-15"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ SHUFFLE_REPLICATE_NL(t1) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-16">
+</span><span id="__span-23-17"><span class="c1">-- When different join strategy hints are specified on both sides of a join, Databricks SQL</span>
+</span><span id="__span-23-18"><span class="c1">-- prioritizes the BROADCAST hint over the MERGE hint over the SHUFFLE_HASH hint</span>
+</span><span id="__span-23-19"><span class="c1">-- over the SHUFFLE_REPLICATE_NL hint.</span>
+</span><span id="__span-23-20"><span class="c1">-- Databricks SQL will issue Warning in the following example</span>
+</span><span id="__span-23-21"><span class="c1">-- org.apache.spark.sql.catalyst.analysis.HintErrorLogger: Hint (strategy=merge)</span>
+</span><span id="__span-23-22"><span class="c1">-- is overridden by another hint and will not take effect.</span>
+</span><span id="__span-23-23"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ BROADCAST(t1), MERGE(t1, t2) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span><span id="__span-23-24">
+</span><span id="__span-23-25"><span class="c1">-- When a table name is occluded by an alias you must use the alias name in the hint</span>
+</span><span id="__span-23-26"><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ BROADCAST(t1), MERGE(s1, s2) */</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="skew">skew<a class="headerlink" href="#skew" title="Permanent link">&para;</a></h4>
+<h3 id="aqe">AQE<a class="headerlink" href="#aqe" title="Permanent link">&para;</a></h3>
+<h4 id="_15">原理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p><code>AQE</code>是在查询执行期间发生的查询重新优化。</p>
+<p>运行时重新优化的推动因素是<code>SparkSQL</code>在随机和广播交换（在 AQE 中称为查询阶段(相对的是<code>读数据阶段</code>)）结束时具有最新的准确统计信息。 因此，<code>SparkSQL</code> 可以选择更好的物理策略、选择最佳的随机后分区大小和数目，或执行以前需要<code>Hint</code>的优化（例如倾斜联接处理）。</p>
+<p>这在未启用统计信息收集功能或统计信息过时的情况下会非常有用。 在静态派生的统计信息不准确的情况下（例如在复杂查询的过程中或在发生数据倾斜之后），也很有用。</p>
+<h4 id="_16">功能和范围<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p><strong>开启</strong></p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><span class="k">set</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="k">sql</span><span class="p">.</span><span class="n">adaptive</span><span class="p">.</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span>
+</span></code></pre></div></td></tr></table></div>
+<p>从<code>Spark3.2</code>开始就默认开启。</p>
+<p><strong>功能</strong></p>
+<ul>
+<li>将<code>SortMergeJoin -&gt; BroadcastHashJoin</code></li>
+<li>在随机交换后将分区进行动态联合（将小分区合并为大小合理的分区）。 非常小的任务具有较差的 I/O 吞吐量，并且往往会产生更多计划开销和任务设置开销。 合并小型任务可节省资源并提高群集吞吐量。</li>
+<li>动态处理<code>ShuffleSortMergeJoin与ShuffleHashJoin</code>中的倾斜，方法是将倾斜的任务拆分（如果需要，还要进行复制）为大小大致相等的任务。</li>
+<li>动态检测并传播空关系。</li>
+</ul>
+<p><strong>范围</strong></p>
+<ul>
+<li>非流式处理</li>
+<li>至少有一个<code>exchange</code>或者一个<code>subquery</code></li>
+</ul>
+<h4 id="_17">其他<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/zh-cn/azure/databricks/optimizations/aqe#query-plans">自适应查询执行 - Azure Databricks | Microsoft Learn</a></p>
+<h3 id="ddp">DDP<a class="headerlink" href="#ddp" title="Permanent link">&para;</a></h3>
+<p><a href="https://zhuanlan.zhihu.com/p/548757324">[SPARK][SQL] 聊一聊Spark 3.0中的DPP特性 - 知乎 (zhihu.com)</a></p>
+<h3 id="spj">SPJ<a class="headerlink" href="#spj" title="Permanent link">&para;</a></h3>
+<p><a href="https://spark.apache.org/docs/4.0.0-preview2/sql-performance-tuning.html#storage-partition-join">性能调优 - Spark 4.0.0-preview2 Documentation (apache.org)</a></p>
+<h2 id="_18">火山模型与向量化<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<h3 id="_19">火山模型<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<h4 id="_20">原理<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://geekdaxue.co/read/dr.andy@vwmkb2/sd7z1u">物理执行引擎之火山引擎 - 《Andy 的研究笔记》 - 极客文档 (geekdaxue.co)</a></p>
+</blockquote>
+<p>火山模型诞生的时候，人们注重于优化IO的效率。</p>
+<p>其将关系代数中的每个操作抽象为<code>Operator</code>，并构建为树。然后从根开始递归调用<code>next</code>，就可以得到输出的<code>tuple</code>。</p>
+<p>SparkSQL中的执行计划也体现了这一点。</p>
+<h4 id="_21">缺点<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<p>火山模型一次处理一行，缺点如下：</p>
+<ul>
+<li>虚函数调用过多，消耗CPU。Java的虚函数与普通函数的调用区别就是其是一个间接调用，会多一次压栈出栈的过程，并且CPU无法预测跳转位置。这样CPU开销是翻倍的。</li>
+<li>缓存不友好，每次只能拉取一行数据，并且当前算子的缓存可能被下层算子冲掉。</li>
+</ul>
+<h4 id="_22">改进<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p><strong>问题一</strong></p>
+<p>针对虚函数调用过多的问题，<code>SparkSQL</code>采用了代码生成来解决，自动生成代码来执行<code>Operator的逻辑</code>，避免虚函数调用。其将一个<code>stage</code>中的<code>operator</code>全部压缩为单个函数调用，是一个大的<code>for-loop</code>。</p>
+<p><code>SparkSQL</code>中使用如下参数开启和关闭：</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><span class="k">set</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="k">sql</span><span class="p">.</span><span class="n">codegen</span><span class="p">.</span><span class="n">wholeStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>问题二</strong></p>
+<p>每次处理一行数据，则可以改为SIMD指令并行，一次处理多行数据，并且缓存对齐。已经有开源项目支持该功能。</p>
+<h3 id="_23">向量化<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>解决的就是问题二。</p>
+<p><a href="https://github.com/kwai/blaze">kwai/blaze：超快的查询执行引擎使用 Apache Spark 语言，并以 Arrow-DataFusion 为核心。 (github.com)</a></p>
+<p><a href="https://github.com/apache/incubator-gluten">apache/incubator-gluten: Gluten is a middle layer responsible for offloading JVM-based SQL engines' execution to native engines. (github.com)</a></p>
+<h2 id="_24">常见问题<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
+<h3 id="spark">Spark<a class="headerlink" href="#spark" title="Permanent link">&para;</a></h3>
+<h4 id="spark-and-mr">Spark and MR<a class="headerlink" href="#spark-and-mr" title="Permanent link">&para;</a></h4>
+<p>Spark已经是事实上的批处理标准引擎了，它比MR来说有如下几点突破：</p>
+<ul>
+<li>从语义上来说，多个MR任务等价于一个Spark任务。而多个MR任务中的每个任务，结果都要落盘。但是Spark任务的中间缓存机制更加完善，某些task可以缓存中间数据，避免大量的磁盘IO。</li>
+<li>Shuffle，这个是核心。</li>
+<li>排序可选：对于MR来说，Shuffle write阶段必须按照parition + key排序。但是有些操作符，比如groupByKey，不需要排序。Spark就可以按照partition进行组织(之所以还要按照paritition排序是为了实现SortedBasedShuffle)，或者按照partition + key进行排序，实现更加灵活。</li>
+<li>在线聚合。MR的聚合，都是数据先统一放入内存/磁盘，再单独启动聚合阶段。而Spark构建特殊结构AppendOnlyMap，利用hashMap的特性，实时更新数据。</li>
+<li>
+<p>临时文件数量小。对于MR来说，上游有M个任务，下游有N个任务，那么MR的临时文件数量为M*N，这是因为MR一直使用的都是HashBasedShuffle。而Spark从1.x开始就引入并默认为SortBasedShuffle。</p>
+<ul>
+<li>HashBasedShuffle的数据，全部按照partitionId直接Hash到对应bucket就可以，MR还要求比如按照kety排序。临时文件数量M*N，排序不可选。</li>
+<li>SortedBasedShuffle，可以先尝试为BypassmergeSortShuffleWriter，类似于hashBasedShuffle。最后也可以退化为SortBasedShuffleWriter，它可以按照partitionId/(partitionId + key)进行排序，最终一个task只用输出一个磁盘文件(xxx.data)。并通过.index标识每个ShuffleRead如何从该文件读取数据。则临时文件数量M个，并且排序粒度可选。</li>
+<li>Tungsten &amp; codegen优化:Spark可以做code generation优化，将算子链拍扁生成一个for循环。同时DS和DF都引入堆外内存进行管理，加速执行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="spark_1">Spark进程类别<a class="headerlink" href="#spark_1" title="Permanent link">&para;</a></h4>
+<p>Spark进程分为如下几种：</p>
+<ol>
+<li>Master节点常驻Master进程</li>
+<li>Worker节点常驻Worker进程</li>
+<li>Executor进程，每个Worker节点可以启动多个ExecutorBackend进程</li>
+<li>Driver进程。官方解释是the process running the main() function of the application and create the SparkContext object。位置不定。一般来说，可以是spark-submit启动的进程，也可以是spark-shell启动的进程，此时是client模式。同时也可以是运行在Yarn的ApplicationMaster中，或者是运行在Kubernetes的一个专属Pod中的进程，此时是cluster模式。甚至也可以是Idea中一个JVM运行main()函数 &amp; 执行task，则此时Driver和Executor都运行在Idea一个JVM进程中。</li>
+</ol>
+<h4 id="spark_2">Spark内存模型<a class="headerlink" href="#spark_2" title="Permanent link">&para;</a></h4>
+<p>Spark采用统一内存管理模型(针对所有Executor进程，也就是spark.executor.memory以及spark.memory.offHeapSize进行的管理)。</p>
+<p>Executor JVM进程管理如下：</p>
+<ol>
+<li>框架内存空间(堆外 + 堆内，共计占60%)：框架执行空间，用于存储Shuffle过程的中间结果。而数据缓存空间，用于存储RDD的缓存数据/广播数据，task中间结果等。这两种默认一半一半。框架执行空间可以直接获取数据缓存空间而不同释放(其实是难以实现释放)，而数据缓存空间占用框架执行空间，必须释放(因为释放比较简单)。</li>
+<li>用户代码空间(堆外 + 堆内,共计占)：用于存储用户代码生成的对象。</li>
+<li>系统保留空间(堆内)：用于存储Spark运行时产生的临时对象。</li>
+</ol>
+<h4 id="_25">聚合、开窗、连接的实现<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
+<p>一般来说有如下类别：</p>
+<ol>
+<li>聚合</li>
+<li>开窗</li>
+<li>连接</li>
+</ol>
+<p>这个上面都详细解释了。</p>
+<h3 id="sql_1">SQL调优<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h3>
+<p>第一步，定位问题，是内部因素还是外部需求问题。</p>
+<p>第二步，决定修改方式。确定是不修改SQL调优还是修改SQL调优。</p>
+<p>第三步</p>
+<ul>
+<li>如果是不修改SQL调优，则可以从参数配置，存储结构调整开始。</li>
+<li>如果是修改SQL调优，则可以进行等价该写，或者说直接根据业务理解改变逻辑。</li>
+</ul>
+<p>对于不修改SQL来说：</p>
+<ul>
+<li>配置修改：比如开启预聚合，加入Hint，小文件合并，分区分桶(分区是目录级划分，把一个日期作为一个目录，方便搜索。而分桶是文件级别划分，比如划分为000x.paruet等，通常用于优化JOIN等)。</li>
+<li>存储调整：比如把数据存储成列式存储，比如Parquet。修改压缩方式(需要测试，还需要看是否支持划分，LZO，zstd，lz4均支持划分)。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      lx CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

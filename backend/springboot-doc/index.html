@@ -1,0 +1,4091 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="li-xiao的个人网站">
+      
+      
+        <meta name="author" content="li-xiao">
+      
+      
+        <link rel="canonical" href="https://melodylx666.github.io/lx-bigdata/backend/springboot-doc/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../../frontend/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>springboot - lx-bigdata</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#springboot" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="lx-bigdata" class="md-header__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            lx-bigdata
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              springboot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Project/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  随手总结
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dataWarehouse/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据存储与计算
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../LANG/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  计算机基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  杂项
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="lx-bigdata" class="md-nav__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    lx-bigdata
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Project/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随手总结
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    随手总结
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/dynamic-Cep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态CEP解析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/econ-rule-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    金融风控引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/AbstractStreamOperatorDesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义StreamOperator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/ruleCoreSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    规则动态加载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/first-intern-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一段实习总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scala Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/scala-scopt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scopt库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    秋招复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/mac_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自用Mac入手文章指南合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总结分析合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/asyncToolLearn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    asyncTool框架梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JVM/JVM%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM并发总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java/Scala I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/design-pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计模式总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/leveldb_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LevelDB源码学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../dataWarehouse/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据存储与计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据存储与计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/hadoop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDFS 与 YARN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据SQL剖析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/flink_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E6%95%B0%E4%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数仓理论总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/interview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    查缺补漏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/graphDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图数据库总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/learn_db_from_paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从论文学隔离级别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../LANG/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LANG/DS-leetcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构与算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/gitSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git 规范总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BaseSkill/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ci/cd流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    杂项
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    杂项
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快速构建项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速构建项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        启动项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spring-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring MVC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spring MVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数接收
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数校验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        拦截器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restful
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restful">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springdoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpringDoc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iocaop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IOC和AOP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IOC和AOP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AOP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        程序入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整合MyBatis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="整合MyBatis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="具体操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实体类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        持久层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        服务层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        控制层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整合Kafka
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="整合Kafka">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前端开发
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TS学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试的复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/javaweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    javaweb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字图像处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/blockchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    blockchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        快速构建项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="快速构建项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        启动项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spring-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring MVC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spring MVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数接收
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数校验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原理解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        拦截器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restful
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restful">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springdoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpringDoc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iocaop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IOC和AOP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IOC和AOP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AOP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        程序入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mybatis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整合MyBatis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="整合MyBatis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="具体操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实体类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        持久层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        服务层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        控制层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整合Kafka
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="整合Kafka">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        环境配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        具体实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/melodylx666/lx-bigdata/edit/main/docs/backend/springboot-doc.md" title="编辑此页" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="springboot">springboot<a class="headerlink" href="#springboot" title="Permanent link">&para;</a></h1>
+<h2 id="_1">快速构建项目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">启动项目<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>首先，创建项目，选择合适的版本以及依赖，为了简便只选择web依赖，版本为springboot3.3.1,，JDK17<img alt="image.png" src="../assets/boot%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" /></p>
+<p>目录结构如上图所示。</p>
+<p>项目代码中自动提供入口程序：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><span class="err">@</span><span class="nb">SpringBootApplication</span>
+</span><span id="__span-0-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>BootApplication<span class="w"> </span>{
+</span><span id="__span-0-3">
+</span><span id="__span-0-4"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>static<span class="w"> </span>void<span class="w"> </span>main(String[]<span class="w"> </span>args)<span class="w"> </span>{
+</span><span id="__span-0-5"><span class="w">        </span><span class="nb">SpringApplication</span>.run(BootApplication.class,<span class="w"> </span>args);
+</span><span id="__span-0-6"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-0-7">
+</span><span id="__span-0-8"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则在同级目录下创建一个HelloController，</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><span class="err">/**</span>
+</span><span id="__span-1-2"><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="nb">ClassName</span>:<span class="w"> </span>HelloController
+</span><span id="__span-1-3"><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="nb">Package</span>:<span class="w"> </span>com.lxbigdata.boot
+</span><span id="__span-1-4"><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="nb">Description</span>:
+</span><span id="__span-1-5"><span class="w"> </span><span class="err">*</span>
+</span><span id="__span-1-6"><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">author</span><span class="w"> </span>lx
+</span><span id="__span-1-7"><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">version</span><span class="w"> </span><span class="m">1</span>.0
+</span><span id="__span-1-8"><span class="w"> </span><span class="err">*/</span>
+</span><span id="__span-1-9"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-1-10"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>HelloController<span class="w"> </span>{
+</span><span id="__span-1-11"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/hello&quot;</span>)
+</span><span id="__span-1-12"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>String<span class="w"> </span>hello(){
+</span><span id="__span-1-13"><span class="w">        </span><span class="nb">return</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>;
+</span><span id="__span-1-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-1-15"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>其中的@RestController=@Controller+@ResponseBody,可以标识一个Controller并且使用JSON格式返回信息。</p>
+<p>tomcat默认8080，则访问<a href="http://localhost:8080/hello">localhost:8080/hello</a>，可以得到显示的hello</p>
+<h3 id="_3">项目配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>之所以这么简单，核心思想是<strong>约定优于配置</strong></p>
+<p>查看项目的pom文件的依赖，核心就一个:</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-2"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span><span class="nb">org</span>.springframework.boot&lt;/groupId&gt;
+</span><span id="__span-2-3"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span><span class="nb">spring</span>-boot-starter-web&lt;/artifactId&gt;
+</span><span id="__span-2-4"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>正常的maven项目，需要：收集web所用的jar包，将坐标添加到maven依赖，并不断调整版本直到可以运行，但是现在springboot提供经过调试的依赖集合。在创建项目的时候，选择了一个web依赖，则这里就一个web-starter,免去了反复粘贴依赖坐标集合。</p>
+<p>还可以做一步选择，就是将Properties转换为yaml文件，这两者的区别就是properties是打平的，但是yaml为层级结构，更加清晰。如果项目中这两者共存，则先加载的yaml会被后加载的properties覆盖。</p>
+<h2 id="spring-mvc">Spring MVC<a class="headerlink" href="#spring-mvc" title="Permanent link">&para;</a></h2>
+<h3 id="mvc">MVC<a class="headerlink" href="#mvc" title="Permanent link">&para;</a></h3>
+<p>是软件工程中一种软件架构模式，把软件系统分为三部分</p>
+<ul>
+<li>模型Model，由一个实体bean实现，是数据的载体</li>
+<li>视图View，在前后端不分离的情况下，由JSP担任，现在已经被前端取代。负责显示数据给用户，并控制用户的输入</li>
+<li>控制器Controller，在JavaEE中，可能是一个servlet，而在SpringMVC中，核心是DispatcherServlet。用于处理用户请求，调用相应的Model方法，并返回相应的View。通常是包含HTTP请求的方法(可以使用注解标识)的类。</li>
+</ul>
+<h3 id="_4">参数接收<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>有四种方式：：无注解，@RequestParam, @PathVariable, @RequestBody</p>
+<p><strong>Spring MAC 常用注解</strong></p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Controller</td>
+<td>类</td>
+<td>Controller标识，Spring容器会在启动的时候将其初始化</td>
+</tr>
+<tr>
+<td>@RequestMapping</td>
+<td>类/方法</td>
+<td>URL映射，设置接口的访问路径</td>
+</tr>
+<tr>
+<td>@ResponseBody</td>
+<td>类/方法</td>
+<td>以JSON格式返回数据。如果修饰类，则其所有方法默认返回JSON</td>
+</tr>
+<tr>
+<td>@RequestParam</td>
+<td>参数</td>
+<td>以名字接收参数，相当于ServletRequest.getParameter()</td>
+</tr>
+<tr>
+<td>@RequestBody</td>
+<td>参数</td>
+<td>接收JSON格式的参数，常用于AJAX请求，前后端分离场景下</td>
+</tr>
+<tr>
+<td>@PathVariable</td>
+<td>参数</td>
+<td>接收URL中的值</td>
+</tr>
+</tbody>
+</table>
+<p>组合注解：</p>
+<p>@RestController=@Controller+@ResponseBody</p>
+<p>@GetMapping=@RequestMapping(method=RequestMethod.GET)。可以映射一个请求路径，并且该路径只响应GET方法</p>
+<p>@PostMapping=@RequestMapping(method=RequestMethod.POST)</p>
+<p>@PutMapping=@RequestMapping(method=RequestMethod.PUT)</p>
+<p>@PatchMapping=@RequestMapping(method=RequestMethod.PATCH)</p>
+<p>@DeleteMapping=@RequestMapping(method=RequestMethod.DELETE)</p>
+<blockquote>
+<p>AJAX请求：JAX（Asynchronous JavaScript and XML）是一种用于在网页上进行异步数据交换的技术，允许网页在不重新加载整个页面的情况下与服务器进行通信。虽然AJAX最初使用XML作为数据格式，但现在通常使用JSON格式，因为它更轻量且易于处理。</p>
+</blockquote>
+<p><strong>例子</strong></p>
+<p>分别创建User Data类，以及Controller</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><span class="err">@</span><span class="nb">Data</span>
+</span><span id="__span-3-2"><span class="err">@</span><span class="nb">AllArgsConstructor</span>
+</span><span id="__span-3-3"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span><span class="k">User</span><span class="w"> </span>{
+</span><span id="__span-3-4"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>name;
+</span><span id="__span-3-5"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Integer<span class="w"> </span>age;
+</span><span id="__span-3-6"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-4-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>ParamController<span class="w"> </span>{
+</span><span id="__span-4-3"><span class="w">    </span><span class="err">//无参数</span>
+</span><span id="__span-4-4"><span class="w">    </span><span class="err">//</span><span class="nb">http</span>://localhost:8080/noAnnotation?name=＠no方式&amp;age=1
+</span><span id="__span-4-5"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/noAnnotation&quot;</span>)
+</span><span id="__span-4-6"><span class="w">    </span><span class="nb">public</span><span class="w"> </span><span class="k">User</span><span class="w"> </span>noAnnotation(User<span class="w"> </span><span class="k">user</span>){
+</span><span id="__span-4-7"><span class="w">        </span><span class="nb">return</span><span class="w"> </span><span class="k">user</span>;
+</span><span id="__span-4-8"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-4-9"><span class="w">    </span><span class="err">//@</span><span class="nb">RequestParam注解</span>,相当于调用request.getParameter方法
+</span><span id="__span-4-10"><span class="w">    </span><span class="err">//</span><span class="nb">http</span>://localhost:8080/requestparam?name=＠RequestParam方式&amp;age=2
+</span><span id="__span-4-11"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/requestParam&quot;</span>)
+</span><span id="__span-4-12"><span class="w">    </span><span class="nb">public</span><span class="w"> </span><span class="k">User</span><span class="w"> </span>requestParam(@RequestParam<span class="w"> </span>String<span class="w"> </span>name,<span class="w"> </span>@RequestParam<span class="w"> </span>Integer<span class="w"> </span>age){
+</span><span id="__span-4-13"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>new<span class="w"> </span><span class="k">User</span>(name,age);
+</span><span id="__span-4-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-4-15"><span class="w">    </span><span class="err">//</span><span class="nb">PathVariable注解</span>,两个配合从路径中获取参数
+</span><span id="__span-4-16"><span class="w">    </span><span class="err">//</span><span class="nb">http</span>://localhost:8080/pathvariable/＠PathVariable方式/3
+</span><span id="__span-4-17"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/pathVariable/{name}/{age}&quot;</span>)
+</span><span id="__span-4-18"><span class="w">    </span><span class="nb">public</span><span class="w"> </span><span class="k">User</span><span class="w"> </span>pathVariable(@PathVariable<span class="w"> </span>String<span class="w"> </span>name,<span class="w"> </span>@PathVariable<span class="w"> </span>Integer<span class="w"> </span>age){
+</span><span id="__span-4-19"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>new<span class="w"> </span><span class="k">User</span>(name,age);
+</span><span id="__span-4-20"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-4-21"><span class="w">    </span><span class="err">//@</span><span class="nb">RequestBody注解</span>,将请求体中的json数据映射为对象
+</span><span id="__span-4-22"><span class="w">    </span><span class="err">//这个方式需要</span><span class="nb">post请求</span>，因为是上传资源
+</span><span id="__span-4-23"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;/requestBody&quot;</span>)
+</span><span id="__span-4-24"><span class="w">    </span><span class="nb">public</span><span class="w"> </span><span class="k">User</span><span class="w"> </span>requestBody(@RequestBody<span class="w"> </span><span class="k">User</span><span class="w"> </span><span class="k">user</span>){
+</span><span id="__span-4-25"><span class="w">        </span><span class="nb">return</span><span class="w"> </span><span class="k">user</span>;
+</span><span id="__span-4-26"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-4-27"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则可以通过各种方式解析参数。注意最后一种方式，由于是上传数据，使用POST方式，可以在idea自带的http客户端写如下的http请求，可在控制台得到输出</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><span class="nb">POST</span><span class="w"> </span>http://localhost:8080/requestBody
+</span><span id="__span-5-2"><span class="nb">Content</span>-Type:<span class="w"> </span>application/json
+</span><span id="__span-5-3">
+</span><span id="__span-5-4"><span class="err">{</span>
+</span><span id="__span-5-5"><span class="w">  </span><span class="err">&quot;</span><span class="nb">name</span><span class="s2">&quot;: &quot;</span>Request<span class="w"> </span>Body<span class="s2">&quot;,</span>
+</span><span id="__span-5-6"><span class="s2">  &quot;</span>age<span class="err">&quot;</span>:<span class="w"> </span><span class="m">4</span>
+</span><span id="__span-5-7"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="_5">参数校验<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>此处只是最基本的参数校验逻辑</p>
+<p>只需要引入validation-starter，则可以在数据类上做校验。比如post上传数据时候字段属性如果不正确，则会输出错误日志</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><span class="err">@</span><span class="nb">Data</span>
+</span><span id="__span-6-2"><span class="err">@</span><span class="nb">AllArgsConstructor</span>
+</span><span id="__span-6-3"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span><span class="k">User</span><span class="w"> </span>{
+</span><span id="__span-6-4"><span class="w">    </span><span class="err">@</span><span class="nb">NotBlank</span>(message<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;name is not blank&quot;</span>)
+</span><span id="__span-6-5"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>name;
+</span><span id="__span-6-6"><span class="w">    </span><span class="err">@</span><span class="nb">Min</span>(value<span class="w"> </span>=<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>message<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;age can not lower than 1&quot;</span>)
+</span><span id="__span-6-7"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Integer<span class="w"> </span>age;
+</span><span id="__span-6-8"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>常见的注解</strong></p>
+<p><img alt="image.png" src="../assets/%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%B3%A8%E8%A7%A3.png" /></p>
+<h3 id="_6">原理解析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>整体流程</strong></p>
+<p><img alt="image.png" src="../assets/MVC%E5%86%85%E9%83%A8%E6%9E%B6%E6%9E%84.png" /></p>
+<p>假设现在浏览器发起一个请求(如如http://localhost：8080/hello),则会经历如下步骤</p>
+<ol>
+<li>DispatcherServlet接收用户请求</li>
+<li>DispatcherServlet根据用户请求的HandlerMapping找到对应的Handler，得到一个HandlerExcutionChain</li>
+<li>DispatcherServlet通过HandlerAdapter调用COntroller进行后续业务的逻辑处理，等待4返回</li>
+<li>处理完业务逻辑，将ModelAndView返回给DispatcherServlet</li>
+<li>DispatcherServlet通过ViewResolver进行视图解析，并返回view</li>
+<li>DispathcerServlet对view进行渲染</li>
+<li>最终将结果返回给用户</li>
+</ol>
+<p><strong>当返回json类型数据的时候，会省去对视图处理的部分，常见的@RestController就有这个功能</strong></p>
+<hr />
+<p><strong>核心组件</strong></p>
+<p>Handler，HandlerMapping，HandlerAdapter (和Netty等架构异曲同工)</p>
+<p>其中Handler是用来具体做事情的，<strong>对应Controller中的方法</strong>。所有有＠RequestMapping的方法都可以被看作一个Handler。</p>
+<p>而handlerMapping是用来找到Handler的，是请求路径和Handler的映射关系</p>
+<p>而HandlerAdapter是一个适配器，用来和具体的Handler配合使用，该接口的注释如下：</p>
+<blockquote>
+<p>MVC framework SPI, allowing parameterization of the core MVC workflow.
+Interface that must be implemented for each handler type to handle a request. This interface is used to allow the DispatcherServlet to be indefinitely extensible. <strong>The DispatcherServlet accesses all installed handlers through this interface,</strong> meaning that it does not contain code specific to any handler type.
+Note that a handler can be of type Object. This is to enable handlers from other frameworks to be integrated with this framework without custom coding, as well as to allow for annotation-driven handler objects that do not obey any specific Java interface.
+This interface is not intended for application developers. It is available to handlers who want to develop their own web workflow.
+Note: HandlerAdapter implementors may implement the org.springframework.core.Ordered interface to be able to specify a sorting order (and thus a priority) for getting applied by the DispatcherServlet. Non-Ordered instances get treated as the lowest priority.</p>
+</blockquote>
+<p>在Netty中，同样有ChannelHandler和HandlerAdapter的配合，适配器可以将自定义一个Handler所需要的努力做到最低，因为他们提供了大部分方法的默认实现，使得开发者只需要关心核心逻辑即可</p>
+<p>DispatcherServlet的核心方法是doDispatcher:</p>
+<blockquote>
+<p>Process the actual dispatching to the handler.
+The handler will be obtained by applying the servlet's HandlerMappings in order. The HandlerAdapter will be obtained by querying the servlet's installed HandlerAdapters to find the first that supports the handler class.
+All HTTP methods are handled by this method. It's up to HandlerAdapters or handlers themselves to decide which methods are acceptable.
+形参:
+request – current HTTP request response – current HTTP response
+抛出:
+Exception – in case of any kind of processing failure</p>
+</blockquote>
+<p>该方法的核心步骤如下：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><span class="err">//</span><span class="w"> </span><span class="nb">Determine</span><span class="w"> </span>handler<span class="w"> </span>for<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>request.
+</span><span id="__span-7-2"><span class="nb">mappedHandler</span><span class="w"> </span>=<span class="w"> </span>getHandler(processedRequest);
+</span><span id="__span-7-3"><span class="err">//</span><span class="w"> </span><span class="nb">Determine</span><span class="w"> </span>handler<span class="w"> </span>adapter<span class="w"> </span>for<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>request.
+</span><span id="__span-7-4"><span class="nb">HandlerAdapter</span><span class="w"> </span>ha<span class="w"> </span>=<span class="w"> </span>getHandlerAdapter(mappedHandler.getHandler());
+</span><span id="__span-7-5"><span class="err">//</span><span class="w"> </span><span class="nb">Actually</span><span class="w"> </span>invoke<span class="w"> </span>the<span class="w"> </span>handler.
+</span><span id="__span-7-6"><span class="nb">mv</span><span class="w"> </span>=<span class="w"> </span>ha.handle(processedRequest,<span class="w"> </span>response,<span class="w"> </span>mappedHandler.getHandler());
+</span><span id="__span-7-7"><span class="err">//</span>
+</span><span id="__span-7-8"><span class="nb">processDispatchResult</span>(processedRequest,<span class="w"> </span>response,<span class="w"> </span>mappedHandler,<span class="w"> </span>mv,<span class="w"> </span>dispatchException);
+</span></code></pre></div></td></tr></table></div>
+<p>首先，根据请求，找到HandlerExecutionChain</p>
+<blockquote>
+<p>HandlerExecutionChain 是 Spring MVC 框架中的一个核心类，用于封装处理请求的处理器（Handler）以及与该处理器关联的拦截器（Interceptors）。它可以包含一个Handler和多个Interceptor</p>
+<p>根据mapping，可以找到Chain。然后根据chain，在请求到达处理器之前，调用preHandle,处理之后，调用postHandle，请求完成之后，调用afterCompletion方法</p>
+</blockquote>
+<p>然后根据其中的Handler找到HandlerAdapter</p>
+<p>然后处理请求消息，最后返回结果</p>
+<p>其中查找HandlerExecutionChain的方法如下：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><span class="w">    </span><span class="nb">protected</span><span class="w"> </span>HandlerExecutionChain<span class="w"> </span>getHandler(HttpServletRequest<span class="w"> </span>request)<span class="w"> </span>throws<span class="w"> </span>Exception<span class="w"> </span>{
+</span><span id="__span-8-2"><span class="w">        </span><span class="nb">if</span><span class="w"> </span>(this.handlerMappings<span class="w"> </span>!=<span class="w"> </span>null)<span class="w"> </span>{
+</span><span id="__span-8-3"><span class="w">            </span><span class="nb">for</span><span class="w"> </span>(HandlerMapping<span class="w"> </span>mapping<span class="w"> </span>:<span class="w"> </span>this.handlerMappings)<span class="w"> </span>{
+</span><span id="__span-8-4"><span class="w">                </span><span class="nb">HandlerExecutionChain</span><span class="w"> </span>handler<span class="w"> </span>=<span class="w"> </span>mapping.getHandler(request);
+</span><span id="__span-8-5"><span class="w">                </span><span class="nb">if</span><span class="w"> </span>(handler<span class="w"> </span>!=<span class="w"> </span>null)<span class="w"> </span>{
+</span><span id="__span-8-6"><span class="w">                    </span><span class="nb">return</span><span class="w"> </span>handler;
+</span><span id="__span-8-7"><span class="w">                </span><span class="err">}</span>
+</span><span id="__span-8-8"><span class="w">            </span><span class="err">}</span>
+</span><span id="__span-8-9"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-8-10"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>null;
+</span><span id="__span-8-11"><span class="w">    </span><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>而查找Adpater的方法如下：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><span class="w">    </span><span class="nb">protected</span><span class="w"> </span>HandlerAdapter<span class="w"> </span>getHandlerAdapter(Object<span class="w"> </span>handler)<span class="w"> </span>throws<span class="w"> </span>ServletException<span class="w"> </span>{
+</span><span id="__span-9-2"><span class="w">        </span><span class="nb">if</span><span class="w"> </span>(this.handlerAdapters<span class="w"> </span>!=<span class="w"> </span>null)<span class="w"> </span>{
+</span><span id="__span-9-3"><span class="w">            </span><span class="nb">for</span><span class="w"> </span>(HandlerAdapter<span class="w"> </span>adapter<span class="w"> </span>:<span class="w"> </span>this.handlerAdapters)<span class="w"> </span>{
+</span><span id="__span-9-4"><span class="w">                </span><span class="nb">if</span><span class="w"> </span>(adapter.supports(handler))<span class="w"> </span>{
+</span><span id="__span-9-5"><span class="w">                    </span><span class="nb">return</span><span class="w"> </span>adapter;
+</span><span id="__span-9-6"><span class="w">                </span><span class="err">}</span>
+</span><span id="__span-9-7"><span class="w">            </span><span class="err">}</span>
+</span><span id="__span-9-8"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-9-9"><span class="w">        </span><span class="nb">throw</span><span class="w"> </span>new<span class="w"> </span>ServletException(<span class="s2">&quot;No adapter for handler [&quot;</span><span class="w"> </span>+<span class="w"> </span>handler<span class="w"> </span>+
+</span><span id="__span-9-10"><span class="w">                </span><span class="err">&quot;]:</span><span class="w"> </span><span class="nb">The</span><span class="w"> </span>DispatcherServlet<span class="w"> </span>configuration<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>include<span class="w"> </span>a<span class="w"> </span>HandlerAdapter<span class="w"> </span>that<span class="w"> </span>supports<span class="w"> </span>this<span class="w"> </span>handler<span class="err">&quot;</span>);
+</span><span id="__span-9-11"><span class="w">    </span><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="_7">拦截器<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>使用场景：登录认证，权限认证，记录日志，性能监控</p>
+<p>接口继承关系如下：</p>
+<p><img alt="image.png" src="../assets/%E6%8B%A6%E6%88%AA%E5%99%A8%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.png" /></p>
+<p>主要有AsyncHandlerIntercptor,WebContentInterceptor,MappedInterceptor</p>
+<p>自定义·一个拦截器，实现其核心方法即可。</p>
+<p><strong>多个拦截器的执行顺序</strong></p>
+<p>相当于安装了多个InboundHanlder和OutboundHandler，则进入按照顺序，而出去则倒序。</p>
+<p>in1        --------&gt;     in2</p>
+<p>out1     &lt;-------      out2</p>
+<h2 id="restful">Restful<a class="headerlink" href="#restful" title="Permanent link">&para;</a></h2>
+<h3 id="springdoc">SpringDoc<a class="headerlink" href="#springdoc" title="Permanent link">&para;</a></h3>
+<p>SpringDoc是一款用于生成、描述、调用和可视化RESTful风格的Web服务接口文档的框架。最大特点是可以使接口文档和代码实时同步。</p>
+<p>接口文档，是联系前后端开发的枢纽。</p>
+<p>具体配置：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><span class="w">        </span><span class="nt">&lt;!--</span><span class="w"> </span><span class="s">springdoc --</span><span class="nt">&gt;</span>
+</span><span id="__span-10-2"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-10-3"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span><span class="nb">org</span>.springdoc&lt;/groupId&gt;
+</span><span id="__span-10-4"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span><span class="nb">springdoc</span>-openapi-starter-webmvc-ui&lt;/artifactId&gt;
+</span><span id="__span-10-5"><span class="w">            </span><span class="nt">&lt;version&gt;</span><span class="err">2</span>.<span class="err">4</span>.<span class="err">0</span><span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-10-6"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><span class="c"># springdoc</span>
+</span><span id="__span-11-2"><span class="nb">springdoc</span>:
+</span><span id="__span-11-3"><span class="w">  </span><span class="nb">api</span>-docs:
+</span><span id="__span-11-4"><span class="w">    </span><span class="nb">path</span>:<span class="w"> </span><span class="sx">/v3/api-docs</span>
+</span><span id="__span-11-5"><span class="w">  </span><span class="nb">swagger</span>-ui:
+</span><span id="__span-11-6"><span class="w">    </span><span class="nb">doc</span>-expansion:<span class="w"> </span><span class="k">none</span>
+</span><span id="__span-11-7"><span class="w">    </span><span class="nb">url</span>:<span class="w"> </span><span class="s2">&quot;/v3/api-docs&quot;</span>
+</span><span id="__span-11-8"><span class="w">    </span><span class="nb">path</span>:<span class="w"> </span><span class="sx">/swagger-ui.html</span>
+</span></code></pre></div></td></tr></table></div>
+<p>即可直接访问接口文档。</p>
+<p><strong>todo</strong></p>
+<p>具体配置</p>
+<h3 id="rest">Rest<a class="headerlink" href="#rest" title="Permanent link">&para;</a></h3>
+<p>定义：表现层转换，也就是由HTTP操作引起的各种资源状态转换。</p>
+<p><strong>资源</strong></p>
+<p>资源的范围比较宽泛，比如一个文件（图片、文档、音乐等）、一条数据（用户信息、订单等）都可以被看作资源（每个资源都有一个对应的URI）</p>
+<p><strong>表现层</strong></p>
+<p>资源以什么样的形式来展现自己——例如，文本可以是JSON或XML格式的，图片可以是JPEG或其他格式的</p>
+<p><strong>状态转换</strong></p>
+<p>由HTTP的各种动作引起的状态转换。</p>
+<p>CRUD可以对应HTTP的post，delete，put，get</p>
+<p>HTTP各种操作的安全性和幂等性如下：</p>
+<p><img alt="image.png" src="../assets/HTTP.png" /></p>
+<p><strong>RestFul</strong>风格</p>
+<p>要求：用URI定位资源，URI由名词组成，使用HTTP操作资源</p>
+<p>例如GET "http:localhost:8080/rest/user/1" 就是一个Restful风格的操作，对应代码如下：</p>
+<p>示例</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-12-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>restfulController<span class="w"> </span>{
+</span><span id="__span-12-3"><span class="w">    </span><span class="err">//增</span>
+</span><span id="__span-12-4"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;/user&quot;</span>)
+</span><span id="__span-12-5"><span class="w">    </span><span class="err">@</span><span class="nb">Operation</span>(summary<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;add user&quot;</span>)
+</span><span id="__span-12-6"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>boolean<span class="w"> </span>add(@RequestBody<span class="w"> </span><span class="k">User</span><span class="w"> </span><span class="k">user</span>){
+</span><span id="__span-12-7"><span class="w">        </span><span class="nb">return</span><span class="w"> </span><span class="k">user</span><span class="w"> </span>==<span class="w"> </span>null;
+</span><span id="__span-12-8"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-12-9"><span class="w">    </span><span class="err">//删</span>
+</span><span id="__span-12-10"><span class="w">    </span><span class="err">@</span><span class="nb">DeleteMapping</span>(<span class="s2">&quot;/user/{id}&quot;</span>)
+</span><span id="__span-12-11"><span class="w">    </span><span class="err">@</span><span class="nb">Operation</span>(summary<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;delete user by id&quot;</span>)
+</span><span id="__span-12-12"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>boolean<span class="w"> </span>delete(@PathVariable<span class="w"> </span>Integer<span class="w"> </span>id){
+</span><span id="__span-12-13"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>id<span class="w"> </span>==<span class="w"> </span>null;
+</span><span id="__span-12-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-12-15"><span class="w">    </span><span class="err">//改。</span><span class="nb">PATCH用于更新部分字段</span>，而PUT用于更新全部字段
+</span><span id="__span-12-16"><span class="w">    </span><span class="err">@</span><span class="nb">PutMapping</span>(<span class="s2">&quot;/user&quot;</span>)
+</span><span id="__span-12-17"><span class="w">    </span><span class="err">@</span><span class="nb">Operation</span>(summary<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;update user&quot;</span>)
+</span><span id="__span-12-18"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>boolean<span class="w"> </span>update(@RequestBody<span class="w"> </span><span class="k">User</span><span class="w"> </span><span class="k">user</span>){
+</span><span id="__span-12-19"><span class="w">        </span><span class="nb">return</span><span class="w"> </span><span class="k">user</span><span class="w"> </span>==<span class="w"> </span>null;
+</span><span id="__span-12-20"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-12-21"><span class="w">    </span><span class="err">//查</span>
+</span><span id="__span-12-22"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/user/{id}&quot;</span>)
+</span><span id="__span-12-23"><span class="w">    </span><span class="err">@</span><span class="nb">Operation</span>(summary<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;get user by id&quot;</span>)
+</span><span id="__span-12-24"><span class="w">    </span><span class="nb">public</span><span class="w"> </span><span class="k">User</span><span class="w"> </span>get(@PathVariable<span class="w"> </span>Integer<span class="w"> </span>id){
+</span><span id="__span-12-25"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>new<span class="w"> </span><span class="k">User</span>(<span class="s2">&quot;hhh&quot;</span>+id,<span class="w"> </span><span class="m">18</span>);
+</span><span id="__span-12-26"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-12-27"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="iocaop">IOC和AOP<a class="headerlink" href="#iocaop" title="Permanent link">&para;</a></h2>
+<p>Spring的核心思想是IOC以及AOP，而SpringBoot在此基础上进行了自动配置。</p>
+<h3 id="ioc">IOC<a class="headerlink" href="#ioc" title="Permanent link">&para;</a></h3>
+<p>Inversion of Control，控制翻转，是一种编程思想，不需要任何新的技术。通常的实现方式有两种：依赖注入和依赖查找。</p>
+<p>依赖查找：依赖查找会主动获取，在需要的时候通过调用框架提供的方法来获取对象，并且在获取时需要提供相关的配置文件路径、key等信息来确定获取对象的状态。</p>
+<p>依赖注入：Springboot中使用的是基于注解的依赖输入。</p>
+<p>为什么要有控制反转这种编程模式？</p>
+<p>Class A代表A是一个类，而A a=new A()代表创建一个A类型的对象a。在没有控制反转的情况下，在A类中使用B类的b对象时，需要在A类中新建一个b对象。如果我们使用控制反转，则只需要先在A类中声明一个私有的b对象，即private B b，然后将创建b对象的工作交由容器来完成。容器会根据注解或者配置文件将b对象注入A类的实例中。</p>
+<p>比如下面的例子：</p>
+<p>首先，是各种交通方式的接口，当一个person要修改它的drive行为的时候，正常情况下，需要违反开闭原则，不断修改已有的内部代码。</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><span class="nb">public</span><span class="w"> </span>interface<span class="w"> </span>Driveable<span class="w"> </span>{
+</span><span id="__span-13-2"><span class="w">    </span><span class="nb">void</span><span class="w"> </span>drive();
+</span><span id="__span-13-3"><span class="err">}</span>
+</span><span id="__span-13-4">
+</span><span id="__span-13-5"><span class="nb">class</span><span class="w"> </span>Car<span class="w"> </span>implements<span class="w"> </span>Driveable{
+</span><span id="__span-13-6"><span class="w">    </span><span class="err">@</span><span class="nb">Override</span>
+</span><span id="__span-13-7"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>drive()<span class="w"> </span>{
+</span><span id="__span-13-8"><span class="w">        </span><span class="nb">System</span>.out.println(<span class="s2">&quot;Car drive&quot;</span>);
+</span><span id="__span-13-9"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-13-10"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>Person<span class="w"> </span>{
+</span><span id="__span-14-2"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>hangOut(){
+</span><span id="__span-14-3"><span class="err">//</span><span class="w">        </span><span class="nb">Driveable</span><span class="w"> </span>car<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Car();
+</span><span id="__span-14-4"><span class="err">//</span><span class="w">        </span><span class="nb">car</span>.drive();
+</span><span id="__span-14-5"><span class="w">        </span><span class="nb">Driveable</span><span class="w"> </span>bike<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Bike();
+</span><span id="__span-14-6"><span class="w">        </span><span class="nb">bike</span>.drive();
+</span><span id="__span-14-7"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-14-8"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>如果使用了IOC方式，则可以改造Person类，将交通工具从方法中提取出来，变为Person类的私有变量：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><span class="err">@</span><span class="nb">AllArgsConstructor</span>
+</span><span id="__span-15-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>Person<span class="w"> </span>{
+</span><span id="__span-15-3"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Driveable<span class="w"> </span>driveable;
+</span><span id="__span-15-4"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>hangOut(){
+</span><span id="__span-15-5"><span class="w">        </span><span class="nb">driveable</span>.drive();
+</span><span id="__span-15-6"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-15-7"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>模拟Springbean容器,其用一个map维护初始化的时候注入的bean.</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>Container<span class="w"> </span>{
+</span><span id="__span-16-2"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Map&lt;Class&lt;?&gt;,Object&gt;<span class="w"> </span>beans<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>ConcurrentHashMap&lt;&gt;();
+</span><span id="__span-16-3">
+</span><span id="__span-16-4"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-16-5"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">获取这个已经注入过的</span><span class="nb">bean</span>
+</span><span id="__span-16-6"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>clazz
+</span><span id="__span-16-7"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">return</span>
+</span><span id="__span-16-8"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>&lt;T&gt;
+</span><span id="__span-16-9"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-16-10"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>&lt;T&gt;<span class="w"> </span>T<span class="w"> </span>getBean(Class&lt;T&gt;<span class="w"> </span>clazz){
+</span><span id="__span-16-11"><span class="w">        </span><span class="nb">Object</span><span class="w"> </span>bean<span class="w"> </span>=<span class="w"> </span>beans.get(clazz);
+</span><span id="__span-16-12"><span class="w">        </span><span class="nb">if</span>(bean<span class="w"> </span>==<span class="w"> </span>null<span class="w"> </span>||<span class="w"> </span>!clazz.isInstance(bean)){
+</span><span id="__span-16-13"><span class="w">            </span><span class="nb">return</span><span class="w"> </span>null;
+</span><span id="__span-16-14"><span class="w">        </span><span class="err">}</span><span class="nb">else</span>{
+</span><span id="__span-16-15"><span class="w">            </span><span class="nb">return</span><span class="w"> </span>(T)bean;
+</span><span id="__span-16-16"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-16-17"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-16-18">
+</span><span id="__span-16-19"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-16-20"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">如果容器中不存在，则添加</span><span class="nb">bean</span>
+</span><span id="__span-16-21"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>clazz
+</span><span id="__span-16-22"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>bean
+</span><span id="__span-16-23"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>&lt;T&gt;
+</span><span id="__span-16-24"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-16-25"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>&lt;T&gt;<span class="w"> </span>void<span class="w"> </span>put(Class&lt;T&gt;<span class="w"> </span>clazz,T<span class="w"> </span>bean){
+</span><span id="__span-16-26"><span class="w">        </span><span class="nb">beans</span>.putIfAbsent(clazz,bean);
+</span><span id="__span-16-27"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-16-28"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>则这时候如果一个人向动态修改它的Drive行为的含义，则可以不用修改内部代码</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>IOCTest<span class="w"> </span>{
+</span><span id="__span-17-2"><span class="w">    </span><span class="err">//</span><span class="nb">bean容器</span>
+</span><span id="__span-17-3"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Container<span class="w"> </span>container;
+</span><span id="__span-17-4"><span class="w">    </span><span class="err">//模拟</span><span class="nb">Spring容器初始化</span>
+</span><span id="__span-17-5"><span class="w">    </span><span class="err">@</span><span class="nb">BeforeEach</span>
+</span><span id="__span-17-6"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>init(){
+</span><span id="__span-17-7"><span class="w">        </span><span class="nb">container</span><span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Container();
+</span><span id="__span-17-8"><span class="w">        </span><span class="nb">container</span>.put(Car.class,new<span class="w"> </span>Car());
+</span><span id="__span-17-9"><span class="w">        </span><span class="nb">container</span>.put(Bike.class,new<span class="w"> </span>Bike());
+</span><span id="__span-17-10"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-17-11"><span class="w">    </span><span class="err">@</span><span class="nb">Test</span>
+</span><span id="__span-17-12"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>test(){
+</span><span id="__span-17-13"><span class="w">        </span><span class="err">//模拟</span><span class="nb">autowired注入</span>
+</span><span id="__span-17-14"><span class="w">        </span><span class="nb">Bike</span><span class="w"> </span>bike<span class="w"> </span>=<span class="w"> </span>container.getBean(Bike.class);
+</span><span id="__span-17-15"><span class="w">        </span><span class="nb">Person</span><span class="w"> </span>a<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Person(bike);
+</span><span id="__span-17-16"><span class="w">        </span><span class="nb">a</span>.hangOut();
+</span><span id="__span-17-17"><span class="w">        </span><span class="err">//如果要换车，只需要修改容器中的</span><span class="nb">bean即可</span>,不用再修改Person类
+</span><span id="__span-17-18"><span class="w">        </span><span class="nb">Car</span><span class="w"> </span>car<span class="w"> </span>=<span class="w"> </span>container.getBean(Car.class);
+</span><span id="__span-17-19"><span class="w">        </span><span class="nb">a</span><span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>Person(car);
+</span><span id="__span-17-20"><span class="w">        </span><span class="nb">a</span>.hangOut();
+</span><span id="__span-17-21"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-17-22"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>IOC的意义</strong></p>
+<p>好处之一当然是不用再手动创建对象，直接使用@Autowired注解就可以。</p>
+<p>但是最核心的好处是：让代码脱离了对具体实现的依赖。原始的Person同时依赖于Driveable接口以及其具体实现。但是现在不依赖于具体实现了，只依赖于抽象的接口。</p>
+<p><img alt="image.png" src="../assets/IOC%E5%8E%9F%E7%90%86.png" /></p>
+<h3 id="aop">AOP<a class="headerlink" href="#aop" title="Permanent link">&para;</a></h3>
+<p>程序设计思想的4类：</p>
+<ul>
+<li>OOP：面向对象编程</li>
+<li>AOP：面向切面编程</li>
+<li>POP：面向过程编程</li>
+<li>FP：函数式编程</li>
+</ul>
+<p>而AOP其实是OOP的一种扩展。</p>
+<p>考虑如果让在一段程序中加入计算运行时间的逻辑，直接枚举并编码，则还可以接受。但是当有几百个业务逻辑，并且统计时间频繁变动的时候，就不能这样了。</p>
+<p>但是通过观察，热河业务逻辑的执行时间所需要的操作都是一样的，都是结束时间-开始时间，求两个时间点的差值。常规思路就是将其封装为一个方法，哪里需要就在哪里调用。但是，<strong>这是一种代码的入侵</strong>。</p>
+<p>AOP就是为了弥补这种不足，OOP擅长解决纵向的业务逻辑，但是对于横向的公共操作却比较乏力，这就需要AOP来解决。</p>
+<p>比如登录，搜索，下单逻辑，都需要性能统计，记录日志，权限检查，这就可以使用AOP操作。<strong>这就是相当于在多个纵向柱面横向切过的操作</strong></p>
+<p><img alt="AOP.png" src="../assets/AOP.png?t=1735985775799" /></p>
+<p><strong>核心概念</strong></p>
+<p>Advice：通知，想让AOP做的事情，比如性能统计</p>
+<p>JoinPoint：连接点，允许AOP通知的地方，比如在方法被调用前执行权限检查，则JoinPoint就是方法调用前。</p>
+<p>PointCut:  切入点，用于筛选JoinPoint的条件，对Joinpoint做一次filter,然后对剩下的做Advice</p>
+<p>Aspect: 切面，一个包含PointCut以及Advice的集合，完整的定义了在什么条件下做什么事情。图中的每个横线就是一个Apsect。比如当下单接口被调用的时候进行权限检查。</p>
+<p><strong>应用场景</strong></p>
+<p>从Advice的时机来看，有</p>
+<ul>
+<li>Before：在目标方法执行前调用Advice</li>
+<li>After[finally]: 目标方法执行结束后</li>
+<li>After[Returning]：目标方法执行成功后</li>
+<li>After-Throwing:目标方法抛出异常后</li>
+<li>Around：环绕/包裹目标方法调用Advice,是一个可定制化调用的Advice</li>
+</ul>
+<p>常见场景：</p>
+<ul>
+<li>参数检查，日志记录，异常处理，性能统计</li>
+<li>事务控制，权限控制，缓存处理</li>
+</ul>
+<p><strong>例子</strong></p>
+<p>首先定义一个正常的Controller</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><span class="err">@</span><span class="nb">Slf4j</span>
+</span><span id="__span-18-2"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-18-3"><span class="err">@</span><span class="nb">RequestMapping</span>(<span class="s2">&quot;/aspect&quot;</span>)
+</span><span id="__span-18-4"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>AspectController<span class="w"> </span>{
+</span><span id="__span-18-5"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>
+</span><span id="__span-18-6"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>Result<span class="w"> </span>aspect(String<span class="w"> </span>message){
+</span><span id="__span-18-7"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;aspect controller&quot;</span>);
+</span><span id="__span-18-8"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>Result.success(message);
+</span><span id="__span-18-9"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-18-10"><span class="w">    </span><span class="err">@</span><span class="nb">GetMapping</span>(<span class="s2">&quot;/exception&quot;</span>)
+</span><span id="__span-18-11"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>Result<span class="w"> </span>exception(){
+</span><span id="__span-18-12"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;aspect controller&quot;</span>);
+</span><span id="__span-18-13"><span class="w">        </span><span class="nb">throw</span><span class="w"> </span>new<span class="w"> </span>RuntimeException(<span class="s2">&quot;aspect exception&quot;</span>);
+</span><span id="__span-18-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-18-15"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>然后定义切面，可以对匹配到的切点的前后执行操作，而不入侵源代码。</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><span class="err">@</span><span class="nb">Slf4j</span>
+</span><span id="__span-19-2"><span class="err">@</span><span class="nb">Aspect</span>
+</span><span id="__span-19-3"><span class="err">@</span><span class="nb">Component</span>
+</span><span id="__span-19-4"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>WebAspect<span class="w"> </span>{
+</span><span id="__span-19-5"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-19-6"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">定义切点集合</span>
+</span><span id="__span-19-7"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="nb">execution是用来匹配连接点的执行方法</span>
+</span><span id="__span-19-8"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="nb">public</span><span class="w"> </span>表示匹配方法的权限范围
+</span><span id="__span-19-9"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">表示匹配所有类型返回值</span>
+</span><span id="__span-19-10"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="nb">com</span>.lxbigdata.boot.Controllers为包路径
+</span><span id="__span-19-11"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">*</span>.<span class="err">*(</span>..<span class="err">)表示匹配包下的所有类的所用方法的所有参数</span>
+</span><span id="__span-19-12"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-19-13"><span class="w">    </span><span class="err">@</span><span class="nb">Pointcut</span>(<span class="s2">&quot;execution(public * com.lxbigdata.boot.Controllers.*.*(..))&quot;</span>)
+</span><span id="__span-19-14"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>pointCut(){
+</span><span id="__span-19-15">
+</span><span id="__span-19-16"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-19-17">
+</span><span id="__span-19-18"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-19-19"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">获取请求路径等信息</span>
+</span><span id="__span-19-20"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>joinPoint
+</span><span id="__span-19-21"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-19-22"><span class="w">    </span><span class="err">@</span><span class="nb">Before</span>(value<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;pointCut()&quot;</span>)
+</span><span id="__span-19-23"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>before(JoinPoint<span class="w"> </span>joinPoint){
+</span><span id="__span-19-24"><span class="w">        </span><span class="nb">String</span><span class="w"> </span>methodName<span class="w"> </span>=<span class="w"> </span>joinPoint.getSignature().getName();
+</span><span id="__span-19-25"><span class="w">        </span><span class="nb">String</span><span class="w"> </span>className<span class="w"> </span>=<span class="w"> </span>joinPoint.getTarget().getClass().getName();
+</span><span id="__span-19-26"><span class="w">        </span><span class="nb">Object</span>[]<span class="w"> </span>args<span class="w"> </span>=<span class="w"> </span>joinPoint.getArgs();
+</span><span id="__span-19-27"><span class="w">        </span><span class="nb">String</span>[]<span class="w"> </span>parameterNames<span class="w"> </span>=<span class="w"> </span>((MethodSignature)<span class="w"> </span>joinPoint.getSignature()).getParameterNames();
+</span><span id="__span-19-28">
+</span><span id="__span-19-29"><span class="w">        </span><span class="nb">HttpServletRequest</span><span class="w"> </span>request<span class="w"> </span>=<span class="w"> </span>((ServletRequestAttributes)<span class="w"> </span>RequestContextHolder.getRequestAttributes()).getRequest();
+</span><span id="__span-19-30">
+</span><span id="__span-19-31"><span class="w">        </span><span class="nb">Map</span>&lt;String,Object&gt;<span class="w"> </span>paramMap<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>HashMap&lt;&gt;();
+</span><span id="__span-19-32"><span class="w">        </span><span class="nb">for</span>(int<span class="w"> </span>i<span class="w"> </span>=<span class="w"> </span><span class="m">0</span>;i&lt;parameterNames.length;i++){
+</span><span id="__span-19-33"><span class="w">            </span><span class="nb">paramMap</span>.put(parameterNames[i],args[i]);
+</span><span id="__span-19-34"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-19-35"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;brfore path:{}&quot;</span>,request.getServletPath());
+</span><span id="__span-19-36"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;class name:{}&quot;</span>,className);
+</span><span id="__span-19-37"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;method name:{}&quot;</span>,methodName);
+</span><span id="__span-19-38"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;param:{}&quot;</span>,paramMap.toString());
+</span><span id="__span-19-39"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-19-40">
+</span><span id="__span-19-41"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-19-42"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">打印目标方法名</span>
+</span><span id="__span-19-43"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>joinPoint
+</span><span id="__span-19-44"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-19-45"><span class="w">    </span><span class="err">@</span><span class="nb">After</span>(value<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;pointCut()&quot;</span>)
+</span><span id="__span-19-46"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>After(JoinPoint<span class="w"> </span>joinPoint){
+</span><span id="__span-19-47"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;{} after&quot;</span>,joinPoint.getSignature().getName());
+</span><span id="__span-19-48"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-19-49">
+</span><span id="__span-19-50"><span class="w">    </span><span class="err">/**</span>
+</span><span id="__span-19-51"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">打印目标方法的返回值</span>
+</span><span id="__span-19-52"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>joinPoint
+</span><span id="__span-19-53"><span class="w">     </span><span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="nb">param</span><span class="w"> </span>result
+</span><span id="__span-19-54"><span class="w">     </span><span class="err">*/</span>
+</span><span id="__span-19-55"><span class="w">    </span><span class="err">@</span><span class="nb">AfterReturning</span>(value<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;pointCut()&quot;</span>,returning<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;result&quot;</span>)
+</span><span id="__span-19-56"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>AfterReturning(JoinPoint<span class="w"> </span>joinPoint,Object<span class="w"> </span>result){
+</span><span id="__span-19-57"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;{} afterReturning&quot;</span>,joinPoint.getSignature().getName());
+</span><span id="__span-19-58"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;result:{}&quot;</span>,result);
+</span><span id="__span-19-59"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-19-60">
+</span><span id="__span-19-61"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>AfterThrowing(JoinPoint<span class="w"> </span>joinPoint,Exception<span class="w"> </span>e){
+</span><span id="__span-19-62"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;{} afterThrowing&quot;</span>,joinPoint.getSignature().getName());
+</span><span id="__span-19-63"><span class="w">        </span><span class="nb">log</span>.info(<span class="s2">&quot;exception:{}&quot;</span>,e.getMessage());
+</span><span id="__span-19-64"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-19-65"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>执行顺序</strong></p>
+<p>同一个切面的执行顺序：before -&gt; after[Returning,Throwing], after</p>
+<p>不同切面的执行顺序：和Adapter一样，使用inbound/outbound的安装执行逻辑</p>
+<p><strong>原理解析</strong></p>
+<p>Spring的AOP是用代理的方式实现的。每个切面都是Spring容器中的一个Bean，在目标方法被调用时，Spring把切面应用到目标对象上，为目标对象动态创建代理，这个过程叫作Weaving（织入）。切面会在指定（符合切点条件）的连接点织入目标对象中。</p>
+<p>当调用者调用目标对象时，调用请求会被代理类拦截，而在目标对象真正被调用之前，会先织入切面逻辑。当应用需要目标对象时，Spring才会创建代理对象，因为Spring采用的是运行期织入的实现方式。</p>
+<p>形象来说，就是把原方法包一层。</p>
+<p>weaving的实现的可以在不同的情况下实现：编译期，类加载器，运行期</p>
+<p><img alt="image.png" src="../assets/AOP%E4%BB%A3%E7%90%86.png" /></p>
+<h3 id="_8">程序入口<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>在没有Springboot之前，都是使用Web容器，将应用打包到容器的相应目录，最后启动容器。</p>
+<p>源码如下：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>ConfigurableApplicationContext<span class="w"> </span>run(String...<span class="w"> </span>args)<span class="w"> </span>{
+</span><span id="__span-20-2"><span class="w">        </span><span class="nb">Startup</span><span class="w"> </span>startup<span class="w"> </span>=<span class="w"> </span>Startup.create();
+</span><span id="__span-20-3"><span class="w">        </span><span class="nb">if</span><span class="w"> </span>(this.registerShutdownHook)<span class="w"> </span>{
+</span><span id="__span-20-4"><span class="w">            </span><span class="nb">SpringApplication</span>.shutdownHook.enableShutdownHookAddition();
+</span><span id="__span-20-5"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-20-6"><span class="w">        </span><span class="nb">DefaultBootstrapContext</span><span class="w"> </span>bootstrapContext<span class="w"> </span>=<span class="w"> </span>createBootstrapContext();
+</span><span id="__span-20-7"><span class="w">        </span><span class="nb">ConfigurableApplicationContext</span><span class="w"> </span>context<span class="w"> </span>=<span class="w"> </span>null;
+</span><span id="__span-20-8"><span class="w">        </span><span class="nb">configureHeadlessProperty</span>();
+</span><span id="__span-20-9"><span class="w">        </span><span class="nb">SpringApplicationRunListeners</span><span class="w"> </span>listeners<span class="w"> </span>=<span class="w"> </span>getRunListeners(args);
+</span><span id="__span-20-10"><span class="w">        </span><span class="nb">listeners</span>.starting(bootstrapContext,<span class="w"> </span>this.mainApplicationClass);
+</span><span id="__span-20-11"><span class="w">        </span><span class="nb">try</span><span class="w"> </span>{
+</span><span id="__span-20-12"><span class="w">            </span><span class="nb">ApplicationArguments</span><span class="w"> </span>applicationArguments<span class="w"> </span>=<span class="w"> </span>new<span class="w"> </span>DefaultApplicationArguments(args);
+</span><span id="__span-20-13"><span class="w">            </span><span class="nb">ConfigurableEnvironment</span><span class="w"> </span>environment<span class="w"> </span>=<span class="w"> </span>prepareEnvironment(listeners,<span class="w"> </span>bootstrapContext,<span class="w"> </span>applicationArguments);
+</span><span id="__span-20-14"><span class="w">            </span><span class="nb">Banner</span><span class="w"> </span>printedBanner<span class="w"> </span>=<span class="w"> </span>printBanner(environment);
+</span><span id="__span-20-15"><span class="w">            </span><span class="nb">context</span><span class="w"> </span>=<span class="w"> </span>createApplicationContext();
+</span><span id="__span-20-16"><span class="w">            </span><span class="nb">context</span>.setApplicationStartup(this.applicationStartup);
+</span><span id="__span-20-17"><span class="w">            </span><span class="nb">prepareContext</span>(bootstrapContext,<span class="w"> </span>context,<span class="w"> </span>environment,<span class="w"> </span>listeners,<span class="w"> </span>applicationArguments,<span class="w"> </span>printedBanner);
+</span><span id="__span-20-18"><span class="w">            </span><span class="nb">refreshContext</span>(context);
+</span><span id="__span-20-19"><span class="w">            </span><span class="nb">afterRefresh</span>(context,<span class="w"> </span>applicationArguments);
+</span><span id="__span-20-20"><span class="w">            </span><span class="nb">startup</span>.started();
+</span><span id="__span-20-21"><span class="w">            </span><span class="nb">if</span><span class="w"> </span>(this.logStartupInfo)<span class="w"> </span>{
+</span><span id="__span-20-22"><span class="w">                </span><span class="nb">new</span><span class="w"> </span>StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(),<span class="w"> </span>startup);
+</span><span id="__span-20-23"><span class="w">            </span><span class="err">}</span>
+</span><span id="__span-20-24"><span class="w">            </span><span class="nb">listeners</span>.started(context,<span class="w"> </span>startup.timeTakenToStarted());
+</span><span id="__span-20-25"><span class="w">            </span><span class="nb">callRunners</span>(context,<span class="w"> </span>applicationArguments);
+</span><span id="__span-20-26"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-20-27"><span class="w">        </span><span class="nb">catch</span><span class="w"> </span>(Throwable<span class="w"> </span>ex)<span class="w"> </span>{
+</span><span id="__span-20-28"><span class="w">            </span><span class="nb">throw</span><span class="w"> </span>handleRunFailure(context,<span class="w"> </span>ex,<span class="w"> </span>listeners);
+</span><span id="__span-20-29"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-20-30"><span class="w">        </span><span class="nb">try</span><span class="w"> </span>{
+</span><span id="__span-20-31"><span class="w">            </span><span class="nb">if</span><span class="w"> </span>(context.isRunning())<span class="w"> </span>{
+</span><span id="__span-20-32"><span class="w">                </span><span class="nb">listeners</span>.ready(context,<span class="w"> </span>startup.ready());
+</span><span id="__span-20-33"><span class="w">            </span><span class="err">}</span>
+</span><span id="__span-20-34"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-20-35"><span class="w">        </span><span class="nb">catch</span><span class="w"> </span>(Throwable<span class="w"> </span>ex)<span class="w"> </span>{
+</span><span id="__span-20-36"><span class="w">            </span><span class="nb">throw</span><span class="w"> </span>handleRunFailure(context,<span class="w"> </span>ex,<span class="w"> </span>null);
+</span><span id="__span-20-37"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-20-38"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>context;
+</span><span id="__span-20-39"><span class="w">    </span><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>步骤如下：</p>
+<ol>
+<li>应用启动计时开始</li>
+<li>声明上下文</li>
+<li>设置属性</li>
+<li>启动监听器</li>
+<li>初始化默认应用参数</li>
+<li>准备应用环境</li>
+<li>打印Banner（logo）</li>
+<li>创建上下文声明，构建上下文，刷新上下文，刷新上下文后处理</li>
+<li>启动计时结束，打印启动日志</li>
+<li>发布上下文，启动完成事件</li>
+<li>调用runners</li>
+<li>启动应用发生异常的处理</li>
+<li>发布上下文就绪事件</li>
+</ol>
+<h2 id="mybatis">整合MyBatis<a class="headerlink" href="#mybatis" title="Permanent link">&para;</a></h2>
+<h3 id="_9">环境配置<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>需要导入的依赖只有两个，一个starter以及一个jdbc依赖</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><span class="w">        </span><span class="nt">&lt;!--</span><span class="w"> </span><span class="s">https://mvnrepository.com/artifact/com.mysql/mysql-connector-j --</span><span class="nt">&gt;</span>
+</span><span id="__span-21-2"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-21-3"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span><span class="nb">com</span>.mysql&lt;/groupId&gt;
+</span><span id="__span-21-4"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span><span class="nb">mysql</span>-connector-j&lt;/artifactId&gt;
+</span><span id="__span-21-5"><span class="w">            </span><span class="nt">&lt;version&gt;</span><span class="err">8</span>.<span class="err">0</span>.<span class="err">33</span><span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-21-6"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-21-7"><span class="w">        </span><span class="nt">&lt;!--</span><span class="w"> </span><span class="s">https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter --</span><span class="nt">&gt;</span>
+</span><span id="__span-21-8"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-21-9"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span><span class="nb">org</span>.mybatis.spring.boot&lt;/groupId&gt;
+</span><span id="__span-21-10"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span><span class="nb">mybatis</span>-spring-boot-starter&lt;/artifactId&gt;
+</span><span id="__span-21-11"><span class="w">            </span><span class="nt">&lt;version&gt;</span><span class="err">3</span>.<span class="err">0</span>.<span class="err">4</span><span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-21-12"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>然后配置app.yaml</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><span class="c"># springboot</span>
+</span><span id="__span-22-2"><span class="nb">spring</span>:
+</span><span id="__span-22-3"><span class="w">  </span><span class="nb">application</span>:
+</span><span id="__span-22-4"><span class="w">    </span><span class="nb">name</span>:boot
+</span><span id="__span-22-5"><span class="w">  </span><span class="nb">datasource</span>:
+</span><span id="__span-22-6"><span class="w">    </span><span class="nb">url</span>:<span class="w"> </span>jdbc:mysql://localhost:3306/boot?serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false
+</span><span id="__span-22-7"><span class="w">    </span><span class="nb">username</span>:<span class="w"> </span>root
+</span><span id="__span-22-8"><span class="w">    </span><span class="nb">password</span>:<span class="w"> </span><span class="m">123456789</span>
+</span><span id="__span-22-9"><span class="w">    </span><span class="nb">driver</span>-class-name:<span class="w"> </span>com.mysql.cj.jdbc.Driver
+</span><span id="__span-22-10"><span class="c"># springdoc</span>
+</span><span id="__span-22-11"><span class="nb">springdoc</span>:
+</span><span id="__span-22-12"><span class="w">  </span><span class="nb">api</span>-docs:
+</span><span id="__span-22-13"><span class="w">    </span><span class="nb">path</span>:<span class="w"> </span><span class="sx">/v3/api-docs</span>
+</span><span id="__span-22-14"><span class="w">  </span><span class="nb">swagger</span>-ui:
+</span><span id="__span-22-15"><span class="w">    </span><span class="nb">doc</span>-expansion:<span class="w"> </span><span class="k">none</span>
+</span><span id="__span-22-16"><span class="w">    </span><span class="nb">url</span>:<span class="w"> </span><span class="s2">&quot;/v3/api-docs&quot;</span>
+</span><span id="__span-22-17"><span class="w">    </span><span class="nb">path</span>:<span class="w"> </span><span class="sx">/swagger-ui.html</span>
+</span><span id="__span-22-18">
+</span><span id="__span-22-19"><span class="c"># mybatis</span>
+</span><span id="__span-22-20"><span class="nb">mybatis</span>:
+</span><span id="__span-22-21"><span class="w">  </span><span class="nb">mapper</span>-locations:<span class="w"> </span>classpath:mapper/*.xml
+</span><span id="__span-22-22"><span class="w">  </span><span class="nb">configuration</span>:
+</span><span id="__span-22-23"><span class="w">    </span><span class="nb">log</span>-impl:<span class="w"> </span>org.apache.ibatis.logging.stdout.StdOutImpl
+</span></code></pre></div></td></tr></table></div>
+<p>则可以写代码了。</p>
+<h3 id="_10">具体操作<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="db">DB<a class="headerlink" href="#db" title="Permanent link">&para;</a></h4>
+<p>建表如下：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><span class="nb">create</span><span class="w"> </span>database<span class="w"> </span>boot;
+</span><span id="__span-23-2"><span class="nb">use</span><span class="w"> </span>boot;
+</span><span id="__span-23-3">
+</span><span id="__span-23-4"><span class="nb">CREATE</span><span class="w"> </span>TABLE<span class="w"> </span>t_user_song(
+</span><span id="__span-23-5"><span class="w">    </span><span class="err">`</span><span class="nb">id</span>`<span class="w"> </span>INT<span class="w"> </span>AUTO_INCREMENT<span class="w"> </span>COMMENT<span class="w"> </span>&#39;序号，自增&#39;<span class="w"> </span>,
+</span><span id="__span-23-6"><span class="w">    </span><span class="err">`</span><span class="nb">name</span>`<span class="w"> </span>VARCHAR(11)<span class="w">   </span>COMMENT<span class="w"> </span>&#39;用户姓名&#39;<span class="w"> </span>,
+</span><span id="__span-23-7"><span class="w">    </span><span class="err">`</span><span class="nb">sname</span>`<span class="w"> </span>VARCHAR(20)<span class="w">   </span>COMMENT<span class="w"> </span>&#39;歌曲名称&#39;<span class="w"> </span>,
+</span><span id="__span-23-8"><span class="w">    </span><span class="err">`</span><span class="nb">stype</span>`<span class="w"> </span>VARCHAR(10)<span class="w">   </span>COMMENT<span class="w"> </span>&#39;歌曲类型&#39;<span class="w"> </span>,
+</span><span id="__span-23-9"><span class="w">    </span><span class="err">`</span><span class="nb">score</span>`<span class="w"> </span>INT<span class="w">   </span>COMMENT<span class="w"> </span>&#39;歌曲评分&#39;<span class="w"> </span>,
+</span><span id="__span-23-10"><span class="w">    </span><span class="err">`</span><span class="nb">songer</span>`<span class="w"> </span>VARCHAR(20)<span class="w">   </span>COMMENT<span class="w"> </span>&#39;歌手姓名&#39;<span class="w"> </span>,
+</span><span id="__span-23-11"><span class="w">    </span><span class="err">`</span><span class="nb">create_time</span>`<span class="w"> </span>DATETIME<span class="w">   </span>COMMENT<span class="w"> </span>&#39;创建时间&#39;<span class="w"> </span>,
+</span><span id="__span-23-12"><span class="w">    </span><span class="nb">PRIMARY</span><span class="w"> </span>KEY<span class="w"> </span>(id)
+</span><span id="__span-23-13"><span class="err">)</span><span class="w">  </span><span class="nb">COMMENT</span><span class="w"> </span>=<span class="w"> </span>&#39;用户歌曲表&#39;;
+</span><span id="__span-23-14">
+</span><span id="__span-23-15"><span class="nb">select</span><span class="w"> </span>*<span class="w"> </span>from<span class="w"> </span>t_user_song;
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_11">实体类<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>创建一个实体类，对应数据库表</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><span class="err">@</span><span class="nb">Data</span>
+</span><span id="__span-24-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>UserSong<span class="w"> </span>{
+</span><span id="__span-24-3"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Integer<span class="w"> </span>id;
+</span><span id="__span-24-4"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>name;
+</span><span id="__span-24-5"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>sname;
+</span><span id="__span-24-6"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>stype;
+</span><span id="__span-24-7"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Integer<span class="w"> </span>score;
+</span><span id="__span-24-8"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>songer;
+</span><span id="__span-24-9"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Date<span class="w"> </span>createTime;
+</span><span id="__span-24-10"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>并封装一个统一相应的消息实体类</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><span class="err">@</span><span class="nb">Data</span>
+</span><span id="__span-25-2"><span class="err">@</span><span class="nb">NoArgsConstructor</span>
+</span><span id="__span-25-3"><span class="err">@</span><span class="nb">AllArgsConstructor</span>
+</span><span id="__span-25-4"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>R&lt;T&gt;<span class="w"> </span>{
+</span><span id="__span-25-5"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>Integer<span class="w"> </span>code;
+</span><span id="__span-25-6"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>String<span class="w"> </span>msg;
+</span><span id="__span-25-7"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>T<span class="w"> </span>data;
+</span><span id="__span-25-8">
+</span><span id="__span-25-9"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>static<span class="w"> </span>&lt;T&gt;<span class="w"> </span>R&lt;T&gt;<span class="w"> </span>ok(T<span class="w"> </span>data)<span class="w"> </span>{
+</span><span id="__span-25-10"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>new<span class="w"> </span>R&lt;&gt;(0,<span class="w"> </span><span class="s2">&quot;success&quot;</span>,<span class="w"> </span>data);
+</span><span id="__span-25-11"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-25-12">
+</span><span id="__span-25-13"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>static<span class="w"> </span>&lt;T&gt;<span class="w"> </span>R&lt;T&gt;<span class="w"> </span><span class="k">error</span>(T<span class="w"> </span>data)<span class="w"> </span>{
+</span><span id="__span-25-14"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>new<span class="w"> </span>R&lt;&gt;(1,<span class="w"> </span><span class="s2">&quot;fail&quot;</span>,<span class="w"> </span>data);
+</span><span id="__span-25-15"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-25-16"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_12">持久层<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>实现一个对应实体操作的Dao接口，和DB交互，用于ORM</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><span class="nb">public</span><span class="w"> </span>interface<span class="w"> </span>UserSongDao<span class="w"> </span>{
+</span><span id="__span-26-2"><span class="w">    </span><span class="err">//增</span>
+</span><span id="__span-26-3"><span class="w">    </span><span class="err">@</span><span class="nb">Insert</span>(<span class="s2">&quot;insert into t_user_song(name,sname,stype,songer,score,create_time) values(#{name},#{sname},#{stype},#{songer},#{score},now())&quot;</span>)
+</span><span id="__span-26-4"><span class="w">    </span><span class="nb">Integer</span><span class="w"> </span>add(UserSong<span class="w"> </span>song);
+</span><span id="__span-26-5"><span class="w">    </span><span class="err">//删</span>
+</span><span id="__span-26-6"><span class="w">    </span><span class="err">@</span><span class="nb">Delete</span>(<span class="s2">&quot;delete from t_user_song where id=#{id}&quot;</span>)
+</span><span id="__span-26-7"><span class="w">    </span><span class="nb">Integer</span><span class="w"> </span>deleteById(Integer<span class="w"> </span>id);
+</span><span id="__span-26-8"><span class="w">    </span><span class="err">//改</span>
+</span><span id="__span-26-9"><span class="w">    </span><span class="err">@</span><span class="nb">Update</span>(<span class="s2">&quot;update t_user_song set sname=#{sname},stype=#{stype},songer=#{songer},score=#{score} where id=#{id}&quot;</span>)
+</span><span id="__span-26-10"><span class="w">    </span><span class="nb">Integer</span><span class="w"> </span>update(UserSong<span class="w"> </span>song);
+</span><span id="__span-26-11"><span class="w">    </span><span class="err">//查</span>
+</span><span id="__span-26-12"><span class="w">    </span><span class="err">@</span><span class="nb">Select</span>(<span class="s2">&quot;select * from t_user_song order by create_time desc&quot;</span>)
+</span><span id="__span-26-13"><span class="w">    </span><span class="nb">List</span>&lt;UserSong&gt;<span class="w"> </span><span class="k">all</span>();
+</span><span id="__span-26-14"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_13">服务层<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<p>用于实现业务逻辑的处理，可以调用多个Dao方法</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><span class="nb">public</span><span class="w"> </span>interface<span class="w"> </span>UserSongService<span class="w"> </span>{
+</span><span id="__span-27-2"><span class="w">    </span><span class="err">//增</span>
+</span><span id="__span-27-3"><span class="w">    </span><span class="nb">R</span><span class="w"> </span>add(UserSong<span class="w"> </span>song);
+</span><span id="__span-27-4">
+</span><span id="__span-27-5"><span class="w">    </span><span class="err">//改</span>
+</span><span id="__span-27-6"><span class="w">    </span><span class="nb">R</span><span class="w"> </span>update(UserSong<span class="w"> </span>song);
+</span><span id="__span-27-7">
+</span><span id="__span-27-8"><span class="w">    </span><span class="err">//删</span>
+</span><span id="__span-27-9"><span class="w">    </span><span class="nb">R</span><span class="w"> </span>delete(Integer<span class="w"> </span>id);
+</span><span id="__span-27-10">
+</span><span id="__span-27-11"><span class="w">    </span><span class="err">//查</span>
+</span><span id="__span-27-12"><span class="w">    </span><span class="nb">R</span><span class="w"> </span>queryAll();
+</span><span id="__span-27-13"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>然后Impl一个具体的类，其中会注入具体的dao类</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><span class="err">@</span><span class="nb">Service</span>
+</span><span id="__span-28-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>UserSongServiceImpl<span class="w"> </span>implements<span class="w"> </span>UserSongService<span class="w"> </span>{
+</span><span id="__span-28-3"><span class="w">    </span><span class="err">@</span><span class="nb">Resource</span>
+</span><span id="__span-28-4"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>UserSongDao<span class="w"> </span>dao;
+</span><span id="__span-28-5">
+</span><span id="__span-28-6"><span class="w">    </span><span class="err">@</span><span class="nb">Override</span>
+</span><span id="__span-28-7"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>add(UserSong<span class="w"> </span>song)<span class="w"> </span>{
+</span><span id="__span-28-8"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>dao.add(song)<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>?<span class="w"> </span>R.ok(song)<span class="w"> </span>:<span class="w"> </span>R.error(song);
+</span><span id="__span-28-9"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-28-10">
+</span><span id="__span-28-11"><span class="w">    </span><span class="err">@</span><span class="nb">Override</span>
+</span><span id="__span-28-12"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>update(UserSong<span class="w"> </span>song)<span class="w"> </span>{
+</span><span id="__span-28-13"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>dao.update(song)<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>?<span class="w"> </span>R.ok(song)<span class="w"> </span>:<span class="w"> </span>R.error(song);
+</span><span id="__span-28-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-28-15">
+</span><span id="__span-28-16"><span class="w">    </span><span class="err">@</span><span class="nb">Override</span>
+</span><span id="__span-28-17"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>delete(Integer<span class="w"> </span>id)<span class="w"> </span>{
+</span><span id="__span-28-18"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>dao.deleteById(id)<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>?<span class="w"> </span>R.ok(null)<span class="w"> </span>:<span class="w"> </span>R.error(null);
+</span><span id="__span-28-19"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-28-20">
+</span><span id="__span-28-21"><span class="w">    </span><span class="err">@</span><span class="nb">Override</span>
+</span><span id="__span-28-22"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>queryAll()<span class="w"> </span>{
+</span><span id="__span-28-23"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>R.ok(dao.all());
+</span><span id="__span-28-24"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-28-25"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_14">控制层<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p>也就是controller的位置，调用service接口的方法，然后等待具体实现类的注入。</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-29-2"><span class="err">@</span><span class="nb">RequestMapping</span>(<span class="s2">&quot;/api/usersong/&quot;</span>)
+</span><span id="__span-29-3"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>UserSongController<span class="w"> </span>{
+</span><span id="__span-29-4"><span class="w">    </span><span class="err">@</span><span class="nb">Resource</span>
+</span><span id="__span-29-5"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>UserSongService<span class="w"> </span>service;
+</span><span id="__span-29-6">
+</span><span id="__span-29-7"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;save&quot;</span>)
+</span><span id="__span-29-8"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>save(@RequestBody<span class="w"> </span>UserSong<span class="w"> </span>song)<span class="w"> </span>{
+</span><span id="__span-29-9"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>service.add(song);
+</span><span id="__span-29-10"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-29-11">
+</span><span id="__span-29-12"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;update&quot;</span>)
+</span><span id="__span-29-13"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>update(@RequestBody<span class="w"> </span>UserSong<span class="w"> </span>song)<span class="w"> </span>{
+</span><span id="__span-29-14"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>service.update(song);
+</span><span id="__span-29-15"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-29-16">
+</span><span id="__span-29-17"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;delete&quot;</span>)
+</span><span id="__span-29-18"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span>delete(Integer<span class="w"> </span>id)<span class="w"> </span>{
+</span><span id="__span-29-19"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>service.delete(id);
+</span><span id="__span-29-20"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-29-21">
+</span><span id="__span-29-22"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;all&quot;</span>)
+</span><span id="__span-29-23"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>R<span class="w"> </span><span class="k">all</span>()<span class="w"> </span>{
+</span><span id="__span-29-24"><span class="w">        </span><span class="nb">return</span><span class="w"> </span>service.queryAll();
+</span><span id="__span-29-25"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-29-26"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_15">测试<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>具体逻辑是先pos一个record，然后查询数据</p>
+<p><strong>post部分</strong></p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><span class="nb">POST</span><span class="w"> </span>http://localhost:8080/api/usersong/save
+</span><span id="__span-30-2"><span class="nb">Content</span>-Type:<span class="w"> </span>application/json
+</span><span id="__span-30-3">
+</span><span id="__span-30-4"><span class="err">{</span>
+</span><span id="__span-30-5"><span class="w">  </span><span class="err">&quot;</span><span class="nb">name</span><span class="s2">&quot;: &quot;</span>lee<span class="s2">&quot;,</span>
+</span><span id="__span-30-6"><span class="s2">  &quot;</span>sname<span class="s2">&quot; :&quot;</span>spuerman<span class="s2">&quot;,</span>
+</span><span id="__span-30-7"><span class="s2">  &quot;</span>songer<span class="s2">&quot;: &quot;</span>hello<span class="s2">&quot;,</span>
+</span><span id="__span-30-8"><span class="s2">  &quot;</span>stype<span class="s2">&quot;: &quot;</span>rock<span class="s2">&quot;,</span>
+</span><span id="__span-30-9"><span class="s2">  &quot;</span>score<span class="err">&quot;</span>:<span class="w"> </span><span class="m">10</span>
+</span><span id="__span-30-10"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>query</strong></p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><span class="nb">POST</span><span class="w"> </span>http://localhost:8080/api/usersong/all
+</span></code></pre></div></td></tr></table></div>
+<p>可以得到输出的JSON格式的相应结果</p>
+<p><strong>查询数据表验证</strong></p>
+<p><img alt="image.png" src="../assets/mybatis-db.png" /></p>
+<p>则整合成功</p>
+<h2 id="kafka">整合Kafka<a class="headerlink" href="#kafka" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>参考文档<a href="https://www.cnblogs.com/cnndevelop/p/14079494.html">SpringBoot集成Spring For Kafka操作Kafka详解 - 大浪不惊涛 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<h3 id="_16">环境配置<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>在linux有Kafka集群环境，但是版本不对并且虚拟机太耗资源。</p>
+<p>为了方便，直接在windows上安装单机版并配置环境变量。其服务监听端口还是9092。</p>
+<p>然后在项目中引入依赖：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><span class="w">        </span><span class="nt">&lt;!--</span><span class="w"> </span><span class="s">kafka --</span><span class="nt">&gt;</span>
+</span><span id="__span-32-2"><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-32-3"><span class="w">            </span><span class="nt">&lt;groupId&gt;</span><span class="nb">org</span>.springframework.kafka&lt;/groupId&gt;
+</span><span id="__span-32-4"><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span><span class="nb">spring</span>-kafka&lt;/artifactId&gt;
+</span><span id="__span-32-5"><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Kafka版本3.6.x，而Springboot版本3.3.1</p>
+<p>最后在yaml文件中配置路径：</p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><span class="nb">spring</span>:
+</span><span id="__span-33-2"><span class="w">  </span><span class="nb">application</span>:
+</span><span id="__span-33-3"><span class="w">    </span><span class="nb">name</span>:boot
+</span><span id="__span-33-4"><span class="w">  </span><span class="nb">datasource</span>:
+</span><span id="__span-33-5"><span class="w">    </span><span class="nb">url</span>:<span class="w"> </span>jdbc:mysql://localhost:3306/boot?serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false
+</span><span id="__span-33-6"><span class="w">    </span><span class="nb">username</span>:<span class="w"> </span>root
+</span><span id="__span-33-7"><span class="w">    </span><span class="nb">password</span>:<span class="w"> </span><span class="m">123456789</span>
+</span><span id="__span-33-8"><span class="w">    </span><span class="nb">driver</span>-class-name:<span class="w"> </span>com.mysql.cj.jdbc.Driver
+</span><span id="__span-33-9"><span class="w">  </span><span class="c">#kafka</span>
+</span><span id="__span-33-10"><span class="w">  </span><span class="nb">kafka</span>:
+</span><span id="__span-33-11"><span class="w">    </span><span class="nb">bootstrap</span>-servers:<span class="w"> </span>localhost:9092
+</span><span id="__span-33-12"><span class="w">    </span><span class="nb">consumer</span>:
+</span><span id="__span-33-13"><span class="w">      </span><span class="nb">group</span>-id:<span class="w"> </span><span class="k">group</span>-1
+</span></code></pre></div></td></tr></table></div>
+<p>则环境配置完毕。</p>
+<h3 id="_17">具体实现<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p><strong>监听topic，此处作为消费者</strong></p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-34-1"><span class="err">@</span><span class="nb">Component</span>
+</span><span id="__span-34-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>KafkaConsumer<span class="w"> </span>{
+</span><span id="__span-34-3"><span class="w">    </span><span class="err">@</span><span class="nb">KafkaListener</span>(topics<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;boot&quot;</span>)
+</span><span id="__span-34-4"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>processMessage(String<span class="w"> </span>message){
+</span><span id="__span-34-5"><span class="w">        </span><span class="nb">System</span>.out.println(<span class="s2">&quot;Received message: &quot;</span><span class="w"> </span>+<span class="w"> </span>message);
+</span><span id="__span-34-6"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-34-7"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这里使用了提供的注解来方便监听指定的topic.该注解的参数较多，可以支持单个，多个，正则等方式指定topic,并且可以指定group</p>
+<p><strong>生产者</strong></p>
+<div class="language-apache highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ApacheConf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><span class="err">@</span><span class="nb">RestController</span>
+</span><span id="__span-35-2"><span class="nb">public</span><span class="w"> </span>class<span class="w"> </span>KafkaController<span class="w"> </span>{
+</span><span id="__span-35-3"><span class="w">    </span><span class="err">@</span><span class="nb">Resource</span>
+</span><span id="__span-35-4"><span class="w">    </span><span class="nb">private</span><span class="w"> </span>KafkaTemplate&lt;String,<span class="w"> </span>String&gt;<span class="w"> </span>kafkaTemplate;
+</span><span id="__span-35-5">
+</span><span id="__span-35-6"><span class="w">    </span><span class="err">@</span><span class="nb">PostMapping</span>(<span class="s2">&quot;/sendMessage&quot;</span>)
+</span><span id="__span-35-7"><span class="w">    </span><span class="nb">public</span><span class="w"> </span>void<span class="w"> </span>sendMessage(@RequestParam(value<span class="w"> </span>=<span class="w"> </span><span class="s2">&quot;message&quot;</span>)<span class="w"> </span>String<span class="w"> </span>message)<span class="w"> </span>{
+</span><span id="__span-35-8"><span class="w">        </span><span class="nb">var</span><span class="w"> </span>future<span class="w"> </span>=<span class="w"> </span>kafkaTemplate.send(<span class="s2">&quot;boot&quot;</span>,<span class="w"> </span>message);
+</span><span id="__span-35-9"><span class="w">        </span><span class="err">//回调,异步发送消息</span>
+</span><span id="__span-35-10"><span class="w">        </span><span class="nb">future</span>.thenApply(result<span class="w"> </span>-&gt;<span class="w"> </span>{
+</span><span id="__span-35-11"><span class="w">            </span><span class="nb">System</span>.out.println(<span class="s2">&quot;消息发送成功&quot;</span>);
+</span><span id="__span-35-12"><span class="w">            </span><span class="nb">return</span><span class="w"> </span>result;
+</span><span id="__span-35-13"><span class="w">        </span><span class="err">});</span>
+</span><span id="__span-35-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-35-15"><span class="err">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这里使用@Resource注解/Autowire注解注入bean对象，然后使用post方法传送消息，可以使用KafkaTemplete中的多种方法来实现消息的发送。可以异步发送/同步发送、</p>
+<h3 id="_18">测试<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>使用自带的http-client发送：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-36-1">POST http://localhost:8080/sendMessage?message=hello
+</span></code></pre></div></td></tr></table></div>
+<p>则可以看到消息已经成功进入了消息队列kafka，控制台也有输出。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      lx CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

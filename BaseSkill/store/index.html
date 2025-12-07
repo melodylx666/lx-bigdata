@@ -1,0 +1,3964 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="li-xiao的个人网站">
+      
+      
+        <meta name="author" content="li-xiao">
+      
+      
+        <link rel="canonical" href="https://melodylx666.github.io/lx-bigdata/BaseSkill/store/">
+      
+      
+        <link rel="prev" href="../../LANG/">
+      
+      
+        <link rel="next" href="../../LANG/DS-leetcode/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>操作系统 - lx-bigdata</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="lx-bigdata" class="md-header__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            lx-bigdata
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              操作系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至夜间模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至夜间模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="orange"  aria-label="切换至日间模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至日间模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Project/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  随手总结
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dataWarehouse/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数据存储与计算
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../LANG/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  计算机基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backend/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  杂项
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="lx-bigdata" class="md-nav__button md-logo" aria-label="lx-bigdata" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    lx-bigdata
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/melodylx666/lx-bigdata" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lx-bigdata
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Project/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随手总结
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    随手总结
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/dynamic-Cep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态CEP解析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/econ-rule-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    金融风控引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/AbstractStreamOperatorDesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义StreamOperator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/ruleCoreSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    规则动态加载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Project/first-intern-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一段实习总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scala-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scala Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scala-scopt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scopt库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    秋招复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自用Mac入手文章指南合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    总结分析合集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/asyncToolLearn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    asyncTool框架梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../JVM/JVM%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM并发总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java/Scala I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design-pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计模式总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frameworkAnalysis/leveldb_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LevelDB源码学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../dataWarehouse/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据存储与计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据存储与计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/hadoop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDFS 与 YARN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%A4%A7%E6%95%B0%E6%8D%AESQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数据SQL剖析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/flink_learn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flink总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E6%95%B0%E4%BB%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数仓理论总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/interview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    查缺补漏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/graphDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图数据库总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataWarehouse/learn_db_from_paper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从论文学隔离级别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../LANG/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        虚拟化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="虚拟化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        why
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        并发
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lwp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LWP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        协程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分页存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多级页表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        并发化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        互斥
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="互斥">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        互斥锁API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        锁的评价标准
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        锁的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="同步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线程同步场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        信号量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalajoin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scala实现join
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        消费者-生产者问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="消费者-生产者问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题实质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解决办法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scala实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他库函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        持久化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="持久化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O设备
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准设备
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准协议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驱动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        硬盘
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件和目录
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文件和目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本抽象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接口调用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        传统文件系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="传统文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        心智模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整体组织
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        访问过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        日志结构文件系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="日志结构文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓冲
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inode分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        垃圾清理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LANG/DS-leetcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据结构与算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gitSummary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git 规范总结
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ci/cd流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../backend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    杂项
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    杂项
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backend/springboot-doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前端开发
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../frontend/typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TS学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试的复习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/javaweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    javaweb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字图像处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/blockchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    blockchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TEST/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件工程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        虚拟化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="虚拟化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        why
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        并发
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lwp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LWP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        协程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分页存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多级页表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        并发化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        互斥
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="互斥">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        互斥锁API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        锁的评价标准
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        锁的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        同步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="同步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线程同步场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        信号量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalajoin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scala实现join
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        消费者-生产者问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="消费者-生产者问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题实质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解决办法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scala" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scala实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他库函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        持久化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="持久化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O设备
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I/O设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准设备
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准协议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驱动
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        硬盘
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件和目录
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文件和目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本抽象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接口调用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        传统文件系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="传统文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        心智模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整体组织
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        访问过程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        日志结构文件系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="日志结构文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缓冲
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        inode分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        垃圾清理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/melodylx666/lx-bigdata/edit/main/docs/BaseSkill/store.md" title="编辑此页" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="_1">操作系统<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">虚拟化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="why">why<a class="headerlink" href="#why" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/306127044">进入内核态究竟是什么意思？ - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p><strong>计算机状态的维护</strong></p>
+<p>计算机的基本结构：<code>运算器，控制器，存储器，输入，输出</code></p>
+<p>而其中有状态的部分就是控制器和存储器，而控制器的状态，又来自于寄存器。</p>
+<p>所以整个计算机系统的状态全部由<code>存储器 + 寄存器</code>来维护。</p>
+<p>从<code>安全性</code>考虑来说：如果任意程序都可以完全控制<code>主存和寄存器</code>，则它能改变系统的任何部分，包括<code>入侵OS内核</code>。</p>
+<p>从<code>可用性</code>考虑来说，多任务情况更加复杂，比如内存地址冲突，外设读取冲突，存在作恶任务等等情况。</p>
+<p>所以需要从能够改变状态的<code>CPU</code>，以及维护状态的<code>存储器</code>入手解决这个问题。</p>
+<p><strong>CPU状态</strong></p>
+<p>CPU被设计为两个状态，分别是内核态(特权模式)和用户态(用户模式)。切换到内核态的CPU可以执行任意指令，而切换到用户态的CPU只能执行部分指令。</p>
+<p><strong>内存访问限制</strong></p>
+<p>CPU引入<code>MMU</code>，也就是内存管理单元组件，来实现内存访问限制。<code>CPU</code>在用户模式下，所有地址访问均经过<code>MMU</code>。而在<code>特权模式</code>下所有地址访问均绕过<code>MMU</code>。</p>
+<p>具体来说，采用虚拟地址空间技术来实现内存访问限制，其通过页表实现了从虚拟地址到物理地址的转换(以页(4KB)为最小粒度)。</p>
+<p>如果有进程切换，而页表会作为上下文的一部分进行存储，并且可以在重新加载的时候提前由<code>OS</code>进行修改，这样就可以实现了内存的访问限制。</p>
+<h3 id="_3">并发<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="lwp">LWP<a class="headerlink" href="#lwp" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%BD%BB%E9%87%8F%E7%BA%A7%E8%BF%9B%E7%A8%8B">轻量级进程 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<p><a href="https://dev59.com/lmgu5IYBdhLWcg3wASWO">何时使用clone()和fork而不是pthreads？ linux - Dev59</a></p>
+</blockquote>
+<p>这里只针对<code>Linux</code>。</p>
+<p>Linux操作系统中的调度只能通过进程来实现。</p>
+<p>通常，用户编程的时候，如果要创建进程，会使用<code>系统调用fork</code>。要创建线程，则使用<code>用户库函数pthread_create</code>。而在当前的<code>Linux</code>实现中，两者最终都是通过<code>sys_clone</code>系统调用来创建的。</p>
+<p><code>sys_clone</code>根据传入的参数不同，也就是资源隔离范围不用，可以创建任意粒度的轻量级线程。最常见的就是<code>进程</code>以及<code>线程粒度的轻量级进程</code>，当然我们可以创建其他不同粒度的调度实体来实现自己想要的调度功能，比如只从<code>父进程</code>继承<code>fd</code>资源的轻量级进程。</p>
+<p>在创建用户线程，也就是调用<code>pthread_create</code>库函数的时候，一个用户线程就对应着<code>一个线程粒度的LWP</code>。</p>
+<p>而用户态的多线程并发，可以认为对应着内核态的<code>线程粒度LWP</code>并发调度。</p>
+<h4 id="_4">协程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E7%A8%8B">协程 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+</blockquote>
+<p>协程就是一种用户级线程，但是它对内核是完全透明的。而不是和传统的用户线程一样，绑定一个<code>LWP</code>。</p>
+<p>协程对应的任务调度理论是<code>用户态协作式任务调度</code>，而线程对应的任务调度理论则是<code>内核态抢占式任务调度</code>。</p>
+<p>也就是说，协程针对的是<code>单个core</code>上的调度问题，也就是<code>并发问题</code>。而线程针对的则是<code>OS</code>对于<code>多core</code>的调度问题，也就是<code>并行问题</code>。</p>
+<h3 id="_5">内存<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>这里不说分段的了，因为目前基本都使用分页管理技术。</p>
+</blockquote>
+<h4 id="_6">分页存储<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p><strong>页</strong></p>
+<p>将一个进程逻辑地址空间不再是分割为几个不同长度的逻辑段(堆，栈，代码区)，而是统一大小分页。同时将物理内存同样通过页帧来管理。</p>
+<p>假设一个进程逻辑地址空间大小一共<code>64 Byte</code>，而一个页有<code>16 Byte</code>，则可以分为4个页大小。通常32位可以有<code>4GB</code>的地址空间。</p>
+<p>将上述逻辑地址空间放入物理内存，如下图所示:</p>
+<p><img alt="image.png" src="../assets/pageframeDemo.png" /></p>
+<p><strong>页表</strong></p>
+<p>为了记录本进程的每个逻辑页的物理存放位置，操作系统通过为每个进程维护一个<code>page table</code>，也就是页表来实现。页表可以为每个逻辑页存储对应的地址转换关系。</p>
+<p>那么如果<code>CPU</code>在用户态下访问内存，则会通过<code>MMU</code>，访问页表并将虚拟地址转换为物理地址，过程如下：</p>
+<p><img alt="image.png" src="../assets/pageTrans.png" /></p>
+<p>也就是说，由于虚拟地址映射以页为单位，所以找到对应的物理页，偏移量不用变就可以。其中的<code>VPN</code>是虚拟页号，而<code>PFN</code>是物理页号。</p>
+<p>由于地址空间的大小原因，页表可以变得特别大，所以存储在内存中而不是<code>MMU</code>中，如下图所示：</p>
+<p><img alt="image.png" src="../assets/pageDemo2.png" /></p>
+<p><strong>页表项</strong></p>
+<p>在<code>x86</code>中，一个标准的页表项是4字节。</p>
+<p>假设页表是线性的，则<code>Array[VPN] = PTE</code>，也就是对应的页表项(PTE)。一个标准的<code>PTE</code>如下所示，存储着是否允许对该物理页读写，是否为脏页等信息。</p>
+<p><img alt="image.png" src="../assets/pte.png" /></p>
+<h4 id="tlb">TLB<a class="headerlink" href="#tlb" title="Permanent link">&para;</a></h4>
+<p><strong>无TLB，CPU访问页表</strong></p>
+<p>已知切换到用户态的<code>CPU</code>，会将所有访问内存地址的指令全部过一遍<code>MMU</code>，则<code>MMU</code>该如何和页表交互呢？</p>
+<p>具体而言，<code>MMU</code>中由一个<code>页表基址寄存器</code>，存储着页表的起始位置。</p>
+<p>对于一个虚拟地址，首先需要访问页表:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1">VPN     = (VirtualAddress &amp; VPN_MASK) &gt;&gt; SHIFT 
+</span><span id="__span-0-2">PTEAddr = PageTableBaseRegister + (VPN * sizeof(PTE))
+</span></code></pre></div></td></tr></table></div>
+<p>然后通过<code>offset</code>以及<code>PTE</code>中所得到的<code>PFN</code>，如果可以访问该页的位置，则直接通过真实地址访问即可。</p>
+<p><code>CPU</code>每次访存，都被放大成了两倍。</p>
+<p><strong>有TLB</strong></p>
+<p><code>TLB</code>,地址转换旁路缓冲存储器，是频繁发生的虚拟到物理地址的转换的<code>cache</code>.</p>
+<p>实际上存储的是<code>VPN-PFN</code>键值对。</p>
+<p>具体控制流如下：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1">1    VPN = (VirtualAddress &amp; VPN_MASK) &gt;&gt; SHIFT
+</span><span id="__span-1-2">2    (Success, TlbEntry) = TLB_Lookup(VPN)
+</span><span id="__span-1-3">3    if (Success == True)    // TLB Hit
+</span><span id="__span-1-4">4        if (CanAccess(TlbEntry.ProtectBits) == True)
+</span><span id="__span-1-5">5            Offset   = VirtualAddress &amp; OFFSET_MASK
+</span><span id="__span-1-6">6            PhysAddr = (TlbEntry.PFN &lt;&lt; SHIFT) | Offset
+</span><span id="__span-1-7">7            AccessMemory(PhysAddr)
+</span><span id="__span-1-8">8        else
+</span><span id="__span-1-9">9            RaiseException(PROTECTION_FAULT)
+</span><span id="__span-1-10">10   else    // TLB Miss
+</span><span id="__span-1-11">11       PTEAddr = PTBR + (VPN * sizeof(PTE))
+</span><span id="__span-1-12">12       PTE = AccessMemory(PTEAddr)
+</span><span id="__span-1-13">13       if (PTE.Valid == False)
+</span><span id="__span-1-14">14           RaiseException(SEGMENTATION_FAULT)
+</span><span id="__span-1-15">15       else if (CanAccess(PTE.ProtectBits) == False)
+</span><span id="__span-1-16">16           RaiseException(PROTECTION_FAULT)
+</span><span id="__span-1-17">17       else
+</span><span id="__span-1-18">18           TLB_Insert(VPN, PTE.PFN, PTE.ProtectBits)
+</span><span id="__span-1-19">19           RetryInstruction()
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到，越是热点的区域使用<code>TLB</code>收益就越高，也就是遵循局部性原理。假设一共有<code>n</code>次访存，则<code>有TLB情况下只需要n+1</code>次，而无<code>TLB</code>就是<code>2n</code>次访存开销。</p>
+<p><strong>对于TLB未命中</strong></p>
+<p>有软件和硬件两种管理形式。</p>
+<p>硬件形式:TLB未命中，触发异常中断，<code>CPU</code>切换到内核态，执行对应的异常处理程序。而这段异常处理程序就是查找对应的页表，并用特权指令写到<code>TLB</code>，然后切回内核态程序处，然后硬件会重试并命中（注意是这里是重试，而不是正常情况下的向下执行）。</p>
+<p><strong>进程切换的TLB处理</strong></p>
+<p>对于进程切换，常见的思路就是简单的<code>flush_tlb</code>，将当前的状态清除，而不影响其他进程。</p>
+<h4 id="_7">多级页表<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p><strong>目的</strong></p>
+<p>地址空间的占用情况往往是稀疏的，多级页表是为了解决线性页表占据空间太大的问题，将稀疏的分布变得紧凑。</p>
+<p><strong>基本思想</strong></p>
+<p>将页表本身同样通过页进行存储，然后对这些划分后的粗粒度页(<code>4KB</code>)而不是细粒度的页表项(<code>4Byte</code>)通过页目录进行管理，如果有的页中的页表项全部为<code>invalid</code>,则不继续存储，并标志<code>invalid</code>。</p>
+<p>通过一个有中间层功能的顶级页表(<code>页目录</code>)，为真正有用的页表提供索引，这也就是多级页表的最终目的：使得页表中的每个页都是有用的(页目录除外)。</p>
+<p>当然，这时候如果<code>TLB</code>未命中，如果是两级页表，则需要从内存加载两次(页目录 + PTE)。</p>
+<p><img alt="image.png" src="../assets/2pagetable.png" /></p>
+<h2 id="_8">并发化<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">互斥<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="api">互斥锁API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h4>
+<p>通常使用锁来对临界区的访问变为串行化。</p>
+<p>一个互斥锁(mutex)，通常有<code>lock &amp; unlock</code>api提供给用户。可以使用它来对不同的区域进行加锁，从而达到精细的控制。</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><span class="mi">1</span><span class="w">    </span><span class="n">pthread_mutex_t</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+</span><span id="__span-2-2"><span class="mi">2</span>
+</span><span id="__span-2-3"><span class="mi">3</span><span class="w">    </span><span class="n">Pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span><span class="w">    </span><span class="c1">// wrapper for pthread_mutex_lock()</span>
+</span><span id="__span-2-4"><span class="mi">4</span><span class="w">    </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-2-5"><span class="mi">5</span><span class="w">    </span><span class="n">Pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_10">锁的评价标准<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>从三点进行评价:</p>
+<ul>
+<li>正确性</li>
+<li>公平性</li>
+<li>性能</li>
+</ul>
+<p>通常正确性是一个锁的必要条件，而公平性可以根据需要进行实现，性能的话则是越高越好。</p>
+<h4 id="_11">锁的实现<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>对于单核或多核，实现方式也有不同。</p>
+<p><strong>关闭中断</strong></p>
+<p>首先是单核程序，由于是单核，则<code>OS</code>获得控制权从而调度程序的方式只有通过中断。通常系统会提供时钟中断来让<code>OS</code>获得定时的必要的操控权利。</p>
+<p>如果在临界区关闭中断，则执行临界区代码的时候必然不会有其他程序的进入，则完成的对临界区的串行访问。</p>
+<p>多核方式则需要使用硬件指令。</p>
+<p><strong>testAndSet 、compareAndSwap</strong></p>
+<p>关闭中断的方式无法在多核上起作用，因为程序还可以被调度到其他核上。</p>
+<p>最简单的方式是使用一个<code>flag</code>变量来控制多线程对临界区的访问如下，我们通过<code>test then set</code>的方式检查这个变量(注意这里不是<code>and</code>，也就意味着不是原子的)。</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><span class="mi">1</span><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w">  </span><span class="nc">lock_t</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">lock_t</span><span class="p">;</span>
+</span><span id="__span-3-2"><span class="mi">2</span>
+</span><span id="__span-3-3"><span class="mi">3</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">mutex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><span class="mi">4</span><span class="w">        </span><span class="c1">// 0 -&gt; lock is available, 1 -&gt; held</span>
+</span><span id="__span-3-5"><span class="mi">5</span><span class="w">        </span><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-3-6"><span class="mi">6</span><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-7"><span class="mi">7</span>
+</span><span id="__span-3-8"><span class="mi">8</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">mutex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-9"><span class="mi">9</span><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// TEST the flag</span>
+</span><span id="__span-3-10"><span class="mi">10</span><span class="w">           </span><span class="p">;</span><span class="w"> </span><span class="c1">// spin-wait (do nothing)</span>
+</span><span id="__span-3-11"><span class="mi">11</span><span class="w">       </span><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">         </span><span class="c1">// now SET it!</span>
+</span><span id="__span-3-12"><span class="mi">12</span><span class="w">   </span><span class="p">}</span>
+</span><span id="__span-3-13"><span class="mi">13</span>
+</span><span id="__span-3-14"><span class="mi">14</span><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">unlock</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">mutex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-15"><span class="mi">15</span><span class="w">       </span><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-3-16"><span class="mi">16</span><span class="w">   </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这个程序显然是有问题的，如果一个程序刚通过<code>test</code>，在<code>set</code>的之前被中断了，这时候另一个程序可以轻松同样通过<code>test</code>。从而，两个线程都进入了临界区，这是不正确的。</p>
+<p>但是，现在硬件已经提供了<code>test and set</code>的指令意味着上述的操作可以原子性完成，则可以通过上述方式实现一个互斥锁:</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><span class="mi">1</span><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w">  </span><span class="nc">lock_t</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><span class="mi">2</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="p">;</span>
+</span><span id="__span-4-3"><span class="mi">3</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">lock_t</span><span class="p">;</span>
+</span><span id="__span-4-4"><span class="mi">4</span>
+</span><span id="__span-4-5"><span class="mi">5</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">lock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-6"><span class="mi">6</span><span class="w">        </span><span class="c1">// 0 indicates that lock is available, 1 that it is held</span>
+</span><span id="__span-4-7"><span class="mi">7</span><span class="w">        </span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-4-8"><span class="mi">8</span><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-9"><span class="mi">9</span><span class="w"> </span>
+</span><span id="__span-4-10"><span class="mi">10</span><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">lock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-11"><span class="mi">11</span><span class="w">       </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">TestAndSet</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-4-12"><span class="mi">12</span><span class="w">           </span><span class="p">;</span><span class="w"> </span><span class="c1">// spin-wait (do nothing)</span>
+</span><span id="__span-4-13"><span class="mi">13</span><span class="w">   </span><span class="p">}</span>
+</span><span id="__span-4-14"><span class="mi">14</span><span class="w"> </span>
+</span><span id="__span-4-15"><span class="mi">15</span><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">unlock</span><span class="p">(</span><span class="n">lock_t</span><span class="w"> </span><span class="o">*</span><span class="n">lock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-16"><span class="mi">16</span><span class="w">       </span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-4-17"><span class="mi">17</span><span class="w">   </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>通过<code>test-and-set</code>操作单变量 + while实现的锁称为自旋锁。要使用自旋锁，操作系统必须能通过时钟中断的方式实现抢占式调度的方式(即不断中断一个线程，运行其他线程)。虽然如此，但是其仍然会浪费<code>一个时间片</code>。</p>
+<p>评价这个自旋锁:</p>
+<ul>
+<li>是正确的</li>
+<li>没有公平性保证</li>
+<li>单核性能极低，多核通常性能不错</li>
+</ul>
+<p>如何解决自旋过多的问题?</p>
+<p>答案是再次寻找硬件/操作系统的支持，让其提供用户线程的调度原语。</p>
+<p>当前的操作系统，线程的状态有三种:</p>
+<ul>
+<li>就绪</li>
+<li>运行</li>
+<li>阻塞</li>
+</ul>
+<p>在JDK中，让进程/线程/LWP从 运行转换到阻塞的调用如下:</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/lifegoeson/p/13516019.html">java线程的五大状态，阻塞状态详解 - Life_Goes_On - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p><img alt="image.png" src="../assets/threadstate.png" /></p>
+<p>而操作系统，可以通过如下方式让线程进入阻塞态，而不是占用<code>CPU</code>时间片。</p>
+<ul>
+<li><code>park &amp; unpark</code>：让线程在获取不到锁的时候直接<code>park</code>，让其休眠进入阻塞态,随后可进入就绪态</li>
+<li><code>两阶段锁</code>:第一阶段自旋，获取不到则让其休眠进入阻塞态，随后可进入就绪态</li>
+</ul>
+<h3 id="_12">同步<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>通常使用<code>条件变量</code>的方式，进行线程/进程间同步。</p>
+<h4 id="_13">线程同步场景<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><span class="mi">1</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">child</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><span class="mi">2</span><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;child</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-5-3"><span class="mi">3</span><span class="w">        </span><span class="c1">// XXX how to indicate we are done?</span>
+</span><span id="__span-5-4"><span class="mi">4</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-5-5"><span class="mi">5</span><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-6"><span class="mi">6</span>
+</span><span id="__span-5-7"><span class="mi">7</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-8"><span class="mi">8</span><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;parent: begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-5-9"><span class="mi">9</span><span class="w">        </span><span class="n">pthread_t</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+</span><span id="__span-5-10"><span class="mi">10</span><span class="w">       </span><span class="n">Pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"> </span><span class="c1">// create child</span>
+</span><span id="__span-5-11"><span class="mi">11</span><span class="w">       </span><span class="c1">// XXX how to wait for child?</span>
+</span><span id="__span-5-12"><span class="mi">12</span><span class="w">       </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;parent: end</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-5-13"><span class="mi">13</span><span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-5-14"><span class="mi">14</span><span class="w">   </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>上述就是一个线程同步的场景，比如常见的<code>join</code>调用。</p>
+<h4 id="_14">条件变量<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p>条件变量是一个显式队列，里面是等待该条件变量对象的线程。</p>
+<p>其提供<code>wait/signal</code>来让线程入队出队，并且<strong>会同时让出锁对象</strong></p>
+<blockquote>
+<p>通过<code>Thread.sleep</code>方式进入阻塞态的线程并不会让出锁对象</p>
+</blockquote>
+<p>其使用方式是被互斥锁保住，并配合用户程序的某个条件(比如x == 3)</p>
+<blockquote>
+<p>注意，这里的条件(用户线程感兴趣的值)和<code>condtion</code>对象不同，后者内部维护的是队列</p>
+</blockquote>
+<h4 id="_15">信号量<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>信号量的使用详见下面的消费者-生产者问题。</p>
+<p>虽然信号量的功能齐全，但是很多时候并不推荐使用信号量，因为其操作复杂并且很容易失误。</p>
+<p>其使用方式如下-比如通过信号量初始值为1，实现互斥锁:</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-6-2"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</span><span id="__span-6-3"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">service</span><span class="p">:</span><span class="w"> </span><span class="n">ExecutorService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newCachedThreadPool</span><span class="p">()</span>
+</span><span id="__span-6-4"><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1000</span><span class="p">){</span>
+</span><span id="__span-6-5"><span class="w">      </span><span class="n">service</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-6"><span class="w">        </span><span class="n">override</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-7"><span class="w">          </span><span class="n">sem</span><span class="p">.</span><span class="na">acquire</span><span class="p">()</span>
+</span><span id="__span-6-8"><span class="w">          </span><span class="n">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+</span><span id="__span-6-9"><span class="w">          </span><span class="n">sem</span><span class="p">.</span><span class="na">release</span><span class="p">()</span>
+</span><span id="__span-6-10"><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-6-11"><span class="w">      </span><span class="p">})</span>
+</span><span id="__span-6-12"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-13"><span class="w">    </span><span class="n">service</span><span class="p">.</span><span class="na">shutdown</span><span class="p">()</span>
+</span><span id="__span-6-14"><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">service</span><span class="p">.</span><span class="na">isTerminated</span><span class="p">){</span>
+</span><span id="__span-6-15"><span class="w">      </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-6-16"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-17"><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>基本原理就是维护一组资源，一个线程获得一个资源，就将其减1。一个线程让出资源，就将其加1。</p>
+<p>信号量为负几，就代表还有几个线程正在等待资源(位于阻塞态)。</p>
+<p>而通过信号量初始值为0，可以实现join。</p>
+<h4 id="scalajoin">Scala实现join<a class="headerlink" href="#scalajoin" title="Permanent link">&para;</a></h4>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><span class="w">  </span><span class="nd">@Test</span>
+</span><span id="__span-7-2"><span class="w">  </span><span class="n">def</span><span class="w"> </span><span class="nf">test02</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">()</span>
+</span><span id="__span-7-4"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">()</span>
+</span><span id="__span-7-5"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</span><span id="__span-7-6">
+</span><span id="__span-7-7"><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-8"><span class="w">      </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">()</span>
+</span><span id="__span-7-9"><span class="w">      </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-7-10"><span class="w">      </span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+</span><span id="__span-7-11"><span class="w">      </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;child&quot;</span><span class="p">)</span>
+</span><span id="__span-7-12"><span class="w">      </span><span class="n">condition</span><span class="p">.</span><span class="na">signal</span><span class="p">()</span>
+</span><span id="__span-7-13"><span class="w">      </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">()</span>
+</span><span id="__span-7-14"><span class="w">    </span><span class="p">}).</span><span class="na">start</span><span class="p">()</span>
+</span><span id="__span-7-15">
+</span><span id="__span-7-16"><span class="w">    </span><span class="c1">//下述方式等同于thread.join</span>
+</span><span id="__span-7-17"><span class="w">    </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">()</span>
+</span><span id="__span-7-18"><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">done</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+</span><span id="__span-7-19"><span class="w">      </span><span class="n">condition</span><span class="p">.</span><span class="na">await</span><span class="p">()</span>
+</span><span id="__span-7-20"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-21"><span class="w">    </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">()</span>
+</span><span id="__span-7-22"><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+</span><span id="__span-7-23"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-7-24"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>可以看到，条件变量通常是和锁在一起的，而在JDK中直接从lock中获取condition。</p>
+<h3 id="-">消费者-生产者问题<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
+<h4 id="_16">描述<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p>生产者-消费者问题，也称为有界缓冲区问题。</p>
+<p>假设有两侧有多个消费者/生产者，如何完成围绕缓冲区的消费-生产模式，而不发生错误。</p>
+<h4 id="_17">问题实质<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p>这个问题的实质，可以拆分为并发问题的两大方面：<code>互斥</code>和<code>同步</code>。</p>
+<p>首先，对于共享缓冲区(通常放置在堆中)，其实就是临界区，所以多个线程访问就必然有竞态问题，通常的解决办法就是对临界区加<code>互斥锁</code></p>
+<p>然后，两侧的生产者-消费者线程之间，就是涉及到了线程的同步问题-如何在合适的时候调度合适的线程，通常通过<code>条件变量</code>来完成。</p>
+<h4 id="_18">解决办法<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p>对于临界区的操作，加一个互斥锁。</p>
+<p>对于线程同步问题，使用两个条件变量，维护两种等待线程的队列(生产 、消费)</p>
+<blockquote>
+<p>条件变量部分使用while而不是if，使得线程被唤醒之后会再次判断，防止假唤醒的情况。使用if会直接向下走</p>
+<p>只有一个条件变量的话并不能区分唤醒的是哪种线程，所以使用两个条件变量，维护两种等待队列。</p>
+</blockquote>
+<p>代码如下:</p>
+<div class="language-cpp highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C++</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><span class="mi">1</span><span class="w">    </span><span class="n">cond_t</span><span class="w"> </span><span class="n">empty</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="p">;</span>
+</span><span id="__span-8-2"><span class="mi">2</span><span class="w">    </span><span class="n">mutex_t</span><span class="w"> </span><span class="n">mutex</span><span class="p">;</span>
+</span><span id="__span-8-3"><span class="mi">3</span>
+</span><span id="__span-8-4"><span class="mi">4</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">producer</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-5"><span class="mi">5</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-8-6"><span class="mi">6</span><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">loops</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-7"><span class="mi">7</span><span class="w">            </span><span class="n">Pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">                 </span><span class="c1">// p1</span>
+</span><span id="__span-8-8"><span class="mi">8</span><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MAX</span><span class="p">)</span><span class="w">                        </span><span class="c1">// p2</span>
+</span><span id="__span-8-9"><span class="mi">9</span><span class="w">                </span><span class="n">Pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">empty</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">      </span><span class="c1">// p3</span>
+</span><span id="__span-8-10"><span class="mi">10</span><span class="w">           </span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">                                     </span><span class="c1">// p4</span>
+</span><span id="__span-8-11"><span class="mi">11</span><span class="w">           </span><span class="n">Pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fill</span><span class="p">);</span><span class="w">                 </span><span class="c1">// p5</span>
+</span><span id="__span-8-12"><span class="mi">12</span><span class="w">           </span><span class="n">Pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">               </span><span class="c1">// p6</span>
+</span><span id="__span-8-13"><span class="mi">13</span><span class="w">       </span><span class="p">}</span>
+</span><span id="__span-8-14"><span class="mi">14</span><span class="w">   </span><span class="p">}</span>
+</span><span id="__span-8-15"><span class="mi">15</span>
+</span><span id="__span-8-16"><span class="mi">16</span><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">consumer</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-17"><span class="mi">17</span><span class="w">       </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-8-18"><span class="mi">18</span><span class="w">       </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">loops</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-19"><span class="mi">19</span><span class="w">           </span><span class="n">Pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">               </span><span class="c1">// c1</span>
+</span><span id="__span-8-20"><span class="mi">20</span><span class="w">           </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">                            </span><span class="c1">// c2</span>
+</span><span id="__span-8-21"><span class="mi">21</span><span class="w">               </span><span class="n">Pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fill</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">     </span><span class="c1">// c3</span>
+</span><span id="__span-8-22"><span class="mi">22</span><span class="w">           </span><span class="kt">int</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="p">();</span><span class="w">                              </span><span class="c1">// c4</span>
+</span><span id="__span-8-23"><span class="mi">23</span><span class="w">           </span><span class="n">Pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">empty</span><span class="p">);</span><span class="w">              </span><span class="c1">// c5</span>
+</span><span id="__span-8-24"><span class="mi">24</span><span class="w">           </span><span class="n">Pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span><span class="w">             </span><span class="c1">// c6</span>
+</span><span id="__span-8-25"><span class="mi">25</span><span class="w">           </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span>
+</span><span id="__span-8-26"><span class="mi">26</span><span class="w">       </span><span class="p">}</span>
+</span><span id="__span-8-27"><span class="mi">27</span><span class="w">   </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="scala">Scala实现<a class="headerlink" href="#scala" title="Permanent link">&para;</a></h4>
+<p><strong>方式1：双条件变量 + 互斥锁</strong></p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><span class="kd">class</span> <span class="nc">ProducerConsumer</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><span class="w">  </span><span class="nd">@Test</span>
+</span><span id="__span-9-3"><span class="w">  </span><span class="n">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Buffer</span><span class="p">()</span>
+</span><span id="__span-9-5"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">producerList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="kd">yield</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Producer</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span><span id="__span-9-6"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">consumerList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="kd">yield</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Consumer</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span><span id="__span-9-7"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newCachedThreadPool</span><span class="p">()</span>
+</span><span id="__span-9-8"><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">producerList</span><span class="p">;</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">consumerList</span><span class="p">){</span>
+</span><span id="__span-9-9"><span class="w">      </span><span class="n">service</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span><span id="__span-9-10"><span class="w">      </span><span class="n">service</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</span><span id="__span-9-11"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-12">
+</span><span id="__span-9-13"><span class="w">    </span><span class="n">service</span><span class="p">.</span><span class="na">shutdown</span><span class="p">()</span>
+</span><span id="__span-9-14"><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">service</span><span class="p">.</span><span class="na">isTerminated</span><span class="p">){</span>
+</span><span id="__span-9-15"><span class="w">      </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-9-16"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-17"><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">)</span>
+</span><span id="__span-9-18"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-19">
+</span><span id="__span-9-20"><span class="p">}</span>
+</span><span id="__span-9-21"><span class="kd">class</span> <span class="nc">Buffer</span><span class="p">{</span>
+</span><span id="__span-9-22"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">()</span>
+</span><span id="__span-9-23"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">()</span><span class="w"> </span><span class="c1">//条件变量通常和锁绑定</span>
+</span><span id="__span-9-24"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">()</span>
+</span><span id="__span-9-25"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutable</span><span class="p">.</span><span class="na">ArrayBuffer</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span><span class="p">()</span>
+</span><span id="__span-9-26"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">maxSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+</span><span id="__span-9-27">
+</span><span id="__span-9-28"><span class="w">  </span><span class="n">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">):</span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-29"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">flag</span><span class="p">:</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">tryLock</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">)</span>
+</span><span id="__span-9-30">
+</span><span id="__span-9-31"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">maxSize</span><span class="p">){</span>
+</span><span id="__span-9-32"><span class="w">      </span><span class="n">full</span><span class="p">.</span><span class="na">await</span><span class="p">()</span>
+</span><span id="__span-9-33"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-34"><span class="w">    </span><span class="n">buffer</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+</span><span id="__span-9-35"><span class="w">    </span><span class="n">empty</span><span class="p">.</span><span class="na">signalAll</span><span class="p">()</span>
+</span><span id="__span-9-36">
+</span><span id="__span-9-37"><span class="w">    </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">()</span>
+</span><span id="__span-9-38"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-39">
+</span><span id="__span-9-40"><span class="w">  </span><span class="n">def</span><span class="w"> </span><span class="nf">get</span><span class="p">():</span><span class="n">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-41"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">flag</span><span class="p">:</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">tryLock</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">)</span>
+</span><span id="__span-9-42"><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+</span><span id="__span-9-43"><span class="w">      </span><span class="n">empty</span><span class="p">.</span><span class="na">await</span><span class="p">()</span>
+</span><span id="__span-9-44"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-45"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-46"><span class="w">    </span><span class="n">full</span><span class="p">.</span><span class="na">signalAll</span><span class="p">()</span>
+</span><span id="__span-9-47">
+</span><span id="__span-9-48"><span class="w">    </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">()</span>
+</span><span id="__span-9-49"><span class="w">    </span><span class="n">i</span>
+</span><span id="__span-9-50"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-51"><span class="p">}</span>
+</span><span id="__span-9-52">
+</span><span id="__span-9-53"><span class="kd">class</span> <span class="nf">Producer</span><span class="p">(</span><span class="n">buffer</span><span class="p">:</span><span class="w"> </span><span class="n">Buffer</span><span class="p">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+</span><span id="__span-9-54"><span class="w">  </span><span class="n">override</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-55"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1000</span><span class="p">){</span>
+</span><span id="__span-9-56"><span class="w">      </span><span class="n">buffer</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-9-57"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-58"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-59"><span class="p">}</span>
+</span><span id="__span-9-60"><span class="kd">class</span> <span class="nf">Consumer</span><span class="p">(</span><span class="n">buffer</span><span class="p">:</span><span class="w"> </span><span class="n">Buffer</span><span class="p">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+</span><span id="__span-9-61"><span class="w">  </span><span class="n">override</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-62"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1000</span><span class="p">){</span>
+</span><span id="__span-9-63"><span class="w">      </span><span class="n">buffer</span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+</span><span id="__span-9-64"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-65"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-66"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>在这里，可以尝试将<code>while</code>修改为<code>if</code>，在我的测试中，使用<code>if</code>的情况必然会报异常，因为其不能对进来的(被唤醒的，拿到锁的)线程再次进行判断，防止它就是上一次调用的线程(<code>假唤醒</code>)。而使用<code>while</code>则彻底避免了这种情况。</p>
+<p>其实可以使用<code>阻塞队列</code>来胜任有界缓冲区功能，甚至无界缓冲区的也可以。</p>
+<p>有界缓冲区，则直接使用<code>LinkedBlockQueue</code>即可，两边可以开任意线程进行生产/消费。</p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><span class="kd">class</span> <span class="nf">Producer3</span><span class="p">(</span><span class="n">buffer</span><span class="p">:</span><span class="w"> </span><span class="n">ArrayBlockingQueue</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+</span><span id="__span-10-2"><span class="w">  </span><span class="n">override</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10000</span><span class="p">){</span>
+</span><span id="__span-10-4"><span class="w">      </span><span class="n">buffer</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-10-5"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-6"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-10-7"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h4 id="_19">其他库函数<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>库函数的实现只适用于只有两个线程同步交换数据，或者说两边可以组成一对对的情况。也就是点对点的交互，并没有更多线程的方式。</p>
+<p>而上面的设计则是通用的逻辑，并且是异步交换。这两者有本质不同。</p>
+</blockquote>
+<p><strong>SyncChannel</strong></p>
+<div class="language-java highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><span class="kd">class</span> <span class="nf">Producer2</span><span class="p">(</span><span class="n">channel</span><span class="p">:</span><span class="w"> </span><span class="n">SyncChannel</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+</span><span id="__span-11-2"><span class="w">  </span><span class="n">override</span><span class="w"> </span><span class="n">def</span><span class="w"> </span><span class="nf">run</span><span class="p">():</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-3"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10000</span><span class="p">){</span>
+</span><span id="__span-11-4"><span class="w">      </span><span class="n">channel</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-11-5"><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-6"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-7"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>exchanger</strong></p>
+<p>Java同样提供了一个库函数，当然在Scala内也能使用。这个库函数内部不像<code>SyncChannel</code>一样只有70行代码，相反的，它有700行。</p>
+<p>具体使用和上述方式类似.</p>
+<h2 id="_20">持久化<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<h3 id="io">I/O设备<a class="headerlink" href="#io" title="Permanent link">&para;</a></h3>
+<h4 id="_21">架构<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
+<p><img alt="image.png" src="../assets/ioj%E6%9E%B6%E6%9E%84.png" /></p>
+<p>典型的系统架构如上所示，整体采用分层的方式：</p>
+<ul>
+<li>内存最靠近CPU，并通过<code>内存总线</code>与其连接</li>
+<li>然后是一些高性能设备，被<code>系统总线/通用IO总线</code>连接</li>
+<li>最后是注重扩展性的外设部分，通过<code>外设IO总线</code>和<code>CPU</code>相连</li>
+</ul>
+<h4 id="_22">标准设备<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
+<p><img alt="image.png" src="../assets/io%E6%A0%87%E5%87%86%E8%AE%BE%E5%A4%87.png" /></p>
+<p>IO部分的一个抽象的标准设备如上。</p>
+<p>硬件需要一些接口，来让系统软件通过遵循<code>标准协议</code>的方式来控制它，也就是访问改变寄存器状态，从而达到使用外部设备的目的。</p>
+<p>而外部设备内部同样有<code>CPU</code>以及<code>RAM</code>，其同样遵循<code>标准协议</code>来操作寄存器，以及内部设备，从而让系统和外设可以通过<code>标准协议</code>进行交互。</p>
+<p><strong>和寄存器交互的方式</strong></p>
+<ul>
+<li>特权指令，比如<code>in/out</code>指令</li>
+<li>内存映射, 外设将寄存器作为内存地址提供，则<code>OS</code>不用引入新指令，正常读写就可以。</li>
+</ul>
+<h4 id="_23">标准协议<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<p>具体的标准协议可以有多种实现，只要能够<code>OS</code>和<code>外设</code>按照协议，通过共同操作寄存器来达到交互的目的就可以。</p>
+<p><strong>简单轮询</strong></p>
+<blockquote>
+<p>非阻塞IO的实现</p>
+</blockquote>
+<ol>
+<li><code>os pulling status register</code></li>
+<li><code>os writes data to data register by PIO</code>（PIO，也就是可编程的IO，即通过CPU来实现数据的移动）</li>
+<li><code>os writes command to command register</code></li>
+<li><code>again polling</code></li>
+</ol>
+<p>缺点：需要操作系统不能挂起当前的<code>LWP</code>，并且一直使用<code>CPU</code>进行轮询。</p>
+<h4 id="_24">中断<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>阻塞IO的实现</p>
+<p>在<code>unix-like</code>操作系统中，进程等用于</p>
+</blockquote>
+<p>首先，操作系统调度的当前<code>LWP</code>，通过执行该进程的<code>CPU</code>首先向<code>外设</code>发送IO请求，然后操作系统让对应的进程挂起，从而可以调度其他进程在该<code>CPU</code>上执行。</p>
+<p>而<code>外设</code>完毕之后，则发起<code>硬件中断</code>，引发<code>CPU</code>跳转到对应的中断处理程序。这里的处理程序则会重新将之前被挂起的进程在合适的时机恢复。</p>
+<p>中断的意义，就在于通过切换，使得<code>IO和计算</code>重叠，最大化利用了<code>CPU</code>的资源。</p>
+<p><strong>混合与合并</strong></p>
+<ul>
+<li>如果<code>外设</code>是高性能设备，也就是可以快速实现进程的需求</li>
+<li>如果该用户进程需要最短可控时间来得到想要的数据</li>
+</ul>
+<p>则不应该只用中断。中断将进程再次交给了<code>OS</code>调度，而进程上下文切换以及响应中断的开销很大。如果直接<code>polling</code>并得到结果的开销可以接受，则可以采用<code>polling</code>。</p>
+<p>当然，也可以两者混合，先<code>polling</code>,不能忍受了再交给<code>OS</code>进行调度。</p>
+<p>或者针对中断的场景进行优化，批处理数据再统一中断，减少处理中断的代价,也就是<code>多LWP</code>在<code>core</code>的切换问题。</p>
+<h4 id="dma">DMA<a class="headerlink" href="#dma" title="Permanent link">&para;</a></h4>
+<p>直接存储器访问。</p>
+<p>操作系统指示之后，DMA就可以自己将数据从外设传输到内存，而不使用CPU。完成之后，将触发硬件中断。</p>
+<h4 id="_25">驱动<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
+<p><img alt="image.png" src="../assets/Dirver.png" /></p>
+<p><code>Linux</code>系统的典型文件系统结构如上。</p>
+<p>可以看到，其采用了分层的方式，对系统进行抽象，和计算机网络的思想是类似的。</p>
+<p>用户调用的系统API，在内部首先经过文件系统API调用，最后由具体块接口路由到驱动程序部分，然后驱动程序完成对应操作之后返回调用。</p>
+<p>驱动程序一般是在用户插入外设之后，主动下载的程序，比如多数鼠标插入的时候就提示需要下载驱动。</p>
+<p>以网络通信为例子，当数据全部从网卡的<code>FIFO</code>缓存到达<code>内存skb_buffer</code>之后，发起硬件中断，操作系统调度<code>网卡驱动</code>，对<code>skb_buffer</code>的数据进行处理，然后向上传递。</p>
+<h4 id="_26">硬盘<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%A1%AC%E7%9B%98">硬盘 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+</blockquote>
+<h3 id="_27">文件和目录<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h4 id="_28">基本抽象<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
+<p><strong>文件</strong></p>
+<p>文件就是一个字节数组，并且由一个<code>整数inode-number</code>(也可以称为<code>inode handle</code>)代表。</p>
+<p><strong>目录</strong></p>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/Inode">inode - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+</blockquote>
+<p>目录是一个<code>List[(name,inode)]</code>列表，存储该目录下每一个文件的用户名称，以及底层名称，也就是<code>inode</code>。</p>
+<p>文件系统对象中只有<code>inode</code>的概念，而<code>文件和目录</code>都只是一个别名。可以通过文件系统的<code>inode-numer</code>去文件系统存储区域的元数据空间去索引<code>inode table</code>，然后找到对应的文件的真实存储位置与其他元数据信息(也就是<code>真正的inode</code>)。</p>
+<p><img alt="image.png" src="../assets/fdinode.png" /></p>
+<h4 id="_29">接口调用<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<p><strong>创建文件</strong></p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">O_CREAT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_WRONLY</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_TRUNC</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>这里的系统调用返回的结果就是一个<code>fd</code>，也就是文件描述符下标，或者将其称为句柄(void * )。</p>
+<blockquote>
+<p>之所以获得的是下标而不是直接的文件对象指针,就是系统出于安全的屏蔽考虑。一切用户访问都路由到这个<code>fd table</code>，方便资源与权限管理，而不是任何程序都可以随便直接操作文件对象。</p>
+</blockquote>
+<p>每个进程提前打开了3个文件，分别是标准输入，标准输出，标准错误。</p>
+<p><strong>硬链接</strong></p>
+<blockquote>
+<p>ln file1 file2</p>
+</blockquote>
+<p>实际上就是在目录中添加了一个<code>(new_name,inode</code>），也就是链接和被链接的两个文件的inode实际上就是一个，他们指向磁盘元数据区域的同一块元数据位置。</p>
+<p>删除文件实际上就是去除了一个硬链接。只有到引用数为0的时候，才会删除磁盘上的数据。</p>
+<p><strong>软链接</strong></p>
+<blockquote>
+<p>ln -s file1 file2</p>
+</blockquote>
+<p>这里就是<code>Linux</code>文件系统的第三种抽象。</p>
+<p>软连接会创建一个新的类型文件，并用<code>file1- &gt; file2</code>作为文件内容。</p>
+<p>从而屏蔽掉直接复用<code>inode</code>带来的两个问题：</p>
+<ul>
+<li>不能硬链接目录</li>
+<li>不能跨文件系统链接</li>
+</ul>
+<p><strong>mount</strong></p>
+<p>挂载文件系统，并将所有文件系统(<code>ext3/4,proc,tmpfs,AFS</code>)统一到同一颗树上，命名统一并且方便。</p>
+<h3 id="_30">传统文件系统<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<h4 id="_31">心智模型<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
+<p>文件系统整体模型分为两个部分：</p>
+<ul>
+<li>文件系统的数据结构</li>
+<li>访问方法，也就是暴露给用户的API</li>
+</ul>
+<p>应该要思考文件系统在磁盘应怎么存储数据和元数据，在内存如何暴露怎么样的API。</p>
+<h4 id="_32">整体组织<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>文件系统的数据结构</p>
+</blockquote>
+<p><strong>磁盘数据</strong></p>
+<p>对磁盘扇区组织起来形成块，<code>1 block = 4 KB</code>。</p>
+<blockquote>
+<p>对于快速文件系统，还会引入<code>block group</code>来优化文件组织，使用局部性原理降低随机写的概率，提高性能。</p>
+</blockquote>
+<p>然后存储区域抽象为数据区域和元数据区域。</p>
+<p>并使用很少的<code>block</code>作为<code>bitmap</code>，存储两种区域的每个位置的使用情况。</p>
+<p>最后是<code>super block</code>，存储文件整个文件系统的元数据信息，<code>mount</code>的时候加载<code>super-block</code>到内存并初始化信息就算挂载完毕。</p>
+<p><strong>inode</strong></p>
+<p>这里要区分<code>inode</code>和<code>inode number</code>。也就是给操作系统进程暴露的都是<code>inode numer(inode handle)</code>，然后再磁盘维护着一个<code>Array[inode]</code>，一个<code>inode</code>存储着一个文件对象真正的元数据。</p>
+<p>一个典型的<code>inode结构体</code>如下：</p>
+<p><img alt="image.png" src="../assets/inode.png" /></p>
+<p><strong>目录</strong></p>
+<p>目录就是<code>List[(user_name,inode-numer)]</code>的别名，并附加一些其他的元数据信息。</p>
+<p>其本身同样有一个<code>inode</code>结构存储于磁盘中。而根目录的<code>inode-number</code>是暴露给全部用户的。</p>
+<h4 id="_33">访问过程<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>用户访问API的所发生的过程</p>
+</blockquote>
+<p>假设现在一个磁盘存储着一个文件系统，我们要通过系统访问它，比如调用<code>open</code>系统调用访问<code>/foo/bar</code></p>
+<ol>
+<li>首先，将该文件系统挂载，<code>super-block</code>加载到内存</li>
+<li>使用<code>open</code>系统调用之后，会从根目录开始访问(因为开始只知道根目录的<code>inode</code>位置)。然后开始路径匹配过程，依次将目录读取出来并遍历查找。</li>
+<li>最终可以找到<code>/foo/bar</code>对应的<code>inode-number</code>，然后从磁盘找到<code>inode</code>并从数据区读取文件。</li>
+</ol>
+<h4 id="_34">缓存<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
+<p><strong>读缓存</strong></p>
+<p>OS通常会将系统内存的<code>10%</code>取出来，使用<code>LRU</code>策略等缓存进程常用的<code>block</code>。</p>
+<p><strong>写缓存</strong></p>
+<p>写的时候也可以缓存起来，最后按<code>batch</code>写入。当然这样提高性能的同时也降低了可靠性，因为引入了中间态。</p>
+<h3 id="_35">日志结构文件系统<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<h4 id="_36">概述<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h4>
+<p>日志结构文件系统整体思路：针对写多读少的场景，将所有更新(包括元数据信息inode)缓存在内存段中，等到积累到足够量的时候再一次性<code>顺序写入</code>磁盘中，并且是从未被使用的部分。</p>
+<p>也就是说，加了一层中间层(内存缓冲)，将所有写统一为<code>顺序写</code>。也就是<code>copy on write</code>。</p>
+<h4 id="_37">缓冲<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
+<p><strong>必要性</strong></p>
+<p>如果不是足够量的缓冲，就算一个个顺序写，但是两次写之间，磁盘可能已经旋转，那就必须再转回来。这样的开销很大。</p>
+<p>所以缓冲的目的就在于<code>制造一次连续大写入</code>,写入的是一个段，也就是很多个<code>block</code>。如下所示</p>
+<p><img alt="image.png" src="../assets/segmentWrite.png" /></p>
+<h4 id="inode">inode分布<a class="headerlink" href="#inode" title="Permanent link">&para;</a></h4>
+<p>传统的文件系统<code>inode</code>以<code>Array[inode]</code>形式组织，可以很方便的访问(通过<code>inode-number</code>)。</p>
+<p>如上图所示，<code>inode</code>写入(也就是文件的元数据信息)，是和数据块一起写入的。这就说明<code>inode</code>分散在整个磁盘上了。</p>
+<p><strong>inode map</strong></p>
+<p>解决方案还是加入中间层：维护一个的<code>inode map</code>，每次写入都存储/更新一下<code>inode</code>的磁盘位置信息。</p>
+<p>等到一个大批量写入的时候，将这个段的<code>inode map</code>同时顺序写入磁盘。</p>
+<p><img alt="image.png" src="../assets/inodemap.png" /></p>
+<p><strong>checkpoint region</strong></p>
+<p>同样又面临<code>inode map</code>分散的情况，同样加一层，但是这次是在一个<code>众所周知</code>的位置，也就是检查点区域，其维护着所有的<code>inode map</code>的引用。</p>
+<p><img alt="image.png" src="../assets/checkpointregion.png" /></p>
+<p><strong>整体访问路径</strong></p>
+<p><code>CR -&gt; inode map -&gt; inode -&gt; file block</code></p>
+<p>通常，<code>OS</code>会将所有的<code>inode map</code>缓存在内存中。</p>
+<h4 id="_38">垃圾清理<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
+<p>对于磁盘上过期的旧数据，有多种处理方法。</p>
+<ul>
+<li>不处理并存储，则称为版本控制文件系统(有<code>snapshots</code>，曾经在<code>LevelDB</code>的实现中看见过)</li>
+<li>定时清理,是LFS的做法，而分段大批量写入在此时也更方便清理。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      lx CC-BY-4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.indexes", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
