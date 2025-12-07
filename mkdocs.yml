@@ -16,7 +16,6 @@ nav:
       - BaseSkill/scala-scopt.md
       - BaseSkill/prepare.md
       - BaseSkill/mac_learn.md
-  - 总结分析:
       - frameworkAnalysis/index.md
       - frameworkAnalysis/asyncToolLearn.md
       - JVM/JVM并发总结.md
@@ -40,18 +39,17 @@ nav:
       - LANG/DS-leetcode.md
       - BaseSkill/gitSummary.md
       - BaseSkill/devops.md
-  - 软件开发:
+  - 杂项:
       - backend/index.md
       - backend/springboot-doc.md
       - frontend/index.md
       - frontend/Vue3快速上手.md
       - frontend/typescript.md
-  - 考试复习:
-        - TEST/index.md
-        - TEST/javaweb.md
-        - TEST/数字图像处理.md
-        - TEST/blockchain.md
-        - TEST/软件工程.md
+      - TEST/index.md
+      - TEST/javaweb.md
+      - TEST/数字图像处理.md
+      - TEST/blockchain.md
+      - TEST/软件工程.md
 # [UI]
 # [top]
 theme:
