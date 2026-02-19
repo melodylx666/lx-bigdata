@@ -6,3 +6,7 @@
 .idea/
 .gradle/
 .vscode/
+.trae/
+
+# 忽略PDF文件
+*.pdf
