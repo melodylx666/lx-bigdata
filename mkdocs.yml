@@ -33,7 +33,7 @@ nav:
       - dataWarehouse/interview.md
       - dataWarehouse/graphDB.md
       - dataWarehouse/learn_db_from_paper.md
-    - AI:
+  - AI:
       - AI/index.md
       - AI/coding/trae-use.md
   - 计算机基础:
