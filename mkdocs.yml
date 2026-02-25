@@ -36,6 +36,8 @@ nav:
   - AI:
       - AI/index.md
       - AI/coding/trae-use.md
+      - AI/NLP/Simple-nlp.md
+      - AI/NLP/OneEE.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
