@@ -23,7 +23,7 @@ $env:CLAUDE_CODE_EFFORT_LEVEL="max"
 
 ## claude code最佳实践
 
-https://code.claude.com/docs/zh-CN/best-practices
+[官网最佳实践](https://code.claude.com/docs/zh-CN/best-practices)
 
 
 
