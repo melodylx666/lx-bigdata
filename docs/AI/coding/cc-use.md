@@ -1,4 +1,4 @@
-# claude code 使用最佳实践
+# claude code 最佳实践
 
 具有基础ai coding使用经验的使用者可以快速上手cc，此处使用claude code cli + deepseek v4系列
 

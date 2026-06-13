@@ -38,7 +38,7 @@ nav:
   - AI:
       - AI/index.md
       - AI/coding/trae-use.md
-      - AI/cc-use.md
+      - AI/coding/cc-use.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
