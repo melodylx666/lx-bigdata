@@ -33,11 +33,12 @@ nav:
       - dataWarehouse/interview.md
       - dataWarehouse/graphDB.md
       - dataWarehouse/learn_db_from_paper.md
+  - 推荐系统:
+      - Reco/index.md
   - AI:
       - AI/index.md
       - AI/coding/trae-use.md
-      - AI/NLP/Simple-nlp.md
-      - AI/NLP/OneEE.md
+      - AI/cc-use.md
   - 计算机基础:
       - LANG/index.md
       - BaseSkill/store.md
@@ -55,6 +56,7 @@ nav:
       - TEST/数字图像处理.md
       - TEST/blockchain.md
       - TEST/软件工程.md
+
 # [UI]
 # [top]
 theme:
