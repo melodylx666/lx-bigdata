@@ -33,8 +33,9 @@ nav:
       - dataWarehouse/interview.md
       - dataWarehouse/graphDB.md
       - dataWarehouse/learn_db_from_paper.md
-  - 推荐系统:
+  - 推荐系统 & 在线广告:
       - Reco/index.md
+      - Reco/computational-ad.md
   - AI:
       - AI/index.md
       - AI/coding/trae-use.md
