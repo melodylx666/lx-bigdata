@@ -22,6 +22,7 @@ nav:
       - frameworkAnalysis/io.md
       - BaseSkill/design-pattern.md
       - frameworkAnalysis/leveldb_learn.md
+      - BaseSkill/OKR-learn.md
   - 数据存储与计算:
       - dataWarehouse/index.md
       - dataWarehouse/kafka.md
